@@ -15,4 +15,12 @@ The software can guide players to record their scores properly.
 
 This software has been created for fun and learn more about the GUI/OOP development features in Python.
 
+# How to play:
+
+A compiled .exe file should be available at some point.
+In the meantime, you have to download all the .py files from this directy and RUN the MAIN.py to initialize the game.
+As of July 9th, 2022 : Nothing has been push to Github...  
+
+Target Date of first alpha version: End August 2022
+
 Thank you!
