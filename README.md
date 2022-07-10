@@ -1,6 +1,6 @@
 # Repository content
 
-This repo contains an "in-work" Darts Game Counter software, that has been programmed in python3.
+This repo contains an "in-work" Darts Game Counter software, that has been programmed in python3.9.
 GUI has been created with the Tkinter Library.
 The compiled version is not currenlty available, i.e. to run it, you must used an IDE such as Pycharm.
 
