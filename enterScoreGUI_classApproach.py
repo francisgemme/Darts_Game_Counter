@@ -6,7 +6,7 @@ root.title("Score Board")
 root.geometry("1050x880")
 #root.resizable(False, False)
 root.iconbitmap("dart_icon.ico")
-root.configure(background="#38404B")
+#root.configure(background="#38404B")
 
 class MainWindow:
 
@@ -68,7 +68,7 @@ class MainWindow:
 
         # Empty Row between players 1-2 and player 3-4
         self.frame8 = LabelFrame(master, padx=10, pady=1)
-        self.frame8.grid(row=4,column=4,columnspan=1,rowspan=3)
+        self.frame8.grid(row=7,column=4,columnspan=1,rowspan=3)
         self.frame8.configure(background="#38404B")
 
         self.emptylabel_4= Label(master, padx=10, pady=1)
@@ -222,7 +222,7 @@ class MainWindow:
 
         #Images:
         global Image2
-        Image2= ImageTk.PhotoImage(Image.open("arrow.png"))
+        Image2= ImageTk.PhotoImage(Image.open("arrow.sgi"))
         self.arrowImage = Label(self.emptylabel_4, image=Image2,bg=self.Button_bg_color, fg="grey")
         self.arrowImage.grid(row=1,column=1)
 
