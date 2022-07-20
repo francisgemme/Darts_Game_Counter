@@ -3,10 +3,10 @@ from PIL import ImageTk,Image
 
 root = Tk()
 root.title("Score Board")
-root.geometry("1200x850")
+root.geometry("1020x850")
 #root.resizable(False, False)
 root.iconbitmap("dart_icon.ico")
-#root.configure(background="#245042")
+root.configure(background="#245042")
 ##38404B"
 
 class MainWindow:
@@ -30,7 +30,7 @@ class MainWindow:
         # To create a vertical space between first column of frames
         self.emptylabel_1= Label(master, padx=20, pady=5)
         self.emptylabel_1.grid(row=2,column=0,rowspan=14)
-        self.emptylabel_1.configure(background="red")
+        self.emptylabel_1.configure(background=self.Button_bg_color)
 
         # Calculator and submit button frame
         self.frame1 = LabelFrame(master, padx=10, pady=10)
@@ -40,12 +40,12 @@ class MainWindow:
         # To create a vertical space after first column of frames
         self.emptylabel_2= Label(master, padx=20, pady=10)
         self.emptylabel_2.grid(row=5,column=4,rowspan=2)
-        self.emptylabel_2.configure(background="green")
+        self.emptylabel_2.configure(background=self.Button_bg_color)
 
         # To create vertical space between frames
         self.emptylabel_3= Label(master, padx=25, pady=2)
         self.emptylabel_3.grid(row=0,column=10,columnspan=5,rowspan=5)
-        self.emptylabel_3.configure(background="red")
+        self.emptylabel_3.configure(background=self.Button_bg_color)
 
         # Entry Score frame
         self.frame2 = LabelFrame(master, padx=10, pady=10)
@@ -63,7 +63,7 @@ class MainWindow:
         self.emptylabel_4.configure(background=self.Button_bg_color)
 
         self.emptylabel_5= Label(master, padx=10, pady=0)
-        self.emptylabel_5.grid(row=4,column=9,rowspan=2, columnspan=3)
+        self.emptylabel_5.grid(row=4,column=9,rowspan=2, columnspan=4)
         self.emptylabel_5.configure(background=self.Button_bg_color)
 
         self.emptylabel_6= Label(master, padx=10, pady=0)
@@ -71,7 +71,7 @@ class MainWindow:
         self.emptylabel_6.configure(background=self.Button_bg_color)
 
         self.emptylabel_7= Label(master, padx=10, pady=0)
-        self.emptylabel_7.grid(row=7,column=9,rowspan=2, columnspan=3)
+        self.emptylabel_7.grid(row=7,column=9,rowspan=2, columnspan=4)
         self.emptylabel_7.configure(background=self.Button_bg_color)
 
         # Empty Row between players 1-2 and player 3-4
@@ -85,22 +85,22 @@ class MainWindow:
         self.frame7.configure(background=self.Button_bg_color)
 
         # first player frame
-        self.frame3 = LabelFrame(master, padx=40, pady=30)
+        self.frame3 = LabelFrame(master, padx=30, pady=30)
         self.frame3.grid(row=5,column=5,columnspan=4,rowspan=3)
         self.frame3.configure(background=self.Button_bg_color)
 
         # Second player frame
-        self.frame4 = LabelFrame(master, padx=60, pady=40)
+        self.frame4 = LabelFrame(master, padx=30, pady=30)
         self.frame4.grid(row=5,column=9,columnspan=4,rowspan=3)
         self.frame4.configure(background=self.Button_bg_color)
 
         # third player frame
-        self.frame5 = LabelFrame(master, padx=60, pady=40)
+        self.frame5 = LabelFrame(master, padx=30, pady=30)
         self.frame5.grid(row=8,column=5,columnspan=4,rowspan=3)
         self.frame5.configure(background=self.Button_bg_color)
 
         # fourth player frame
-        self.frame6 = LabelFrame(master, padx=60, pady=40)
+        self.frame6 = LabelFrame(master, padx=30, pady=30)
         self.frame6.grid(row=8,column=9,columnspan=4,rowspan=3)
         self.frame6.configure(background=self.Button_bg_color)
 
@@ -202,37 +202,66 @@ class MainWindow:
                                        fg="cyan")
         self.updateStatusLabel.grid(row=0,column=0)
 
+        #---------------------------------------------------------------------------------------------------------------
+        # CREATING PLAYERS ENTRY BOXES
+        #---------------------------------------------------------------------------------------------------------------
 
+        #First Player Name
         self.player_1_label_1= Entry(self.frame3, width=16, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 14),
                                        justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
         self.player_1_label_1.grid(row=0,column=0)
         self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
         self.player_1_label_1.config(state=DISABLED)
 
-
-        self.player_1_label_2= Entry(self.frame3, width=5, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 30),
+        #First Player Score
+        self.player_1_label_2= Entry(self.frame3, width=5, bg=self.Button_bg_color,fg="grey", borderwidth=1, font=("Helvetica", 30),
                                        justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
         self.player_1_label_2.grid(row=2,column=0,pady=10)
         self.player_1_label_2.insert(0, "501")
         self.player_1_label_2.config(state=DISABLED)
 
-
-
-
-        self.player_2_label_1 = Label(self.frame4,padx=0, pady =0, text="Ajoutez le Joueur #2",font=("Helvetica", 12),bg=self.Button_bg_color, fg="grey")
+        # Second Player Name
+        self.player_2_label_1= Entry(self.frame4, width=16, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 14),
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
         self.player_2_label_1.grid(row=0,column=0)
-        self.player_2_label_2 = Label(self.frame4,padx=0, pady =0, text="501",font=("Helvetica", 30),bg=self.Button_bg_color, fg="grey")
-        self.player_2_label_2.grid(row=1,column=0)
+        self.player_2_label_1.insert(0, "Ajoutez le Joueur #2")
+        self.player_2_label_1.config(state=DISABLED)
 
-        self.player_3_label_1 = Label(self.frame5,padx=0, pady =0, text="Ajoutez le Joueur #3",font=("Helvetica", 12),bg=self.Button_bg_color, fg="grey")
+        # Second Player Score
+        self.player_2_label_2= Entry(self.frame4, width=5, bg=self.Button_bg_color,fg="grey", borderwidth=1, font=("Helvetica", 30),
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
+        self.player_2_label_2.grid(row=2,column=0,pady=10)
+        self.player_2_label_2.insert(0, "501")
+        self.player_2_label_2.config(state=DISABLED)
+
+        #Third Player Name
+        self.player_3_label_1= Entry(self.frame5, width=16, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 14),
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
         self.player_3_label_1.grid(row=0,column=0)
-        self.player_3_label_2 = Label(self.frame5,padx=0, pady =0, text="501",font=("Helvetica", 30),bg=self.Button_bg_color, fg="grey")
-        self.player_3_label_2.grid(row=1,column=0)
+        self.player_3_label_1.insert(0, "Ajoutez le Joueur #3")
+        self.player_3_label_1.config(state=DISABLED)
 
-        self.player_4_label_1 = Label(self.frame6,padx=0, pady =0, text="Ajoutez le Joueur #4",font=("Helvetica", 12),bg=self.Button_bg_color, fg="grey")
+        #Third Player Score
+        self.player_3_label_2= Entry(self.frame5, width=5, bg=self.Button_bg_color,fg="grey", borderwidth=1, font=("Helvetica", 30),
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
+        self.player_3_label_2.grid(row=2,column=0,pady=10)
+        self.player_3_label_2.insert(0, "501")
+        self.player_3_label_2.config(state=DISABLED)
+
+        #Fourth Player Name
+        self.player_4_label_1= Entry(self.frame6, width=16, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 14),
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
         self.player_4_label_1.grid(row=0,column=0)
-        self.player_4_label_2 = Label(self.frame6,padx=0, pady =0, text="501",font=("Helvetica", 30),bg=self.Button_bg_color, fg="grey")
-        self.player_4_label_2.grid(row=1,column=0)
+        self.player_4_label_1.insert(0, "Ajoutez le Joueur #4")
+        self.player_4_label_1.config(state=DISABLED)
+
+        #Fourth Player Score
+        self.player_4_label_2= Entry(self.frame6, width=5, bg=self.Button_bg_color,fg="grey", borderwidth=1, font=("Helvetica", 30),
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
+        self.player_4_label_2.grid(row=2,column=0,pady=10)
+        self.player_4_label_2.insert(0, "501")
+        self.player_4_label_2.config(state=DISABLED)
+
 
         #Images:
         global arrowImage
@@ -262,14 +291,14 @@ class MainWindow:
 
     def function_updateStatusLabel(self,text):
         self.updateStatusLabel.destroy()
-        self.updateStatusLabel = Label(self.emptylabel0,
-                                       padx=1,
-                                       pady =20,
-                                       text=text,
-                                       font=("Helvetica", 12),
-                                       bg=self.Button_bg_color,
-                                       fg="cyan")
+        self.updateStatusLabel = Label(self.emptylabel0, padx=1, pady=20, text=text, font=("Helvetica", 12),
+                                       bg=self.Button_bg_color, fg="cyan")
         self.updateStatusLabel.grid(row=0,column=0)
+        return
+
+    def function_refreshImages(self):
+        self.arrowImage = Label(self.emptylabel_3, image=LogoImage,bg=self.Button_bg_color, fg="grey")
+        self.arrowImage.grid(row=1,column=1)
         return
 
     def function_click(self,number):
@@ -348,34 +377,37 @@ class MainWindow:
                 MainWindow.player_1_label_1.delete(0,END)
                 MainWindow.player_1_label_1.insert(0, playerName)
                 MainWindow.player_1_label_1.config(state=DISABLED,disabledforeground="yellow")
-
-                #MainWindow.player_1_label_1.configure(text=playerName,fg='yellow')
-                #MainWindow.player_1_label_2.configure(padx=38, pady =7, text="501",font=("Helvetica", 30), fg="yellow")
                 MainWindow.frame3.configure(relief='raised')
                 updateStatusLabeltext= "Ajouter un deuxième joueur OU Cliquer Démarrer Partie!"
 
             if MainWindow.nbPlayer == 2:
-                MainWindow.player_2_label_1.configure(text=playerName,fg='yellow')
-                MainWindow.player_2_label_2.configure(padx=38, pady =7, text="501",font=("Helvetica", 30), fg="yellow")
-                MainWindow.frame4.configure(relief='raised', borderwidth=5, padx=40, pady=10)
+                MainWindow.player_2_label_1.config(state=NORMAL)
+                MainWindow.player_2_label_1.delete(0,END)
+                MainWindow.player_2_label_1.insert(0, playerName)
+                MainWindow.player_2_label_1.config(state=DISABLED,disabledforeground="yellow")
+                MainWindow.frame4.configure(relief='raised')
                 updateStatusLabeltext= "Ajouter un troisième joueur OU Cliquer Démarrer Partie!"
 
             if MainWindow.nbPlayer == 3:
-                MainWindow.player_3_label_1.configure(text=playerName,fg='yellow')
-                MainWindow.player_3_label_2.configure(padx=38, pady =7, text="501",font=("Helvetica", 30), fg="yellow")
-                MainWindow.frame5.configure(relief='raised', borderwidth=5, padx=40, pady=10)
+                MainWindow.player_3_label_1.config(state=NORMAL)
+                MainWindow.player_3_label_1.delete(0,END)
+                MainWindow.player_3_label_1.insert(0, playerName)
+                MainWindow.player_3_label_1.config(state=DISABLED,disabledforeground="yellow")
+                MainWindow.frame5.configure(relief='raised')
                 updateStatusLabeltext= "Ajouter un quatrième joueur OU Cliquer Démarrer Partie!"
 
-
             if MainWindow.nbPlayer == 4:
-                MainWindow.player_4_label_1.configure(text=playerName,fg='yellow')
-                MainWindow.player_4_label_2.configure(padx=38, pady =7, text="501",font=("Helvetica", 30), fg="yellow")
-                MainWindow.frame6.configure(relief='raised', borderwidth=5, padx=40, pady=10)
+                MainWindow.player_4_label_1.config(state=NORMAL)
+                MainWindow.player_4_label_1.delete(0,END)
+                MainWindow.player_4_label_1.insert(0, playerName)
+                MainWindow.player_4_label_1.config(state=DISABLED,disabledforeground="yellow")
+                MainWindow.frame6.configure(relief='raised')
                 updateStatusLabeltext= "Cliquer Démarrer Partie!"
 
         MainWindow.nbPlayer += 1
         print(MainWindow.nbPlayer)
         MainWindow.function_updateStatusLabel(updateStatusLabeltext)
+        MainWindow.function_refreshImages()
         MainWindow.subWin.destroy()
 
         if MainWindow.nbPlayer >= 5:
