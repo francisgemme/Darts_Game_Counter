@@ -16,6 +16,8 @@ class MainWindow:
         self.nbPlayer = 1
         self.Button_bg_color = "#245042"
         self.Button_ft_color = "#D3DBE5"
+        self.gameStarted = False
+        self.playerIndex = []  #
 
         # Add player button frame
         self.frame0 = LabelFrame(master, padx=5, pady=5)
@@ -177,7 +179,7 @@ class MainWindow:
         self.button_addPlayer.grid(row=0 ,column=0,columnspan=1)
         self.button_endTurn.grid(row=0 ,column=0,columnspan=1)
         self.button_gameStart.grid(row=0 ,column=3,columnspan=1)
-        self.button_quit.grid(row=13 ,column=9,columnspan=7)
+        self.button_quit.grid(row=13 ,column=10,columnspan=7)
 
         #---------------------------------------------------------------------------------------------------------------
         # CREATING ENTRY BOXES
@@ -265,24 +267,24 @@ class MainWindow:
 
         #Images:
         global arrowImage
-        global LogoImage
+        global logoImage
 
-        LogoImage= ImageTk.PhotoImage(Image.open("dart_Logo.sgi"))
-        self.arrowImage = Label(self.emptylabel_3, image=LogoImage,bg=self.Button_bg_color, fg="grey")
-        self.arrowImage.grid(row=1,column=1)
+        logoImage= ImageTk.PhotoImage(Image.open("dart_Logo.sgi"))
+        self.logoImage = Label(self.emptylabel_3, image=logoImage,bg=self.Button_bg_color, fg="grey")
+        self.logoImage.grid(row=1,column=1,columnspan=2)
 
         arrowImage= ImageTk.PhotoImage(Image.open("arrow.sgi"))
         self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        self.arrowImage.grid(row=1,column=1)
+        #self.arrowImage.grid(row=1,column=1)
 
-        self.arrowImage = Label(self.emptylabel_5, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        self.arrowImage.grid(row=1,column=1)
+        #self.arrowImage = Label(self.emptylabel_5, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+        #self.arrowImage.grid(row=1,column=1)
 
-        self.arrowImage = Label(self.emptylabel_6, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        self.arrowImage.grid(row=1,column=1)
+        #self.arrowImage = Label(self.emptylabel_6, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+        #self.arrowImage.grid(row=1,column=1)
 
-        self.arrowImage = Label(self.emptylabel_7, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        self.arrowImage.grid(row=1,column=1)
+        #self.arrowImage = Label(self.emptylabel_7, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+        #self.arrowImage.grid(row=1,column=1)
 
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -297,9 +299,15 @@ class MainWindow:
         return
 
     def function_refreshImages(self):
-        self.arrowImage = Label(self.emptylabel_3, image=LogoImage,bg=self.Button_bg_color, fg="grey")
-        self.arrowImage.grid(row=1,column=1)
+        self.logoImage = Label(self.emptylabel_3, image=logoImage,bg=self.Button_bg_color, fg="grey")
+        self.logoImage.grid(row=1,column=1,columnspan=2)
+        if self.gameStarted == True:
+            self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+            self.arrowImage.grid(row=1,column=1)
+
         return
+
+
 
     def function_click(self,number):
         # A class "Game" with its properties must be sent to this function
@@ -374,7 +382,7 @@ class MainWindow:
                 MainWindow.button_gameStart.configure(state="normal",fg="#60ff30")
 
                 MainWindow.player_1_label_1.config(state=NORMAL)
-                MainWindow.player_1_label_1.delete(0,END)
+                MainWindow.player_1_label_1.delete(0, END)
                 MainWindow.player_1_label_1.insert(0, playerName)
                 MainWindow.player_1_label_1.config(state=DISABLED,disabledforeground="yellow")
                 MainWindow.frame3.configure(relief='raised')
@@ -382,7 +390,7 @@ class MainWindow:
 
             if MainWindow.nbPlayer == 2:
                 MainWindow.player_2_label_1.config(state=NORMAL)
-                MainWindow.player_2_label_1.delete(0,END)
+                MainWindow.player_2_label_1.delete(0, END)
                 MainWindow.player_2_label_1.insert(0, playerName)
                 MainWindow.player_2_label_1.config(state=DISABLED,disabledforeground="yellow")
                 MainWindow.frame4.configure(relief='raised')
@@ -390,7 +398,7 @@ class MainWindow:
 
             if MainWindow.nbPlayer == 3:
                 MainWindow.player_3_label_1.config(state=NORMAL)
-                MainWindow.player_3_label_1.delete(0,END)
+                MainWindow.player_3_label_1.delete(0, END)
                 MainWindow.player_3_label_1.insert(0, playerName)
                 MainWindow.player_3_label_1.config(state=DISABLED,disabledforeground="yellow")
                 MainWindow.frame5.configure(relief='raised')
@@ -398,7 +406,7 @@ class MainWindow:
 
             if MainWindow.nbPlayer == 4:
                 MainWindow.player_4_label_1.config(state=NORMAL)
-                MainWindow.player_4_label_1.delete(0,END)
+                MainWindow.player_4_label_1.delete(0, END)
                 MainWindow.player_4_label_1.insert(0, playerName)
                 MainWindow.player_4_label_1.config(state=DISABLED,disabledforeground="yellow")
                 MainWindow.frame6.configure(relief='raised')
@@ -411,17 +419,109 @@ class MainWindow:
         MainWindow.subWin.destroy()
 
         if MainWindow.nbPlayer >= 5:
-                MainWindow.button_addPlayer.configure(state="disabled")
+                MainWindow.button_addPlayer.configure(state=DISABLED)
 
         return
 
     def function_gameStart(self):
-        self.function_updateStatusLabel("tour fini!")
+        if self.gameStarted == False:
+            self.gameStarted = True
+            self.function_updateStatusLabel("La Partie est commencée!")
+            print(self.gameStarted)
+            self.button_endTurn.configure(state="normal")
+            self.button_addPlayer.configure(state="disabled")
+
+            if self.nbPlayer != 0:
+                if self.nbPlayer == 2:
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                    for i in range((self.nbPlayer)-1):
+                        self.playerIndex.append(i+1)
+
+                    print(self.playerIndex)
+
+                if self.nbPlayer == 3:
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                    for i in range((self.nbPlayer)-1):
+                        self.playerIndex.append(i+1)
+
+                    print(self.playerIndex)
+
+                if self.nbPlayer == 4:
+                    self.player_3_label_2.config(state=NORMAL)
+                    self.player_3_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                    for i in range((self.nbPlayer)-1):
+                        self.playerIndex.append(i+1)
+
+                    print(self.playerIndex)
+
+                if self.nbPlayer == 5:
+                    self.player_4_label_2.config(state=NORMAL)
+                    self.player_4_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_3_label_2.config(state=NORMAL)
+                    self.player_3_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                    for i in range((self.nbPlayer)-1):
+                        self.playerIndex.append(i+1)
+
+                    print(self.playerIndex)
+
+        self.function_refreshImages()
+
         return
 
     def function_endTurn(self):
-        self.function_updateStatusLabel("tour fini!")
+        if self.gameStarted == True:
+            self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+            self.arrowImage.grid(row=1,column=1)
+
+            self.button_endTurn.configure(state="normal")
+
+            if self.nbPlayer != 0:
+                if self.nbPlayer == 2:
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                if self.nbPlayer == 3:
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                if self.nbPlayer == 4:
+                    self.player_3_label_2.config(state=NORMAL)
+                    self.player_3_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
+                if self.nbPlayer == 5:
+                    self.player_4_label_2.config(state=NORMAL)
+                    self.player_4_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_3_label_2.config(state=NORMAL)
+                    self.player_3_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+
         return
+
 
 
 e = MainWindow(root)
