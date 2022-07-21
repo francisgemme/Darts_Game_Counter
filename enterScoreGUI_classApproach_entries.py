@@ -486,39 +486,36 @@ class MainWindow:
 
     def function_endTurn(self):
         if self.gameStarted == True:
+
+            self.playerIndex
+
+            # Remove Current arrow on active player
+
+            # Add Arrow to the next active player considering the amount of players
+
             self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
             self.arrowImage.grid(row=1,column=1)
 
             self.button_endTurn.configure(state="normal")
 
+            number = 9
+            # eval performs the multiplication passed as argument
+            square_number = eval('number * number')
+            print(square_number)
+
             if self.nbPlayer != 0:
                 if self.nbPlayer == 2:
-                    self.player_1_label_2.config(state=NORMAL)
-                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    print('loop2')
 
                 if self.nbPlayer == 3:
-                    self.player_2_label_2.config(state=NORMAL)
-                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
-                    self.player_1_label_2.config(state=NORMAL)
-                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    print('loop3')
+
 
                 if self.nbPlayer == 4:
-                    self.player_3_label_2.config(state=NORMAL)
-                    self.player_3_label_2.config(state=DISABLED,disabledforeground="yellow")
-                    self.player_2_label_2.config(state=NORMAL)
-                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
-                    self.player_1_label_2.config(state=NORMAL)
-                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    print('loop4')
 
                 if self.nbPlayer == 5:
-                    self.player_4_label_2.config(state=NORMAL)
-                    self.player_4_label_2.config(state=DISABLED,disabledforeground="yellow")
-                    self.player_3_label_2.config(state=NORMAL)
-                    self.player_3_label_2.config(state=DISABLED,disabledforeground="yellow")
-                    self.player_2_label_2.config(state=NORMAL)
-                    self.player_2_label_2.config(state=DISABLED,disabledforeground="yellow")
-                    self.player_1_label_2.config(state=NORMAL)
-                    self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
+                    print('loop5')
 
         return
 
