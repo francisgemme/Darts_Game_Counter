@@ -191,7 +191,7 @@ class MainWindow:
         #---------------------------------------------------------------------------------------------------------------
         #First Player Name
         self.player_1_label_1= Entry(self.frame3, width=16, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 14),
-                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey",state=DISABLED)
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
         self.player_1_label_1.grid(row=0,column=0)
         self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
         self.player_1_label_1.config(state=DISABLED)
@@ -452,7 +452,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    self.playerIndex = list(range(1, self.nbPlayer+1))
+                    self.playerIndex = [1, 1]
 
                 if self.nbPlayer == 2:
                     self.player_2_label_2.config(state=NORMAL)
@@ -460,7 +460,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    self.playerIndex = list(range(1, self.nbPlayer+1))
+                    self.playerIndex = [1, 2]
 
                 if self.nbPlayer == 3:
                     self.player_3_label_2.config(state=NORMAL)
@@ -470,7 +470,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    self.playerIndex = list(range(1, self.nbPlayer+1))
+                    self.playerIndex = [1, 3]
 
                 if self.nbPlayer == 4:
                     self.player_4_label_2.config(state=NORMAL)
@@ -482,7 +482,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    self.playerIndex = list(range(1, self.nbPlayer+1))
+                    self.playerIndex = [1, 4]
 
         self.function_refreshImages()
         self.function_updateStatusLabel("La Partie est commencée!")
@@ -493,6 +493,12 @@ class MainWindow:
         if self.gameStarted == True:
 
             print(self.playerIndex)
+
+            # get Current Player turn over the total nb of player
+            currentPlayer = self.playerIndex[1:]
+            totalPlayer = self.playerIndex[:1]
+
+
 
             # Remove Current arrow on active player
 
@@ -507,17 +513,16 @@ class MainWindow:
             square_number = eval('number * number')
             print(square_number)
 
-            if self.nbPlayer != 0:
-                if self.nbPlayer == 2:
+            if self.nbPlayer == 2:
                     print('loop2')
 
-                if self.nbPlayer == 3:
+            if self.nbPlayer == 3:
                     print('loop3')
 
-                if self.nbPlayer == 4:
+            if self.nbPlayer == 4:
                     print('loop4')
 
-                if self.nbPlayer == 5:
+            if self.nbPlayer == 5:
                     print('loop5')
 
         return
