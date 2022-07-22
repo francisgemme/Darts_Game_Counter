@@ -53,17 +53,17 @@ class MainWindow:
         self.frame9.grid(row=3,column=5,columnspan=2,rowspan=1)
 
        # Turn arrow panel
-        self.emptylabel_4= Label(master, padx=10, pady=0,bg= self.Button_bg_color)
-        self.emptylabel_4.grid(row=4,column=5,rowspan=2, columnspan=3)
+        self.arrowLabel_1= Label(master, padx=10, pady=0, bg= self.Button_bg_color)
+        self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3)
 
-        self.emptylabel_5= Label(master, padx=10, pady=0, bg= self.Button_bg_color)
-        self.emptylabel_5.grid(row=4,column=9,rowspan=2, columnspan=4)
+        self.arrowLabel_2= Label(master, padx=10, pady=0, bg= self.Button_bg_color)
+        self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=4)
 
-        self.emptylabel_6= Label(master, padx=10, pady=0, bg=self.Button_bg_color)
-        self.emptylabel_6.grid(row=7,column=5,rowspan=2, columnspan=3)
+        self.arrowLabel_3= Label(master, padx=10, pady=0, bg=self.Button_bg_color)
+        self.arrowLabel_3.grid(row=7, column=5, rowspan=2, columnspan=3)
 
-        self.emptylabel_7= Label(master, padx=10, pady=0, bg=self.Button_bg_color)
-        self.emptylabel_7.grid(row=7,column=9,rowspan=2, columnspan=4)
+        self.arrowLabel_4= Label(master, padx=10, pady=0, bg=self.Button_bg_color)
+        self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=4)
 
         # Empty Row between players 1-2 and player 3-4
         self.frame8 = LabelFrame(master, padx=10, pady=1, bg=self.Button_bg_color)
@@ -257,7 +257,7 @@ class MainWindow:
         self.logoImage.grid(row=1,column=1,columnspan=2)
 
         arrowImage= ImageTk.PhotoImage(Image.open("arrow.sgi"))
-        self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+        self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
 
         # for testing...
 
@@ -296,7 +296,7 @@ class MainWindow:
         self.logoImage = Label(self.emptylabel_3, image=logoImage,bg=self.Button_bg_color, fg="grey")
         self.logoImage.grid(row=1,column=1,columnspan=2)
         if self.gameStarted == True:
-            self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+            self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
             self.arrowImage.grid(row=1,column=1)
         return
 
@@ -494,16 +494,22 @@ class MainWindow:
 
             print(self.playerIndex)
 
+            currentPlayer = ""
+            totalPlayer = ""
             # get Current Player turn over the total nb of player
-            currentPlayer = self.playerIndex[1:]
-            totalPlayer = self.playerIndex[:1]
+            currentPlayer = str(self.playerIndex[:1])
+            totalPlayer = str(self.playerIndex[1:])
+
+            string = "self.arrowImage = Label(self.arrowLabel_"+ currentPlayer+",image=arrowImage, bg=self.Button_bg_color, fg='grey)"
+
+            print(string)
 
 
 
             # Remove Current arrow on active player
 
             # Add Arrow to the next active player considering the amount of players
-            self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+            self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
             self.arrowImage.grid(row=1,column=1)
 
             self.button_endTurn.configure(state="normal")
