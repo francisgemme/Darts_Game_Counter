@@ -4,7 +4,7 @@ from PIL import ImageTk,Image
 root = Tk()
 root.title("Score Board")
 root.geometry("1125x850")
-#root.resizable(False, False)
+root.resizable(False, False)
 root.iconbitmap("dart_icon.ico")
 root.configure(background="#245042")
 ##38404B"
@@ -21,77 +21,73 @@ class MainWindow:
         self.playerIndex = []  #
 
         # Add player button frame
-        self.frame0 = LabelFrame(master, padx=5, pady=5, background=self.Button_bg_color)
+        self.frame0 = LabelFrame(master, padx=5, pady=5, bg=self.Button_bg_color)
         self.frame0.grid(row=0,column=0,columnspan=7,sticky="W")
 
         # To create horizontal space between frames (this area provide instructions & Game Status)
-        self.emptylabel0= Label(master, padx=25, pady=30, background= self.Button_bg_color)
+        self.emptylabel0= Label(master, padx=25, pady=30, bg= self.Button_bg_color)
         self.emptylabel0.grid(row=2,column=1,columnspan=3)
 
         # To create a vertical space between first column of frames
-        self.emptylabel_1= Label(master, padx=20, pady=5, background= self.Button_bg_color)
+        self.emptylabel_1= Label(master, padx=20, pady=5, bg= self.Button_bg_color)
         self.emptylabel_1.grid(row=2,column=0,rowspan=14)
 
         # Calculator and submit button frame
-        self.frame1 = LabelFrame(master, padx=10, pady=10, background= self.Button_bg_color)
+        self.frame1 = LabelFrame(master, padx=10, pady=10, bg= self.Button_bg_color)
         self.frame1.grid(row=5,column=1,columnspan=3,rowspan=5)
 
         # To create a vertical space after first column of frames
-        self.emptylabel_2= Label(master, padx=20, pady=10, background= self.Button_bg_color)
+        self.emptylabel_2= Label(master, padx=20, pady=10, bg= self.Button_bg_color)
         self.emptylabel_2.grid(row=5,column=4,rowspan=2)
 
         # To create vertical space between frames
-        self.emptylabel_3= Label(master, padx=25, pady=2,background= self.Button_bg_color)
+        self.emptylabel_3= Label(master, padx=25, pady=2,bg= self.Button_bg_color)
         self.emptylabel_3.grid(row=0,column=10,columnspan=5,rowspan=5)
 
         # Entry Score frame
-        self.frame2 = LabelFrame(master, padx=10, pady=10, background= self.Button_bg_color)
+        self.frame2 = LabelFrame(master, padx=10, pady=10, bg= self.Button_bg_color)
         self.frame2.grid(row=3,column=1,columnspan=3)
 
         # Start Game button frame
-        self.frame9 = LabelFrame(master, padx=10, pady=10, background= self.Button_bg_color)
+        self.frame9 = LabelFrame(master, padx=10, pady=10, bg= self.Button_bg_color)
         self.frame9.grid(row=3,column=5,columnspan=2,rowspan=1)
 
        # Turn arrow panel
-        self.emptylabel_4= Label(master, padx=10, pady=0,background= self.Button_bg_color)
+        self.emptylabel_4= Label(master, padx=10, pady=0,bg= self.Button_bg_color)
         self.emptylabel_4.grid(row=4,column=5,rowspan=2, columnspan=3)
 
-        self.emptylabel_5= Label(master, padx=10, pady=0, background= self.Button_bg_color)
+        self.emptylabel_5= Label(master, padx=10, pady=0, bg= self.Button_bg_color)
         self.emptylabel_5.grid(row=4,column=9,rowspan=2, columnspan=4)
 
-        self.emptylabel_6= Label(master, padx=10, pady=0, background=self.Button_bg_color)
+        self.emptylabel_6= Label(master, padx=10, pady=0, bg=self.Button_bg_color)
         self.emptylabel_6.grid(row=7,column=5,rowspan=2, columnspan=3)
 
-        self.emptylabel_7= Label(master, padx=10, pady=0, background=self.Button_bg_color)
+        self.emptylabel_7= Label(master, padx=10, pady=0, bg=self.Button_bg_color)
         self.emptylabel_7.grid(row=7,column=9,rowspan=2, columnspan=4)
 
         # Empty Row between players 1-2 and player 3-4
-        self.frame8 = LabelFrame(master, padx=10, pady=1, background=self.Button_bg_color)
+        self.frame8 = LabelFrame(master, padx=10, pady=1, bg=self.Button_bg_color)
         self.frame8.grid(row=5,column=8,columnspan=3,rowspan=3)
 
         # End turn button frame
-        self.frame7 = LabelFrame(master, padx=10, pady=5, background=self.Button_bg_color)
+        self.frame7 = LabelFrame(master, padx=10, pady=5, bg=self.Button_bg_color)
         self.frame7.grid(row=13,column=2,columnspan=1)
 
         # first player frame
-        self.frame3 = LabelFrame(master, padx=30, pady=30)
+        self.frame3 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
         self.frame3.grid(row=5,column=5,columnspan=4,rowspan=3)
-        self.frame3.configure(background=self.Button_bg_color)
 
         # Second player frame
-        self.frame4 = LabelFrame(master, padx=30, pady=30)
+        self.frame4 = LabelFrame(master, padx=30, pady=30,bg=self.Button_bg_color)
         self.frame4.grid(row=5,column=9,columnspan=4,rowspan=3)
-        self.frame4.configure(background=self.Button_bg_color)
 
         # third player frame
-        self.frame5 = LabelFrame(master, padx=30, pady=30)
+        self.frame5 = LabelFrame(master, padx=30, pady=30, background=self.Button_bg_color)
         self.frame5.grid(row=8,column=5,columnspan=4,rowspan=3)
-        self.frame5.configure(background=self.Button_bg_color)
 
         # fourth player frame
-        self.frame6 = LabelFrame(master, padx=30, pady=30)
+        self.frame6 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
         self.frame6.grid(row=8,column=9,columnspan=4,rowspan=3)
-        self.frame6.configure(background=self.Button_bg_color)
 
         #---------------------------------------------------------------------------------------------------------------
         #                                               CREATING BUTTONS
@@ -151,26 +147,26 @@ class MainWindow:
                                   bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED)
 
         # Put the buttons on the screen
-        self.button_1.grid(row=3 ,column=0)
-        self.button_2.grid(row=3 ,column=1)
-        self.button_3.grid(row=3 ,column=2)
-        self.button_4.grid(row=2 ,column=0)
-        self.button_5.grid(row=2 ,column=1)
-        self.button_6.grid(row=2 ,column=2)
-        self.button_7.grid(row=1 ,column=0)
-        self.button_8.grid(row=1 ,column=1)
-        self.button_9.grid(row=1 ,column=2)
-        self.button_0.grid(row=4 ,column=0)
-        self.button_commitScore.grid(row=5 ,column=0, columnspan=3)
-        self.button_clear.grid(row=4 ,column=1, columnspan=2)
-        self.button_addPlayer.grid(row=0 ,column=0,columnspan=1)
-        self.button_gameMode.grid(row=0 ,column=2,columnspan=1)
-        self.button_editScore.grid(row=0 ,column=3,columnspan=1)
-        self.button_editName.grid(row=0 ,column=4,columnspan=1)
-        self.button_endTurn.grid(row=0 ,column=0,columnspan=1)
-        self.button_gameStart.grid(row=0 ,column=3,columnspan=1)
-        self.restartBoard.grid(row=13 ,column=10,columnspan=1,sticky="SE")
-        self.button_quit.grid(row=13 ,column=11,columnspan=1,sticky="SE")
+        self.button_1.grid(row=3, column=0)
+        self.button_2.grid(row=3, column=1)
+        self.button_3.grid(row=3, column=2)
+        self.button_4.grid(row=2, column=0)
+        self.button_5.grid(row=2, column=1)
+        self.button_6.grid(row=2, column=2)
+        self.button_7.grid(row=1, column=0)
+        self.button_8.grid(row=1, column=1)
+        self.button_9.grid(row=1, column=2)
+        self.button_0.grid(row=4, column=0)
+        self.button_commitScore.grid(row=5, column=0, columnspan=3)
+        self.button_clear.grid(row=4, column=1, columnspan=2)
+        self.button_addPlayer.grid(row=0, column=0,columnspan=1)
+        self.button_gameMode.grid(row=0, column=2,columnspan=1)
+        self.button_editScore.grid(row=0, column=3,columnspan=1)
+        self.button_editName.grid(row=0, column=4,columnspan=1)
+        self.button_endTurn.grid(row=0, column=0,columnspan=1)
+        self.button_gameStart.grid(row=0, column=3,columnspan=1)
+        self.restartBoard.grid(row=13, column=10,columnspan=1, sticky="SE")
+        self.button_quit.grid(row=13, column=11, columnspan=1, sticky="SE")
 
         #---------------------------------------------------------------------------------------------------------------
         # CREATING ENTRY BOXES
@@ -193,10 +189,9 @@ class MainWindow:
         #---------------------------------------------------------------------------------------------------------------
         # CREATING PLAYERS ENTRY BOXES
         #---------------------------------------------------------------------------------------------------------------
-
         #First Player Name
         self.player_1_label_1= Entry(self.frame3, width=16, bg=self.Button_bg_color,fg="grey", borderwidth=0, font=("Helvetica", 14),
-                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey")
+                                       justify='center',disabledbackground=self.Button_bg_color,disabledforeground="grey",state=DISABLED)
         self.player_1_label_1.grid(row=0,column=0)
         self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
         self.player_1_label_1.config(state=DISABLED)
@@ -250,8 +245,10 @@ class MainWindow:
         self.player_4_label_2.insert(0, "501")
         self.player_4_label_2.config(state=DISABLED)
 
-
-        #Images:
+        #---------------------------------------------------------------------------------------------------------------
+        # CREATING IMAGES (from .SGI files)
+        #---------------------------------------------------------------------------------------------------------------
+        #Images global variable:
         global arrowImage
         global logoImage
 
@@ -261,6 +258,9 @@ class MainWindow:
 
         arrowImage= ImageTk.PhotoImage(Image.open("arrow.sgi"))
         self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
+
+        # for testing...
+
         #self.arrowImage.grid(row=1,column=1)
 
         #self.arrowImage = Label(self.emptylabel_5, image=arrowImage,bg=self.Button_bg_color, fg="grey")
@@ -298,7 +298,6 @@ class MainWindow:
         if self.gameStarted == True:
             self.arrowImage = Label(self.emptylabel_4, image=arrowImage,bg=self.Button_bg_color, fg="grey")
             self.arrowImage.grid(row=1,column=1)
-
         return
 
 
@@ -363,18 +362,21 @@ class MainWindow:
         MainWindow.subWin.emptylabel_1 = Label(MainWindow.subWin, padx=10, pady=10,background=MainWindow.Button_bg_color)
         MainWindow.subWin.emptylabel_1.grid(row=0,column=0, columnspan=4)
 
-        l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (MainWindow.nbPlayer+1),bg=MainWindow.Button_bg_color,fg=MainWindow.Button_ft_color)
+        MainWindow.subWin.emptylabel_2 = Label(MainWindow.subWin, padx=10, pady=2,background=MainWindow.Button_bg_color)
+        MainWindow.subWin.emptylabel_2.grid(row=4,column=0, columnspan=4)
+
+        l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (MainWindow.nbPlayer+1),font= ("Helvetica",12),bg=MainWindow.Button_bg_color,fg=MainWindow.Button_ft_color)
         l.grid(row=1,column=0, columnspan=1, padx=50, pady=10)
 
         MainWindow.subWin.errorStatus = Label(MainWindow.subWin, text="",bg=MainWindow.Button_bg_color,fg="cyan")
         MainWindow.subWin.errorStatus.grid(row=2,column=1, columnspan=1, padx=1, pady=10, sticky="n")
 
-        MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black',fg='yellow', borderwidth=3, font=("Helvetica", 12),justify='center')
+        MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black',fg='yellow', borderwidth=3, font=("Helvetica", 16),justify='center')
         MainWindow.subWin.input_Name.grid(row=1,column=1, columnspan=1)
 
-        MainWindow.subWin.button_commitAddPlayer= Button(MainWindow.subWin, text="Enregistrer", padx=10, pady =15, font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
+        MainWindow.subWin.button_commitAddPlayer= Button(MainWindow.subWin, text="Enregistrer", padx=10, pady =5, font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
                             fg="yellow", command=MainWindow.commitAddPlayer)
-        MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady =10, font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
+        MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady =5, font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
                       fg=MainWindow.Button_ft_color, command=lambda: MainWindow.subWin.destroy())
 
         MainWindow.subWin.button_commitAddPlayer.grid(row=3 ,column=1, columnspan=1)
@@ -439,21 +441,18 @@ class MainWindow:
     def function_gameStart(self):
         if self.gameStarted == False:
             self.gameStarted = True
+            self.frame9.configure(borderwidth=0)
+            self.button_gameStart.configure(borderwidth=0)
             print(self.gameStarted)
             self.button_endTurn.configure(state="normal")
-            self.button_addPlayer.configure(state=DISABLED)
-            self.button_gameStart.configure(state=DISABLED)
+            self.button_gameStart.configure(state=DISABLED,disabledforeground=self.Button_bg_color)
 
             if self.nbPlayer != 0:
                 if self.nbPlayer == 1:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    for i in range((self.nbPlayer)-1):
-                        self.playerIndex.append(i+1)
-
-                    print(self.playerIndex)
-                    print("loop 1")
+                    self.playerIndex = list(range(1, self.nbPlayer+1))
 
                 if self.nbPlayer == 2:
                     self.player_2_label_2.config(state=NORMAL)
@@ -461,11 +460,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    for i in range((self.nbPlayer)-1):
-                        self.playerIndex.append(i+1)
-
-                    print(self.playerIndex)
-                    print("loop 2")
+                    self.playerIndex = list(range(1, self.nbPlayer+1))
 
                 if self.nbPlayer == 3:
                     self.player_3_label_2.config(state=NORMAL)
@@ -475,11 +470,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    for i in range((self.nbPlayer)-1):
-                        self.playerIndex.append(i+1)
-
-                    print(self.playerIndex)
-                    print("loop 3")
+                    self.playerIndex = list(range(1, self.nbPlayer+1))
 
                 if self.nbPlayer == 4:
                     self.player_4_label_2.config(state=NORMAL)
@@ -491,11 +482,7 @@ class MainWindow:
                     self.player_1_label_2.config(state=NORMAL)
                     self.player_1_label_2.config(state=DISABLED,disabledforeground="yellow")
 
-                    for i in range((self.nbPlayer)-1):
-                        self.playerIndex.append(i+1)
-
-                    print(self.playerIndex)
-                    print("loop 4")
+                    self.playerIndex = list(range(1, self.nbPlayer+1))
 
         self.function_refreshImages()
         self.function_updateStatusLabel("La Partie est commencée!")
