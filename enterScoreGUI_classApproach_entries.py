@@ -330,38 +330,65 @@ class MainWindow:
                 self.input_Score.insert(0, str(current) + str(number))
                 self.input_Score.config(state=DISABLED)
 
-            if len(current) == 3:
-                newValue = self.input_Score.get()
-                if newValue > 1:
-                    print('holla!')
+            #if len(current) == 2:
+             #   newValue = self.input_Score.get()
+              #  if str(newValue) > str(1):
+               #     print('holla!')
 
         return
 
     def function_clear(self):
-          # A class "Game" with its properties must be sent to this function
+        # A class "Game" with its properties must be sent to this function
         # Transfer created player to the Lobby
-        if self.nbPlayer != 1:
-            self.input_Score.config(state=NORMAL)
-            self.input_Score.delete(0,END)
-            self.input_Score.config(state=DISABLED)
-
+        self.input_Score.config(state=NORMAL)
+        self.input_Score.delete(0,END)
+        self.input_Score.config(state=DISABLED)
         return
 
     def button_commitScore(self):
-        # A class "Game" with its properties must be sent to this function
-        # Must create a memory (by using a global variable)
-            if self.nbPlayer != 0:
-                next_number = self.input_Score.get()
-                input_Score.delete(0, END)
-                if math == "addition":
-                    input_Score.insert(0, f_num + int(next_number))
-                if math == "substraction":
-                    input_Score.insert(0, f_num - int(next_number))
-                if math == "multiplication":
-                    input_Score.insert(0, f_num * int(next_number))
-                if math == "division":
-                    input_Score.insert(0, f_num / int(next_number))
-            return
+        # get Current Player turn over the total nb of player
+        scoreToInput = int(self.input_Score.get())
+        currentPlayer = self.playerIndex[:1]
+        self.input_Score.config(state=NORMAL)
+        self.input_Score.delete(0,END)
+        self.input_Score.config(state=DISABLED)
+
+        if currentPlayer == [1]:
+            currentPlayerScore =int(self.player_1_label_2.get())
+
+            if int(currentPlayerScore) >= int(scoreToInput):
+                self.player_1_label_2.config(state=NORMAL)
+                self.player_1_label_2.delete(0,END)
+                self.player_1_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                self.player_1_label_2.config(state=DISABLED)
+
+        if currentPlayer == [2]:
+            currentPlayerScore = int(self.player_2_label_2.get())
+            if int(currentPlayerScore) >= int(scoreToInput):
+                self.player_2_label_2.config(state=NORMAL)
+                self.player_2_label_2.delete(0,END)
+                self.player_2_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                self.player_2_label_2.config(state=DISABLED)
+
+        if currentPlayer == [3]:
+            currentPlayerScore = int(self.player_3_label_2.get())
+
+            if int(currentPlayerScore) >= int(scoreToInput):
+                self.player_3_label_2.config(state=NORMAL)
+                self.player_3_label_2.delete(0,END)
+                self.player_3_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                self.player_3_label_2.config(state=DISABLED)
+
+        if currentPlayer == [4]:
+            currentPlayerScore = int(self.player_4_label_2.get())
+
+            if int(currentPlayerScore) >= int(scoreToInput):
+                self.player_4_label_2.config(state=NORMAL)
+                self.player_4_label_2.delete(0,END)
+                self.player_4_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                self.player_4_label_2.config(state=DISABLED)
+
+        return
 
     def function_addPlayer(MainWindow):
         # Transfer created player to the Lobby
@@ -508,8 +535,6 @@ class MainWindow:
             print(self.playerIndex)
             self.button_endTurn.configure(state=DISABLED)
 
-            currentPlayer = ""
-            totalPlayer = ""
             # get Current Player turn over the total nb of player
             currentPlayer = self.playerIndex[:1]
             totalPlayer = self.playerIndex[1:]
@@ -559,7 +584,6 @@ class MainWindow:
 
             self.button_endTurn.configure(state=NORMAL)
             self.function_refreshImages()
-
         return
 
 
