@@ -296,8 +296,20 @@ class MainWindow:
         self.logoImage = Label(self.emptylabel_3, image=logoImage,bg=self.Button_bg_color, fg="grey")
         self.logoImage.grid(row=1,column=1,columnspan=2)
         if self.gameStarted == True:
-            self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
-            self.arrowImage.grid(row=1,column=1)
+
+            currentPlayer = self.playerIndex[:1]
+            if currentPlayer == [1]:
+                self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
+                self.arrowImage.grid(row=1, column=1)
+            if currentPlayer == [2]:
+                self.arrowImage = Label(self.arrowLabel_2, image=arrowImage, bg=self.Button_bg_color, fg="grey")
+                self.arrowImage.grid(row=1, column=1)
+            if currentPlayer == [3]:
+                self.arrowImage = Label(self.arrowLabel_3, image=arrowImage, bg=self.Button_bg_color, fg="grey")
+                self.arrowImage.grid(row=1, column=1)
+            if currentPlayer == [4]:
+                self.arrowImage = Label(self.arrowLabel_4, image=arrowImage, bg=self.Button_bg_color, fg="grey")
+                self.arrowImage.grid(row=1, column=1)
         return
 
 
@@ -444,8 +456,9 @@ class MainWindow:
             self.frame9.configure(borderwidth=0)
             self.button_gameStart.configure(borderwidth=0)
             print(self.gameStarted)
-            self.button_endTurn.configure(state="normal")
+            self.button_endTurn.configure(state=NORMAL)
             self.button_gameStart.configure(state=DISABLED,disabledforeground=self.Button_bg_color)
+            self.button_addPlayer.configure(state=DISABLED)
 
             if self.nbPlayer != 0:
                 if self.nbPlayer == 1:
@@ -493,43 +506,59 @@ class MainWindow:
         if self.gameStarted == True:
 
             print(self.playerIndex)
+            self.button_endTurn.configure(state=DISABLED)
 
             currentPlayer = ""
             totalPlayer = ""
             # get Current Player turn over the total nb of player
-            currentPlayer = str(self.playerIndex[:1])
-            totalPlayer = str(self.playerIndex[1:])
+            currentPlayer = self.playerIndex[:1]
+            totalPlayer = self.playerIndex[1:]
 
-            string = "self.arrowImage = Label(self.arrowLabel_"+ currentPlayer+",image=arrowImage, bg=self.Button_bg_color, fg='grey)"
+            print(currentPlayer)
 
-            print(string)
+            #string = "self.arrowImage = Label(self.arrowLabel_"+ currentPlayer+",image=arrowImage, bg=self.Button_bg_color, fg='grey)"
+            #print(string)
 
-
-
-            # Remove Current arrow on active player
-
-            # Add Arrow to the next active player considering the amount of players
-            self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
-            self.arrowImage.grid(row=1,column=1)
-
-            self.button_endTurn.configure(state="normal")
-
-            number = 9
+            # number = 9
             # eval performs the multiplication passed as argument
-            square_number = eval('number * number')
-            print(square_number)
+            #square_number = eval('number * number')
+            #print(square_number)
 
-            if self.nbPlayer == 2:
-                    print('loop2')
+            if currentPlayer == [1]:
+                print('loop1')
+                if currentPlayer == totalPlayer:
+                    self.playerIndex[0] = 1
+                    self.arrowImage.grid_forget()
+                if currentPlayer < totalPlayer:
+                    self.playerIndex[0] = 2
+                    self.arrowImage.grid_forget()
 
-            if self.nbPlayer == 3:
-                    print('loop3')
+            if currentPlayer == [2]:
+                print('loop2')
+                if currentPlayer == totalPlayer:
+                    self.playerIndex[0] = 1
+                    self.arrowImage.grid_forget()
+                if currentPlayer < totalPlayer:
+                    self.playerIndex[0] = 3
+                    self.arrowImage.grid_forget()
 
-            if self.nbPlayer == 4:
-                    print('loop4')
+            if currentPlayer == [3]:
+                print('loop3')
+                if currentPlayer == totalPlayer:
+                    self.playerIndex[0] = 1
+                    self.arrowImage.grid_forget()
+                if currentPlayer < totalPlayer:
+                    self.playerIndex[0] = 4
+                    self.arrowImage.grid_forget()
 
-            if self.nbPlayer == 5:
-                    print('loop5')
+            if currentPlayer == [4]:
+                print('loop4')
+                if currentPlayer == totalPlayer:
+                    self.playerIndex[0] = 1
+                    self.arrowImage.grid_forget()
+
+            self.button_endTurn.configure(state=NORMAL)
+            self.function_refreshImages()
 
         return
 
