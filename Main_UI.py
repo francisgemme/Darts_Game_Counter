@@ -1,5 +1,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
+import pandas as pd
+
 
 class MainWindow:
 
@@ -10,12 +12,39 @@ class MainWindow:
         self.nbPlayer = 0
         self.Button_bg_color = "#245042"
         self.Button_ft_color = "#D3DBE5"
+        self.activeButton_bg_color = "#9aa794"
+        self.activeButton_ft_color = "#D3DBE5"
         self.gameStarted = False
-        self.playerIndex = []  #
+        self.playerIndex = []  # Variable tracking player turn and total number of players
 
-    # ---------------------------------------------------------------------------------------------------------------
-    # Create Frames for the UI Layout
-    #-----------------------------------------------------------------------------------------------------------------
+        # 1 column Array per player with n rows for each score entered during the game (for the goBack and Forward function)
+        # If the user click on the goBack button and commit a new score, all subsequent scores for
+        # this specific player get erased (from the memory), i.e. this function purpose is to correct the score in the case of a typo.
+        # If the user click on "End Turn", the current display score become the latest data in the memory.
+        self.gameTurn = 0
+        self.gameTurnToRemove = 0
+        self.player_1_ScoreLog = []
+        self.player_2_ScoreLog = []
+        self.player_3_ScoreLog = []
+        self.player_4_ScoreLog = []
+
+        technologies = ({
+            'Courses':["Spark","Hadoop","pandas","Java","Pyspark"],
+            'Fee' :[20000,25000,30000,22000,26000],
+            'Duration':['30days','40days','35days','60days','50days'],
+            'Discount':[1000,2500,1500,1200,3000]
+                        })
+
+        df = pd.DataFrame(technologies)
+        print(df)
+        df = pd.DataFrame(technologies)
+        new_row = pd.DataFrame({'Courses':'Hyperion', 'Fee':24000, 'Duration':'55days', 'Discount':1800}, index=[0])
+        df2 = pd.concat([new_row,df.loc[:]]).reset_index(drop=True)
+
+        # --------------------------------------------------------------------------------------------------------------
+        #   Create Frames for the UI Layout
+        # --------------------------------------------------------------------------------------------------------------
+
         # Add player button frame
         self.frame0 = LabelFrame(master, padx=5, pady=5, bg=self.Button_bg_color)
         self.frame0.grid(row=0, column=0, columnspan=7, sticky="W")
@@ -48,20 +77,23 @@ class MainWindow:
         self.frame9 = LabelFrame(master, padx=10, pady=10, bg=self.Button_bg_color)
         self.frame9.grid(row=3, column=5, columnspan=2, rowspan=1)
 
-        # Turn arrow panel
+        # Turn arrow panel for player 1
         self.arrowLabel_1 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
         self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3)
 
+        # Turn arrow panel for player 2
         self.arrowLabel_2 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
         self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=4)
 
+        # Turn arrow panel for player 3
         self.arrowLabel_3 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
         self.arrowLabel_3.grid(row=7, column=5, rowspan=2, columnspan=3)
 
+        # Turn arrow panel for player 4
         self.arrowLabel_4 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
         self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=4)
 
-        # Empty Row between players 1-2 and player 3-4
+        # Empty Row between players 1-2 panels and player 3-4 panels
         self.frame8 = LabelFrame(master, padx=10, pady=1, bg=self.Button_bg_color)
         self.frame8.grid(row=5, column=8, columnspan=3, rowspan=3)
 
@@ -69,79 +101,124 @@ class MainWindow:
         self.frame7 = LabelFrame(master, padx=10, pady=5, bg=self.Button_bg_color)
         self.frame7.grid(row=13, column=2, columnspan=1)
 
-        # first player frame
+        # Previous (Ctrl Z) button frame
+        self.frame20 = LabelFrame(master, padx=3, pady=2, bg=self.Button_bg_color, borderwidth=0)
+        self.frame20.grid(row=13, column=1, columnspan=1, rowspan=1,sticky='E')
+
+        # Next (Ctrl Y) button frame
+        self.frame21 = LabelFrame(master, padx=3, pady=2, bg=self.Button_bg_color,borderwidth=0)
+        self.frame21.grid(row=13, column=3, columnspan=1, rowspan=1,sticky='W')
+
+        # player 1 frame
         self.frame3 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
         self.frame3.grid(row=5, column=5, columnspan=4, rowspan=3)
 
-        # Second player frame
+        # player 2 frame
         self.frame4 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
         self.frame4.grid(row=5, column=9, columnspan=4, rowspan=3)
 
-        # third player frame
+        # player 3 frame
         self.frame5 = LabelFrame(master, padx=30, pady=30, background=self.Button_bg_color)
         self.frame5.grid(row=8, column=5, columnspan=4, rowspan=3)
 
-        # fourth player frame
+        # fourth player 4 frame
         self.frame6 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
         self.frame6.grid(row=8, column=9, columnspan=4, rowspan=3)
 
-        # ---------------------------------------------------------------------------------------------------------------
-        #                                               CREATING BUTTONS
-        # ---------------------------------------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------------------------------------
+        #   CREATING BUTTONS
+        # --------------------------------------------------------------------------------------------------------------
 
         # Define buttons
         self.button_1 = Button(self.frame1, text="1", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(1))
-        self.button_2 = Button(self.frame1, text="2", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(2))
-        self.button_3 = Button(self.frame1, text="3", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(3))
-        self.button_4 = Button(self.frame1, text="4", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(4))
-        self.button_5 = Button(self.frame1, text="5", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(5))
-        self.button_6 = Button(self.frame1, text="6", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(6))
-        self.button_7 = Button(self.frame1, text="7", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(7))
-        self.button_8 = Button(self.frame1, text="8", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(8))
-        self.button_9 = Button(self.frame1, text="9", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(9))
-        self.button_0 = Button(self.frame1, text="0", padx=40, pady=20, font=("Helvetica", 25),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=lambda: self.function_click(0))
+                               fg=self.Button_ft_color, command=lambda: self.function_click(1),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_2 = Button(self.frame1, text="2", padx=40, pady=20, font=("Helvetica", 25), bg= self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(2),
+                               activebackground= self.activeButton_bg_color, activeforeground= self.activeButton_ft_color)
+
+        self.button_3 = Button(self.frame1, text="3", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(3),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_4 = Button(self.frame1, text="4", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(4),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_5 = Button(self.frame1, text="5", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(5),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_6 = Button(self.frame1, text="6", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(6),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_7 = Button(self.frame1, text="7", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(7),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_8 = Button(self.frame1, text="8", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(8),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_9 = Button(self.frame1, text="9", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(9),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_0 = Button(self.frame1, text="0", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
+                               fg=self.Button_ft_color, command=lambda: self.function_click(0),
+                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_commitScore = Button(self.frame1, text="Soumettre", padx=100, pady=20, font=("Helvetica", 25),
-                                         bg=self.Button_bg_color, fg="yellow", command=self.button_commitScore)
+                                         bg=self.Button_bg_color, fg="yellow", command=self.button_commitScore,
+                                         activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
         self.button_clear = Button(self.frame1, text="C", padx=99.49999, pady=20, font=("Helvetica", 25),
-                                   bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.function_clear)
+                                   bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.function_clear,
+                                   activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_addPlayer = Button(self.frame0, text="Ajouter Joueur", padx=35, pady=3, font=("Helvetica", 12),
-                                       bg=self.Button_bg_color, fg=self.Button_ft_color,
-                                       command=self.function_addPlayer)
+                                       bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.function_addPlayer,
+                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_gameMode = Button(self.frame0, text="Mode de Jeu", padx=35, pady=3, font=("Helvetica", 12),
-                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED)
+                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED,
+                                      activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_editScore = Button(self.frame0, text="Modifier Pointage", padx=20, pady=3, font=("Helvetica", 12),
-                                       bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED)
+                                       bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED,
+                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_editName = Button(self.frame0, text="Renommer Joueur", padx=20, pady=3, font=("Helvetica", 12),
-                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED)
+                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED,
+                                      activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
-        self.button_gameStart = Button(self.frame9, text="Démarrer Partie!", padx=40, pady=5, font=("Helvetica", 12),
-                                       bg=self.Button_bg_color, fg=self.Button_ft_color,
-                                       command=self.function_gameStart, state="disabled")
+        self.button_gameStart = Button(self.frame9, text="Démarrer Partie!", padx=40, pady=5, font=("Helvetica", 14, "bold"),
+                                       bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.function_gameStart,
+                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color, state="disabled")
 
         self.button_endTurn = Button(self.frame7, text="Tour terminé", padx=40, pady=5, font=("Helvetica", 12),
                                      bg=self.Button_bg_color, fg=self.Button_ft_color,
-                                     command=self.function_endTurn, state="disabled")
+                                     command=self.function_endTurn, state="disabled",
+                                     activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_goBack = Button(self.frame20, text="<<", padx=1, pady=1, font=("Helvetica", 10),
+                                    bg=self.Button_bg_color, fg=self.Button_ft_color, state="normal",relief="groove",
+                                    activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+
+        self.button_forward = Button(self.frame21, text=">>", padx=1, pady=1, font=("Helvetica", 10),
+                                     bg=self.Button_bg_color, fg=self.Button_ft_color, state="normal",relief="groove",
+                                     activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_quit = Button(master, text="Quitter", padx=40, pady=5, font=("Helvetica", 12),
-                                  bg=self.Button_bg_color, fg=self.Button_ft_color, command=master.quit)
+                                  bg=self.Button_bg_color, fg=self.Button_ft_color,
+                                  activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color,
+                                  command=master.quit)
 
         self.restartBoard = Button(master, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
-                                   bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED)
+                                   bg=self.Button_bg_color, fg=self.Button_ft_color, state="disabled",
+                                   activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         # Put the buttons on the screen
         self.button_1.grid(row=3, column=0)
@@ -162,19 +239,89 @@ class MainWindow:
         self.button_editName.grid(row=0, column=4, columnspan=1)
         self.button_endTurn.grid(row=0, column=0, columnspan=1)
         self.button_gameStart.grid(row=0, column=3, columnspan=1)
+        self.button_goBack.grid(row=0, column=0)
+        self.button_forward.grid(row=0, column=0)
         self.restartBoard.grid(row=13, column=10, columnspan=1, sticky="SE")
         self.button_quit.grid(row=13, column=11, columnspan=1, sticky="SE")
 
         # ---------------------------------------------------------------------------------------------------------------
         # CREATING ENTRY BOXES
         # ---------------------------------------------------------------------------------------------------------------
-        # Create Entry box
+        # Create Score Entry box
         self.input_Score = Entry(self.frame2, width=5, bg='black', fg='yellow', borderwidth=3, font=("Helvetica", 50),
                                  justify='center', disabledbackground='black', disabledforeground="yellow",
                                  state=DISABLED)
-        # Columnspan can hold other slots
         self.input_Score.grid(row=0, column=0, columnspan=3)
-        # input_Score.insert(0, "Enter Name")
+
+        # CREATING PLAYERS ENTRY BOXES
+        # First Player Name and Score
+        self.player_1_label_1 = Entry(self.frame3, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
+                                      font=("Helvetica", 14),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+
+        self.player_1_label_2 = Entry(self.frame3, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 30),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+
+        self.player_1_label_1.grid(row=0, column=0)
+        self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
+        self.player_1_label_1.config(state=DISABLED)
+
+        self.player_1_label_2.grid(row=2, column=0, pady=10)
+        self.player_1_label_2.insert(0, "501")
+        self.player_1_label_2.config(state=DISABLED)
+
+        # Second Player Name and Score
+        self.player_2_label_1 = Entry(self.frame4, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
+                                      font=("Helvetica", 14),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+        self.player_2_label_2 = Entry(self.frame4, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 30),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+
+        self.player_2_label_1.grid(row=0, column=0)
+        self.player_2_label_1.insert(0, "Ajoutez le Joueur #2")
+        self.player_2_label_1.config(state=DISABLED)
+        self.player_2_label_2.grid(row=2, column=0, pady=10)
+        self.player_2_label_2.insert(0, "501")
+        self.player_2_label_2.config(state=DISABLED)
+
+        # Third Player Name and Score
+        self.player_3_label_1 = Entry(self.frame5, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
+                                      font=("Helvetica", 14),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+        self.player_3_label_2 = Entry(self.frame5, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 30),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+
+        self.player_3_label_1.grid(row=0, column=0)
+        self.player_3_label_1.insert(0, "Ajoutez le Joueur #3")
+        self.player_3_label_1.config(state=DISABLED)
+        self.player_3_label_2.grid(row=2, column=0, pady=10)
+        self.player_3_label_2.insert(0, "501")
+        self.player_3_label_2.config(state=DISABLED)
+
+        # Fourth Player Name and Score
+        self.player_4_label_1 = Entry(self.frame6, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
+                                      font=("Helvetica", 14),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+        self.player_4_label_2 = Entry(self.frame6, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 30),
+                                      justify='center', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey")
+        self.player_4_label_1.grid(row=0, column=0)
+        self.player_4_label_1.insert(0, "Ajoutez le Joueur #4")
+        self.player_4_label_1.config(state=DISABLED)
+        self.player_4_label_2.grid(row=2, column=0, pady=10)
+        self.player_4_label_2.insert(0, "501")
+        self.player_4_label_2.config(state=DISABLED)
 
         # ---------------------------------------------------------------------------------------------------------------
         # CREATING STATUS
@@ -185,84 +332,8 @@ class MainWindow:
         self.updateStatusLabel.grid(row=0, column=0)
 
         # ---------------------------------------------------------------------------------------------------------------
-        # CREATING PLAYERS ENTRY BOXES
-        # ---------------------------------------------------------------------------------------------------------------
-        # First Player Name
-        self.player_1_label_1 = Entry(self.frame3, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
-                                      font=("Helvetica", 14),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_1_label_1.grid(row=0, column=0)
-        self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
-        self.player_1_label_1.config(state=DISABLED)
-
-        # First Player Score
-        self.player_1_label_2 = Entry(self.frame3, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
-                                      font=("Helvetica", 30),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_1_label_2.grid(row=2, column=0, pady=10)
-        self.player_1_label_2.insert(0, "501")
-        self.player_1_label_2.config(state=DISABLED)
-
-        # Second Player Name
-        self.player_2_label_1 = Entry(self.frame4, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
-                                      font=("Helvetica", 14),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_2_label_1.grid(row=0, column=0)
-        self.player_2_label_1.insert(0, "Ajoutez le Joueur #2")
-        self.player_2_label_1.config(state=DISABLED)
-
-        # Second Player Score
-        self.player_2_label_2 = Entry(self.frame4, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
-                                      font=("Helvetica", 30),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_2_label_2.grid(row=2, column=0, pady=10)
-        self.player_2_label_2.insert(0, "501")
-        self.player_2_label_2.config(state=DISABLED)
-
-        # Third Player Name
-        self.player_3_label_1 = Entry(self.frame5, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
-                                      font=("Helvetica", 14),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_3_label_1.grid(row=0, column=0)
-        self.player_3_label_1.insert(0, "Ajoutez le Joueur #3")
-        self.player_3_label_1.config(state=DISABLED)
-
-        # Third Player Score
-        self.player_3_label_2 = Entry(self.frame5, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
-                                      font=("Helvetica", 30),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_3_label_2.grid(row=2, column=0, pady=10)
-        self.player_3_label_2.insert(0, "501")
-        self.player_3_label_2.config(state=DISABLED)
-
-        # Fourth Player Name
-        self.player_4_label_1 = Entry(self.frame6, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
-                                      font=("Helvetica", 14),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_4_label_1.grid(row=0, column=0)
-        self.player_4_label_1.insert(0, "Ajoutez le Joueur #4")
-        self.player_4_label_1.config(state=DISABLED)
-
-        # Fourth Player Score
-        self.player_4_label_2 = Entry(self.frame6, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
-                                      font=("Helvetica", 30),
-                                      justify='center', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey")
-        self.player_4_label_2.grid(row=2, column=0, pady=10)
-        self.player_4_label_2.insert(0, "501")
-        self.player_4_label_2.config(state=DISABLED)
-
-        # ---------------------------------------------------------------------------------------------------------------
         # CREATING IMAGES (from .SGI files)
         # ---------------------------------------------------------------------------------------------------------------
-        # Images global variable:
         global arrowImage
         global logoImage
 
@@ -309,7 +380,7 @@ class MainWindow:
     def function_refreshImages(self):
         self.logoImage = Label(self.emptylabel_3, image=logoImage, bg=self.Button_bg_color, fg="grey")
         self.logoImage.grid(row=1, column=1, columnspan=2)
-        if self.gameStarted == True:
+        if self.gameStarted:
 
             currentPlayer = self.playerIndex[:1]
             if currentPlayer == [1]:
@@ -404,6 +475,7 @@ class MainWindow:
 
     def function_addPlayer(MainWindow):
         # Transfer created player to the Lobby
+        MainWindow.button_addPlayer.config(state=DISABLED)
 
         MainWindow.subWin = Tk()
         MainWindow.subWin.wm_title("Ajouter Joueur #%s" % (MainWindow.nbPlayer + 1))
@@ -490,8 +562,9 @@ class MainWindow:
         MainWindow.function_updateStatusLabel(updateStatusLabeltext)
         MainWindow.function_refreshImages()
         MainWindow.subWin.destroy()
+        MainWindow.button_addPlayer.config(state=NORMAL)
 
-        if MainWindow.nbPlayer >= 5:
+        if MainWindow.nbPlayer >= 4:
             MainWindow.button_addPlayer.configure(state=DISABLED)
 
         return
@@ -558,16 +631,6 @@ class MainWindow:
             currentPlayer = self.playerIndex[:1]
             totalPlayer = self.playerIndex[1:]
 
-            print(currentPlayer)
-
-            # string = "self.arrowImage = Label(self.arrowLabel_"+ currentPlayer+",image=arrowImage, bg=self.Button_bg_color, fg='grey)"
-            # print(string)
-
-            # number = 9
-            # eval performs the multiplication passed as argument
-            # square_number = eval('number * number')
-            # print(square_number)
-
             if currentPlayer == [1]:
                 print('loop1')
                 if currentPlayer == totalPlayer:
@@ -605,16 +668,18 @@ class MainWindow:
             self.function_refreshImages()
         return
 
+
 if __name__ == "__main__":
     root = Tk()
     root.title("Score Board")
     root.geometry("1125x850")
-    #root.resizable(False, False)
+    # root.resizable(False, False)
     root.iconbitmap("dart_icon.ico")
     root.configure(background="#245042")
 
-    #Call Constructor
+
+    # Call Constructor
     e = MainWindow(root)
 
-    #The GUI is acting like a listening... Constantly waiting for something to happen.
+    # The GUI is acting like a listening... Constantly waiting for something to happen.
     root.mainloop()
