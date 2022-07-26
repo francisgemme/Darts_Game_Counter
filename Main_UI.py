@@ -2,6 +2,10 @@ from tkinter import *
 from PIL import ImageTk, Image
 import pandas as pd
 
+# To display all log data in console
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
 
 class MainWindow:
 
@@ -14,32 +18,10 @@ class MainWindow:
         self.Button_ft_color = "#D3DBE5"
         self.activeButton_bg_color = "#9aa794"
         self.activeButton_ft_color = "#D3DBE5"
+        self.gameMode = [] #
         self.gameStarted = False
         self.playerIndex = []  # Variable tracking player turn and total number of players
-
-        # 1 column Array per player with n rows for each score entered during the game (for the goBack and Forward function)
-        # If the user click on the goBack button and commit a new score, all subsequent scores for
-        # this specific player get erased (from the memory), i.e. this function purpose is to correct the score in the case of a typo.
-        # If the user click on "End Turn", the current display score become the latest data in the memory.
-        self.gameTurn = 0
-        self.gameTurnToRemove = 0
-        self.player_1_ScoreLog = []
-        self.player_2_ScoreLog = []
-        self.player_3_ScoreLog = []
-        self.player_4_ScoreLog = []
-
-        technologies = ({
-            'Courses':["Spark","Hadoop","pandas","Java","Pyspark"],
-            'Fee' :[20000,25000,30000,22000,26000],
-            'Duration':['30days','40days','35days','60days','50days'],
-            'Discount':[1000,2500,1500,1200,3000]
-                        })
-
-        df = pd.DataFrame(technologies)
-        print(df)
-        df = pd.DataFrame(technologies)
-        new_row = pd.DataFrame({'Courses':'Hyperion', 'Fee':24000, 'Duration':'55days', 'Discount':1800}, index=[0])
-        df2 = pd.concat([new_row,df.loc[:]]).reset_index(drop=True)
+        self.turnIndexLog = [] #
 
         # --------------------------------------------------------------------------------------------------------------
         #   Create Frames for the UI Layout
@@ -172,7 +154,8 @@ class MainWindow:
 
         self.button_commitScore = Button(self.frame1, text="Soumettre", padx=100, pady=20, font=("Helvetica", 25),
                                          bg=self.Button_bg_color, fg="yellow", command=self.button_commitScore,
-                                         activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+                                         activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color,
+                                         state="disabled")
 
         self.button_clear = Button(self.frame1, text="C", padx=99.49999, pady=20, font=("Helvetica", 25),
                                    bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.function_clear,
@@ -402,7 +385,7 @@ class MainWindow:
         # Transfer created player to the Lobby
         if self.gameStarted == True:
 
-            impossibleScore3 = [179, 178, 176, 175, 173, 172, 169, 166, 163]
+            impossibleScores = [179, 178, 176, 175, 173, 172, 169, 166, 163]
             scoreFlag1 = False
             scoreFlag2 = False
             current = self.input_Score.get()
@@ -412,6 +395,13 @@ class MainWindow:
                 self.input_Score.delete(0, END)
                 self.input_Score.insert(0, str(current) + str(number))
                 self.input_Score.config(state=DISABLED)
+
+            # Will change the state of the button depending of what is now inside
+            newCurrent = self.input_Score.get()
+            if len(newCurrent) > 0:
+                self.button_commitScore.configure(state=NORMAL)
+            if len(newCurrent) < 0:
+                self.button_commitScore.configure(state=DISABLED)
 
             # if len(current) == 2:
             #   newValue = self.input_Score.get()
@@ -426,9 +416,17 @@ class MainWindow:
         self.input_Score.config(state=NORMAL)
         self.input_Score.delete(0, END)
         self.input_Score.config(state=DISABLED)
+        self.button_commitScore.configure(state=DISABLED) # Clearing is also disabling the commit score button
         return
 
     def button_commitScore(self):
+
+        self.whiteCommitScore()
+        self.updateIndexLog()
+
+        return
+
+    def whiteCommitScore(self):
         # get Current Player turn over the total nb of player
         scoreToInput = int(self.input_Score.get())
         currentPlayer = self.playerIndex[:1]
@@ -471,6 +469,61 @@ class MainWindow:
                 self.player_4_label_2.insert(0, str(currentPlayerScore - scoreToInput))
                 self.player_4_label_2.config(state=DISABLED)
 
+        self.button_commitScore.configure(state=DISABLED)
+
+        return
+
+    def updateIndexLog(self):
+
+        if self.gameStarted == False:  # If the game is not started, create the Index Log with all added players
+            # get Current Player turn over the total nb of player
+            totalPlayer = self.playerIndex[1:]
+
+            if totalPlayer == [1]:
+                self.turnIndexLog = pd.DataFrame([[1, 0, 501]],
+                                            columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score'])
+            elif totalPlayer == [2]:
+                 self.turnIndexLog = pd.DataFrame([[1, 0, 501, 0, 501]],
+                                             columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score',
+                                                      'Player_2_Turn', 'Player_2_Score'])
+            elif totalPlayer == [3]:
+                self.turnIndexLog = pd.DataFrame([[1, 0, 501, 0, 501, 0, 501]],
+                                            columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score', 'Player_2_Turn',
+                                                     'Player_2_Score','Player_3_Turn', 'Player_3_Score'])
+            elif totalPlayer == [4]:
+                self.turnIndexLog = pd.DataFrame([[1, 0, 501, 0, 501, 0, 501, 0, 501]],
+                                            columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score', 'Player_2_Turn',
+                                                     'Player_2_Score', 'Player_3_Turn', 'Player_3_Score',
+                                                     'Player_4_Turn', 'Player_4_Score'])
+
+        # If the game is started, add the committed score to the selected (current player)
+        if self.gameStarted:
+            currentGameTurn = self.turnIndexLog['gameTurn'].iloc[-1]
+            totalPlayer = self.playerIndex[1:]
+            currentPlayer = self.playerIndex[:1]
+
+            if currentPlayer == [1]:
+                CommitedScoreToLog = int(self.player_1_label_2.get())
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score'])
+                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
+
+            elif currentPlayer == [2]:
+                CommitedScoreToLog = int(self.player_2_label_2.get())
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_2_Turn', 'Player_2_Score'])
+                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
+
+            elif currentPlayer == [3]:
+                CommitedScoreToLog = int(self.player_3_label_2.get())
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_3_Turn', 'Player_3_Score'])
+                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
+
+            elif currentPlayer == [4]:
+                CommitedScoreToLog = int(self.player_4_label_2.get())
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_4_Turn', 'Player_4_Score'])
+                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
+
+
+        print(self.turnIndexLog)
         return
 
     def function_addPlayer(MainWindow):
@@ -570,8 +623,7 @@ class MainWindow:
         return
 
     def function_gameStart(self):
-        if self.gameStarted == False:
-            self.gameStarted = True
+        if ~self.gameStarted:
             self.frame9.configure(borderwidth=0)
             self.button_gameStart.configure(borderwidth=0)
             print(self.gameStarted)
@@ -616,6 +668,8 @@ class MainWindow:
 
                     self.playerIndex = [1, 4]
 
+        self.updateIndexLog()
+        self.gameStarted = True
         self.function_refreshImages()
         self.function_updateStatusLabel("La Partie est commencée!")
 
@@ -664,7 +718,16 @@ class MainWindow:
                     self.playerIndex[0] = 1
                     self.arrowImage.grid_forget()
 
+            #self.updateIndexLog()
             self.button_endTurn.configure(state=NORMAL)
+
+            #if this is the last player to play, to log is updated
+            currentGameTurn = self.turnIndexLog['gameTurn'].iloc[-1]
+            if currentPlayer == totalPlayer:
+                currentGameTurn += 1
+                toAppend = pd.DataFrame([[currentGameTurn]], columns=['gameTurn'])
+                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
+
             self.function_refreshImages()
         return
 
