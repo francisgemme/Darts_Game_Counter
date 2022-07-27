@@ -527,7 +527,6 @@ class MainWindow:
         return
 
     def function_addPlayer(MainWindow):
-        # Transfer created player to the Lobby
         MainWindow.button_addPlayer.config(state=DISABLED)
 
         MainWindow.subWin = Tk()
@@ -535,12 +534,10 @@ class MainWindow:
         MainWindow.subWin.configure(background=MainWindow.Button_bg_color)
         MainWindow.subWin.resizable(False, False)
 
-        MainWindow.subWin.emptylabel_1 = Label(MainWindow.subWin, padx=10, pady=10,
-                                               background=MainWindow.Button_bg_color)
+        MainWindow.subWin.emptylabel_1 = Label(MainWindow.subWin, padx=10, pady=10, bg=MainWindow.Button_bg_color)
         MainWindow.subWin.emptylabel_1.grid(row=0, column=0, columnspan=4)
 
-        MainWindow.subWin.emptylabel_2 = Label(MainWindow.subWin, padx=10, pady=2,
-                                               background=MainWindow.Button_bg_color)
+        MainWindow.subWin.emptylabel_2 = Label(MainWindow.subWin, padx=10, pady=2, bg=MainWindow.Button_bg_color)
         MainWindow.subWin.emptylabel_2.grid(row=4, column=0, columnspan=4)
 
         l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (MainWindow.nbPlayer + 1),
@@ -553,19 +550,30 @@ class MainWindow:
         MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black', fg='yellow', borderwidth=3,
                                              font=("Helvetica", 16), justify='center')
         MainWindow.subWin.input_Name.grid(row=1, column=1, columnspan=1)
+        #MainWindow.subWin.input_Name.focus_set()
+
 
         MainWindow.subWin.button_commitAddPlayer = Button(MainWindow.subWin, text="Enregistrer", padx=10, pady=5,
                                                           font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
-                                                          fg="yellow", command=MainWindow.commitAddPlayer)
+                                                          fg="yellow", command=MainWindow.commitAddPlayer,
+                                                          activebackground=MainWindow.activeButton_bg_color,
+                                                          activeforeground=MainWindow.activeButton_ft_color)
         MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady=5,
                                                  font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
                                                  fg=MainWindow.Button_ft_color,
-                                                 command=lambda: MainWindow.subWin.destroy())
+                                                 activebackground=MainWindow.activeButton_bg_color,
+                                                 activeforeground=MainWindow.activeButton_ft_color,
+                                                 command=lambda: MainWindow.destroySubWin())
 
         MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
         MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
-
         return
+
+    def destroySubWin(MainWindow):
+        MainWindow.button_addPlayer.config(state=NORMAL)
+        MainWindow.subWin.destroy()
+        return
+
 
     def commitAddPlayer(MainWindow):
         # A class "Game" with its properties must be sent to this function
@@ -679,56 +687,36 @@ class MainWindow:
         if self.gameStarted == True:
 
             print(self.playerIndex)
-            self.button_endTurn.configure(state=DISABLED)
+            self.button_endTurn.configure(state=DISABLED) #De-activate button for safety
 
             # get Current Player turn over the total nb of player
-            currentPlayer = self.playerIndex[:1]
-            totalPlayer = self.playerIndex[1:]
+            currentPlayer = self.playerIndex[:1]  # Who is playing
+            totalPlayer = self.playerIndex[1:] # Total number of players
 
-            if currentPlayer == [1]:
-                print('loop1')
-                if currentPlayer == totalPlayer:
-                    self.playerIndex[0] = 1
-                    self.arrowImage.grid_forget()
-                if currentPlayer < totalPlayer:
+            if currentPlayer < totalPlayer:
+                if currentPlayer == [1]: # if player #1 turn
                     self.playerIndex[0] = 2
-                    self.arrowImage.grid_forget()
-
-            if currentPlayer == [2]:
-                print('loop2')
-                if currentPlayer == totalPlayer:
-                    self.playerIndex[0] = 1
-                    self.arrowImage.grid_forget()
-                if currentPlayer < totalPlayer:
+                if currentPlayer == [2]:
                     self.playerIndex[0] = 3
-                    self.arrowImage.grid_forget()
-
-            if currentPlayer == [3]:
-                print('loop3')
-                if currentPlayer == totalPlayer:
+                if currentPlayer == [3]:
+                     self.playerIndex[0] = 4
+                if currentPlayer == [4]:
                     self.playerIndex[0] = 1
-                    self.arrowImage.grid_forget()
-                if currentPlayer < totalPlayer:
-                    self.playerIndex[0] = 4
-                    self.arrowImage.grid_forget()
 
-            if currentPlayer == [4]:
-                print('loop4')
-                if currentPlayer == totalPlayer:
-                    self.playerIndex[0] = 1
-                    self.arrowImage.grid_forget()
+            if currentPlayer == totalPlayer:
+                self.playerIndex[0] = 1
 
-            #self.updateIndexLog()
-            self.button_endTurn.configure(state=NORMAL)
-
-            #if this is the last player to play, to log is updated
+            #if this is the last player to play, the log "game turn" is updated by 1  **To be removed...
             currentGameTurn = self.turnIndexLog['gameTurn'].iloc[-1]
             if currentPlayer == totalPlayer:
                 currentGameTurn += 1
                 toAppend = pd.DataFrame([[currentGameTurn]], columns=['gameTurn'])
                 self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
 
+            self.arrowImage.grid_forget()
+            self.button_endTurn.configure(state=NORMAL)
             self.function_refreshImages()
+
         return
 
 
