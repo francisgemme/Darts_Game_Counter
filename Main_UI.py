@@ -23,6 +23,8 @@ class MainWindow:
         self.playerIndex = []  # Variable tracking player turn and total number of players
         self.turnIndexLog = [] #
         self.keyBindSetup(master)
+        self.editScoreMode = False
+        self.editNameMode = False
 
 
 
@@ -173,8 +175,9 @@ class MainWindow:
                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_editScore = Button(self.frame0, text="Modifier Pointage", padx=20, pady=3, font=("Helvetica", 12),
-                                       bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED,
-                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+                                       bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.function_editScore,
+                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color,
+                                       state= "disabled")
 
         self.button_editName = Button(self.frame0, text="Renommer Joueur", padx=20, pady=3, font=("Helvetica", 12),
                                       bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED,
@@ -325,7 +328,7 @@ class MainWindow:
         global arrowImage
 
 
-        logoImage = ImageTk.PhotoImage(Image.open("dart_Logo.sgi"))
+        logoImage = ImageTk.PhotoImage(Image.open("dart_Logo2.sgi"))
         self.logoImage = Label(self.emptylabel_3, image=logoImage, bg=self.Button_bg_color, fg="grey")
         self.logoImage.grid(row=1, column=1, columnspan=2)
 
@@ -548,6 +551,21 @@ class MainWindow:
         print(self.turnIndexLog)
         return
 
+    def function_editScore(self):
+
+        if self.gameStarted:
+            if self.editScoreMode == False:
+                self.button_editScore.config(fg=self.activeButton_ft_color, bg=self.activeButton_bg_color, relief=SUNKEN)
+                print("pressed")
+                self.editScoreMode = True
+            elif self.editScoreMode == True:
+                self.button_editScore.config(fg=self.Button_ft_color, bg=self.Button_bg_color, relief=RAISED)
+                print("un-pressed")
+                self.editScoreMode = False
+
+        return
+
+
     def function_addPlayer(MainWindow):
         MainWindow.button_addPlayer.config(state=DISABLED)
 
@@ -663,7 +681,6 @@ class MainWindow:
             self.frame9.configure(borderwidth=0)
             self.button_gameStart.configure(borderwidth=0)
             print(self.gameStarted)
-            self.button_endTurn.configure(state=NORMAL)
             self.button_gameStart.configure(state=DISABLED, disabledforeground=self.Button_bg_color)
             self.button_addPlayer.configure(state=DISABLED)
 
@@ -706,6 +723,8 @@ class MainWindow:
 
         self.updateIndexLog()
         self.gameStarted = True
+        self.button_editScore.config(state=NORMAL)
+        self.button_endTurn.configure(state=NORMAL)
         self.function_refreshImages()
         self.function_updateStatusLabel("La Partie est commencée!")
 
