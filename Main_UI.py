@@ -552,7 +552,7 @@ class MainWindow:
         MainWindow.button_addPlayer.config(state=DISABLED)
 
         MainWindow.subWin = Tk()
-
+        MainWindow.subWin.eval('tk::PlaceWindow . center')
         MainWindow.subWin.wm_title("Ajouter Joueur #%s" % (MainWindow.nbPlayer + 1))
         MainWindow.subWin.configure(background=MainWindow.Button_bg_color)
         MainWindow.subWin.resizable(False, False)
@@ -754,12 +754,30 @@ if __name__ == "__main__":
         root.destroy()
         initializeWindow()
 
+    def center(win):
+        """
+        centers a tkinter window
+        :param win: the main window or Toplevel window to center
+        """
+        win.update_idletasks()
+        width = win.winfo_width()
+        frm_width = win.winfo_rootx() - win.winfo_x()
+        win_width = width + 2 * frm_width
+        height = win.winfo_height()
+        titlebar_height = win.winfo_rooty() - win.winfo_y()
+        win_height = height + titlebar_height + frm_width
+        x = win.winfo_screenwidth() // 2 - win_width // 2
+        y = win.winfo_screenheight() // 2 - win_height // 2
+        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+        win.deiconify()
+
     def initializeWindow():
         global root
         root = Tk()
         root.title("Score Board")
         root.geometry("1125x850")
-        # root.resizable(False, False)
+        center(root)
+        root.resizable(False, False)
         root.iconbitmap("dart_icon.ico")
         root.configure(background="#245042")
         # Call Constructor
