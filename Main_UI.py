@@ -22,6 +22,9 @@ class MainWindow:
         self.gameStarted = False
         self.playerIndex = []  # Variable tracking player turn and total number of players
         self.turnIndexLog = [] #
+        self.keyBindSetup(master)
+
+
 
         # --------------------------------------------------------------------------------------------------------------
         #   Create Frames for the UI Layout
@@ -200,8 +203,9 @@ class MainWindow:
                                   command=master.quit)
 
         self.restartBoard = Button(master, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
-                                   bg=self.Button_bg_color, fg=self.Button_ft_color, state="disabled",
-                                   activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+                                   bg=self.Button_bg_color, fg=self.Button_ft_color,
+                                   activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color,
+                                   command=function_restartBoard)
 
         # Put the buttons on the screen
         self.button_1.grid(row=3, column=0)
@@ -317,8 +321,9 @@ class MainWindow:
         # ---------------------------------------------------------------------------------------------------------------
         # CREATING IMAGES (from .SGI files)
         # ---------------------------------------------------------------------------------------------------------------
-        global arrowImage
         global logoImage
+        global arrowImage
+
 
         logoImage = ImageTk.PhotoImage(Image.open("dart_Logo.sgi"))
         self.logoImage = Label(self.emptylabel_3, image=logoImage, bg=self.Button_bg_color, fg="grey")
@@ -352,6 +357,21 @@ class MainWindow:
     # -------------------------------------------------------------------------------------------------------------------
     # DEFINING FUNCTION
     # -------------------------------------------------------------------------------------------------------------------
+
+    def keyBindSetup(self,master):
+        master.bind("1", lambda event: MainWindow.function_click(self, 1))
+        master.bind("2", lambda event: MainWindow.function_click(self, 2))
+        master.bind("3", lambda event: MainWindow.function_click(self, 3))
+        master.bind("4", lambda event: MainWindow.function_click(self, 4))
+        master.bind("5", lambda event: MainWindow.function_click(self, 5))
+        master.bind("6", lambda event: MainWindow.function_click(self, 6))
+        master.bind("7", lambda event: MainWindow.function_click(self, 7))
+        master.bind("8", lambda event: MainWindow.function_click(self, 8))
+        master.bind("9", lambda event: MainWindow.function_click(self, 9))
+        master.bind("0", lambda event: MainWindow.function_click(self, 0))
+        master.bind("<Return>", lambda event: MainWindow.button_commitScore(self))
+        master.bind("<space>", lambda event: MainWindow.function_endTurn(self))
+        return
 
     def function_updateStatusLabel(self, text):
         self.updateStatusLabel.destroy()
@@ -420,56 +440,57 @@ class MainWindow:
         return
 
     def button_commitScore(self):
-
-        self.whiteCommitScore()
-        self.updateIndexLog()
-
+        if self.gameStarted:
+            self.whiteCommitScore()
+            self.updateIndexLog()
         return
 
     def whiteCommitScore(self):
         # get Current Player turn over the total nb of player
-        scoreToInput = int(self.input_Score.get())
-        currentPlayer = self.playerIndex[:1]
-        self.input_Score.config(state=NORMAL)
-        self.input_Score.delete(0, END)
-        self.input_Score.config(state=DISABLED)
+        scoreToInput = self.input_Score.get()
+        if scoreToInput != '':
+            scoreToInput = int(self.input_Score.get())
+            currentPlayer = self.playerIndex[:1]
+            self.input_Score.config(state=NORMAL)
+            self.input_Score.delete(0, END)
+            self.input_Score.config(state=DISABLED)
 
-        if currentPlayer == [1]:
-            currentPlayerScore = int(self.player_1_label_2.get())
+            if currentPlayer == [1]:
+                currentPlayerScore = int(self.player_1_label_2.get())
 
-            if int(currentPlayerScore) >= int(scoreToInput):
-                self.player_1_label_2.config(state=NORMAL)
-                self.player_1_label_2.delete(0, END)
-                self.player_1_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                self.player_1_label_2.config(state=DISABLED)
+                if int(currentPlayerScore) >= int(scoreToInput):
+                    self.player_1_label_2.config(state=NORMAL)
+                    self.player_1_label_2.delete(0, END)
+                    self.player_1_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                    self.player_1_label_2.config(state=DISABLED)
 
-        if currentPlayer == [2]:
-            currentPlayerScore = int(self.player_2_label_2.get())
-            if int(currentPlayerScore) >= int(scoreToInput):
-                self.player_2_label_2.config(state=NORMAL)
-                self.player_2_label_2.delete(0, END)
-                self.player_2_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                self.player_2_label_2.config(state=DISABLED)
+            if currentPlayer == [2]:
+                currentPlayerScore = int(self.player_2_label_2.get())
+                if int(currentPlayerScore) >= int(scoreToInput):
+                    self.player_2_label_2.config(state=NORMAL)
+                    self.player_2_label_2.delete(0, END)
+                    self.player_2_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                    self.player_2_label_2.config(state=DISABLED)
 
-        if currentPlayer == [3]:
-            currentPlayerScore = int(self.player_3_label_2.get())
+            if currentPlayer == [3]:
+                currentPlayerScore = int(self.player_3_label_2.get())
 
-            if int(currentPlayerScore) >= int(scoreToInput):
-                self.player_3_label_2.config(state=NORMAL)
-                self.player_3_label_2.delete(0, END)
-                self.player_3_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                self.player_3_label_2.config(state=DISABLED)
+                if int(currentPlayerScore) >= int(scoreToInput):
+                    self.player_3_label_2.config(state=NORMAL)
+                    self.player_3_label_2.delete(0, END)
+                    self.player_3_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                    self.player_3_label_2.config(state=DISABLED)
 
-        if currentPlayer == [4]:
-            currentPlayerScore = int(self.player_4_label_2.get())
+            if currentPlayer == [4]:
+                currentPlayerScore = int(self.player_4_label_2.get())
 
-            if int(currentPlayerScore) >= int(scoreToInput):
-                self.player_4_label_2.config(state=NORMAL)
-                self.player_4_label_2.delete(0, END)
-                self.player_4_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                self.player_4_label_2.config(state=DISABLED)
+                if int(currentPlayerScore) >= int(scoreToInput):
+                    self.player_4_label_2.config(state=NORMAL)
+                    self.player_4_label_2.delete(0, END)
+                    self.player_4_label_2.insert(0, str(currentPlayerScore - scoreToInput))
+                    self.player_4_label_2.config(state=DISABLED)
 
-        self.button_commitScore.configure(state=DISABLED)
+            self.button_commitScore.configure(state=DISABLED)
 
         return
 
@@ -530,6 +551,7 @@ class MainWindow:
         MainWindow.button_addPlayer.config(state=DISABLED)
 
         MainWindow.subWin = Tk()
+
         MainWindow.subWin.wm_title("Ajouter Joueur #%s" % (MainWindow.nbPlayer + 1))
         MainWindow.subWin.configure(background=MainWindow.Button_bg_color)
         MainWindow.subWin.resizable(False, False)
@@ -550,14 +572,13 @@ class MainWindow:
         MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black', fg='yellow', borderwidth=3,
                                              font=("Helvetica", 16), justify='center')
         MainWindow.subWin.input_Name.grid(row=1, column=1, columnspan=1)
-        #MainWindow.subWin.input_Name.focus_set()
-
 
         MainWindow.subWin.button_commitAddPlayer = Button(MainWindow.subWin, text="Enregistrer", padx=10, pady=5,
                                                           font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
                                                           fg="yellow", command=MainWindow.commitAddPlayer,
                                                           activebackground=MainWindow.activeButton_bg_color,
                                                           activeforeground=MainWindow.activeButton_ft_color)
+
         MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady=5,
                                                  font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
                                                  fg=MainWindow.Button_ft_color,
@@ -567,6 +588,10 @@ class MainWindow:
 
         MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
         MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
+
+        MainWindow.subWin.after(1, lambda: MainWindow.subWin.focus_force())
+        MainWindow.subWin.after(1, lambda: MainWindow.subWin.input_Name.focus_force())
+
         return
 
     def destroySubWin(MainWindow):
@@ -721,16 +746,25 @@ class MainWindow:
 
 
 if __name__ == "__main__":
-    root = Tk()
-    root.title("Score Board")
-    root.geometry("1125x850")
-    # root.resizable(False, False)
-    root.iconbitmap("dart_icon.ico")
-    root.configure(background="#245042")
 
+    def function_restartBoard():
+        print("yo")
+        root.destroy()
+        initializeWindow()
 
-    # Call Constructor
-    e = MainWindow(root)
+    def initializeWindow():
+        global root
+        root = Tk()
+        root.title("Score Board")
+        root.geometry("1125x850")
+        # root.resizable(False, False)
+        root.iconbitmap("dart_icon.ico")
+        root.configure(background="#245042")
+        # Call Constructor
+        e = MainWindow(root)
+        # The GUI is acting like a listening... Constantly waiting for something to happen.
 
-    # The GUI is acting like a listening... Constantly waiting for something to happen.
+    initializeWindow()
     root.mainloop()
+
+
