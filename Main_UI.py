@@ -440,7 +440,8 @@ class MainWindow:
         return
 
     def button_commitScore(self):
-        if self.gameStarted:
+        scoreToInput = self.input_Score.get()
+        if scoreToInput != '':
             self.whiteCommitScore()
             self.updateIndexLog()
         return
@@ -588,6 +589,8 @@ class MainWindow:
 
         MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
         MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
+
+        MainWindow.subWin.bind("<Return>", lambda event: MainWindow.commitAddPlayer())
 
         MainWindow.subWin.after(1, lambda: MainWindow.subWin.focus_force())
         MainWindow.subWin.after(1, lambda: MainWindow.subWin.input_Name.focus_force())
@@ -748,7 +751,6 @@ class MainWindow:
 if __name__ == "__main__":
 
     def function_restartBoard():
-        print("yo")
         root.destroy()
         initializeWindow()
 
