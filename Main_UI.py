@@ -411,35 +411,101 @@ class MainWindow:
             impossibleScores = [179, 178, 176, 175, 173, 172, 169, 166, 163]
             scoreFlag1 = False
             scoreFlag2 = False
-            current = self.input_Score.get()
 
-            if len(current) < 3:
-                self.input_Score.config(state=NORMAL)
-                self.input_Score.delete(0, END)
-                self.input_Score.insert(0, str(current) + str(number))
-                self.input_Score.config(state=DISABLED)
+            if self.editScoreMode == False:
+                current = self.input_Score.get()
 
-            # Will change the state of the button depending of what is now inside
-            newCurrent = self.input_Score.get()
-            if len(newCurrent) > 0:
-                self.button_commitScore.configure(state=NORMAL)
-            if len(newCurrent) < 0:
-                self.button_commitScore.configure(state=DISABLED)
+                if len(current) < 3:
+                    self.input_Score.config(state=NORMAL)
+                    self.input_Score.delete(0, END)
+                    self.input_Score.insert(0, str(current) + str(number))
+                    self.input_Score.config(state=DISABLED)
 
-            # if len(current) == 2:
-            #   newValue = self.input_Score.get()
-            #  if str(newValue) > str(1):
-            #     print('holla!')
+                # Will change the state of the button depending of what is now inside
+                newCurrent = self.input_Score.get()
+                if len(newCurrent) > 0:
+                    self.button_commitScore.configure(state=NORMAL)
+                if len(newCurrent) < 0:
+                    self.button_commitScore.configure(state=DISABLED)
+
+
+            if self.editScoreMode == True:
+
+                currentPlayer = self.playerIndex[:1]  # Who is playing
+                newCurrent = []
+
+                if currentPlayer == [1]: # if player #1 turn
+                    current = self.player_1_label_2.get()
+                    if len(current) < 3:
+                        self.player_1_label_2.config(state=NORMAL)
+                        self.player_1_label_2.delete(0, END)
+                        self.player_1_label_2.insert(0, str(current) + str(number))
+                        self.player_1_label_2.config(state=DISABLED)
+                        newCurrent = self.player_1_label_2.get()
+                elif currentPlayer == [2]:
+                    current = self.player_2_label_2.get()
+                    if len(current) < 3:
+                        self.player_2_label_2.config(state=NORMAL)
+                        self.player_2_label_2.delete(0, END)
+                        self.player_2_label_2.insert(0, str(current) + str(number))
+                        self.player_2_label_2.config(state=DISABLED)
+                        newCurrent = self.player_2_label_2.get()
+                elif currentPlayer == [3]:
+                    current = self.player_3_label_2.get()
+                    if len(current) < 3:
+                        self.player_3_label_2.config(state=NORMAL)
+                        self.player_3_label_2.delete(0, END)
+                        self.player_3_label_2.insert(0, str(current) + str(number))
+                        self.player_3_label_2.config(state=DISABLED)
+                        newCurrent = self.player_3_label_2.get()
+                elif currentPlayer == [4]:
+                    current = self.player_4_label_2.get()
+                    if len(current) < 3:
+                        self.player_4_label_2.config(state=NORMAL)
+                        self.player_4_label_2.delete(0, END)
+                        self.player_4_label_2.insert(0, str(current) + str(number))
+                        self.player_4_label_2.config(state=DISABLED)
+                        newCurrent = self.player_4_label_2.get()
+
+                # Will change the state of the button depending of what is now inside
+                if len(newCurrent) > 0:
+                    self.button_commitScore.configure(state=NORMAL)
+                if len(newCurrent) <= 0:
+                    self.button_commitScore.configure(state=DISABLED)
 
         return
 
     def function_clear(self):
         # A class "Game" with its properties must be sent to this function
         # Transfer created player to the Lobby
-        self.input_Score.config(state=NORMAL)
-        self.input_Score.delete(0, END)
-        self.input_Score.config(state=DISABLED)
-        self.button_commitScore.configure(state=DISABLED) # Clearing is also disabling the commit score button
+        if self.editScoreMode == False:
+            self.input_Score.config(state=NORMAL)
+            self.input_Score.delete(0, END)
+            self.input_Score.config(state=DISABLED)
+            self.button_commitScore.configure(state=DISABLED) # Clearing is also disabling the commit score button
+
+        if self.editScoreMode == True:
+            currentPlayer = self.playerIndex[:1]
+            if currentPlayer == [1]:
+                self.player_1_label_2.config(state=NORMAL)
+                self.player_1_label_2.delete(0, END)
+                self.player_1_label_2.config(state=DISABLED)
+                self.button_commitScore.configure(state=DISABLED)
+            if currentPlayer == [2]:
+                self.player_2_label_2.config(state=NORMAL)
+                self.player_2_label_2.delete(0, END)
+                self.player_2_label_2.config(state=DISABLED)
+                self.button_commitScore.configure(state=DISABLED)
+            if currentPlayer == [3]:
+                self.player_3_label_2.config(state=NORMAL)
+                self.player_3_label_2.delete(0, END)
+                self.player_3_label_2.config(state=DISABLED)
+                self.button_commitScore.configure(state=DISABLED)
+            if currentPlayer == [4]:
+                self.player_4_label_2.config(state=NORMAL)
+                self.player_4_label_2.delete(0, END)
+                self.player_4_label_2.config(state=DISABLED)
+                self.button_commitScore.configure(state=DISABLED)
         return
 
     def button_commitScore(self):
@@ -499,7 +565,6 @@ class MainWindow:
         return
 
     def updateIndexLog(self):
-
         if self.gameStarted == False:  # If the game is not started, create the Index Log with all added players
             # get Current Player turn over the total nb of player
             totalPlayer = self.playerIndex[1:]
@@ -554,13 +619,35 @@ class MainWindow:
     def function_editScore(self):
 
         if self.gameStarted:
+            currentPlayer = self.playerIndex[:1]  # Who is playing
+
             if self.editScoreMode == False:
                 self.button_editScore.config(fg=self.activeButton_ft_color, bg=self.activeButton_bg_color, relief=SUNKEN)
                 print("pressed")
+                self.input_Score.config(disabledbackground=self.Button_bg_color)
+                if currentPlayer == [1]: # if player #1 turn
+                    self.player_1_label_2.config(disabledbackground='black')
+                if currentPlayer == [2]:
+                    self.player_2_label_2.config(disabledbackground='black')
+                if currentPlayer == [3]:
+                     self.player_3_label_2.config(disabledbackground='black')
+                if currentPlayer == [4]:
+                    self.player_4_label_2.config(disabledbackground='black')
+
                 self.editScoreMode = True
+
             elif self.editScoreMode == True:
                 self.button_editScore.config(fg=self.Button_ft_color, bg=self.Button_bg_color, relief=RAISED)
                 print("un-pressed")
+                self.input_Score.config(disabledbackground='black')
+                if currentPlayer == [1]: # if player #1 turn
+                    self.player_1_label_2.config(disabledbackground=self.Button_bg_color)
+                if currentPlayer == [2]:
+                    self.player_2_label_2.config(disabledbackground=self.Button_bg_color)
+                if currentPlayer == [3]:
+                     self.player_3_label_2.config(disabledbackground=self.Button_bg_color)
+                if currentPlayer == [4]:
+                    self.player_4_label_2.config(disabledbackground=self.Button_bg_color)
                 self.editScoreMode = False
 
         return
