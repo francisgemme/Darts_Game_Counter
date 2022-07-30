@@ -84,15 +84,11 @@ class MainWindow:
 
         # End turn button frame
         self.frame7 = LabelFrame(master, padx=10, pady=5, bg=self.Button_bg_color)
-        self.frame7.grid(row=13, column=2, columnspan=1)
+        self.frame7.grid(row=10, column=2, columnspan=1)
 
-        # Previous (Ctrl Z) button frame
-        self.frame20 = LabelFrame(master, padx=3, pady=2, bg=self.Button_bg_color, borderwidth=0)
-        self.frame20.grid(row=13, column=1, columnspan=1, rowspan=1,sticky='E')
-
-        # Next (Ctrl Y) button frame
-        self.frame21 = LabelFrame(master, padx=3, pady=2, bg=self.Button_bg_color,borderwidth=0)
-        self.frame21.grid(row=13, column=3, columnspan=1, rowspan=1,sticky='W')
+        # Previous (Ctrl Z) (AND Y) button frame
+        self.frame20 = LabelFrame(master, padx=5, pady=1, bg=self.Button_bg_color, borderwidth=0)
+        self.frame20.grid(row=10, column=4, columnspan=8, rowspan=1,sticky='N')
 
         # player 1 frame
         self.frame3 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
@@ -190,11 +186,11 @@ class MainWindow:
                                      command=self.function_endTurn, state="disabled",
                                      activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
-        self.button_goBack = Button(self.frame20, text="<<", padx=1, pady=1, font=("Helvetica", 10),
+        self.button_goBack = Button(self.frame20, text="<<", padx=5, pady=1, font=("Helvetica", 10),
                                     bg=self.Button_bg_color, fg=self.Button_ft_color, state="normal",relief="groove",
                                     activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
-        self.button_forward = Button(self.frame21, text=">>", padx=1, pady=1, font=("Helvetica", 10),
+        self.button_forward = Button(self.frame20, text=">>", padx=5, pady=1, font=("Helvetica", 10),
                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state="normal",relief="groove",
                                      activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
@@ -227,8 +223,8 @@ class MainWindow:
         self.button_editName.grid(row=0, column=4, columnspan=1)
         self.button_endTurn.grid(row=0, column=0, columnspan=1)
         self.button_gameStart.grid(row=0, column=3, columnspan=1)
-        self.button_goBack.grid(row=0, column=0)
-        self.button_forward.grid(row=0, column=0)
+        self.button_goBack.grid(row=0, column=0,ipadx=5)
+        self.button_forward.grid(row=0, column=1,ipadx=5)
         self.restartBoard.grid(row=13, column=10, columnspan=1, sticky="SE")
         self.button_quit.grid(row=13, column=11, columnspan=1, sticky="SE")
 
@@ -390,6 +386,7 @@ class MainWindow:
             if currentPlayer == [1]:
                 self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
                 self.arrowImage.grid(row=1, column=1)
+
             if currentPlayer == [2]:
                 self.arrowImage = Label(self.arrowLabel_2, image=arrowImage, bg=self.Button_bg_color, fg="grey")
                 self.arrowImage.grid(row=1, column=1)
@@ -483,43 +480,15 @@ class MainWindow:
             self.input_Score.delete(0, END)
             self.input_Score.config(state=DISABLED)
 
-            if currentPlayer == [1]:
-                currentPlayerScore = int(self.player_1_label_2.get())
+            currentPlayerScore = eval("self.player_"+str(currentPlayer[0])+"_label_2.get()", {"self": self})
 
-                if int(currentPlayerScore) >= int(scoreToInput):
-                    self.player_1_label_2.config(state=NORMAL)
-                    self.player_1_label_2.delete(0, END)
-                    self.player_1_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                    self.player_1_label_2.config(state=DISABLED)
-
-            if currentPlayer == [2]:
-                currentPlayerScore = int(self.player_2_label_2.get())
-                if int(currentPlayerScore) >= int(scoreToInput):
-                    self.player_2_label_2.config(state=NORMAL)
-                    self.player_2_label_2.delete(0, END)
-                    self.player_2_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                    self.player_2_label_2.config(state=DISABLED)
-
-            if currentPlayer == [3]:
-                currentPlayerScore = int(self.player_3_label_2.get())
-
-                if int(currentPlayerScore) >= int(scoreToInput):
-                    self.player_3_label_2.config(state=NORMAL)
-                    self.player_3_label_2.delete(0, END)
-                    self.player_3_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                    self.player_3_label_2.config(state=DISABLED)
-
-            if currentPlayer == [4]:
-                currentPlayerScore = int(self.player_4_label_2.get())
-
-                if int(currentPlayerScore) >= int(scoreToInput):
-                    self.player_4_label_2.config(state=NORMAL)
-                    self.player_4_label_2.delete(0, END)
-                    self.player_4_label_2.insert(0, str(currentPlayerScore - scoreToInput))
-                    self.player_4_label_2.config(state=DISABLED)
+            if int(currentPlayerScore) >= int(scoreToInput):
+                eval("self.player_"+str(currentPlayer[0])+"_label_2.config(state=NORMAL)")
+                eval("self.player_"+str(currentPlayer[0])+"_label_2.delete(0, END)")
+                eval("self.player_"+str(currentPlayer[0])+"_label_2.insert(0, str(int(currentPlayerScore) - scoreToInput))")
+                eval("self.player_"+str(currentPlayer[0])+"_label_2.config(state=DISABLED)")
 
             self.button_commitScore.configure(state=DISABLED)
-
         return
 
     def updateIndexLog(self):
@@ -843,7 +812,7 @@ if __name__ == "__main__":
         global root
         root = Tk()
         root.title("Score Board")
-        root.geometry("1125x850")
+        root.geometry("1150x875")
         center(root)
         root.resizable(False, False)
         root.iconbitmap("dart_icon.ico")
