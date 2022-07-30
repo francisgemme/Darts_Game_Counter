@@ -509,10 +509,16 @@ class MainWindow:
         return
 
     def button_commitScore(self):
-        scoreToInput = self.input_Score.get()
-        if scoreToInput != '':
-            self.whiteCommitScore()
-            self.updateIndexLog()
+
+        if self.editScoreMode == True:
+                self.function_editScore()
+                self.updateIndexLog()
+
+        elif self.editScoreMode == False:
+            scoreToInput = self.input_Score.get()
+            if scoreToInput != '':
+                self.whiteCommitScore()
+                self.updateIndexLog()
         return
 
     def whiteCommitScore(self):
@@ -624,6 +630,10 @@ class MainWindow:
             if self.editScoreMode == False:
                 self.button_editScore.config(fg=self.activeButton_ft_color, bg=self.activeButton_bg_color, relief=SUNKEN)
                 print("pressed")
+                self.input_Score.config(state=NORMAL)
+                self.input_Score.delete(0, END)
+                self.input_Score.config(state=DISABLED)
+                self.button_commitScore.configure(state=DISABLED)
                 self.input_Score.config(disabledbackground=self.Button_bg_color)
                 if currentPlayer == [1]: # if player #1 turn
                     self.player_1_label_2.config(disabledbackground='black')
