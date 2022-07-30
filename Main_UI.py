@@ -428,51 +428,21 @@ class MainWindow:
                 if len(newCurrent) < 0:
                     self.button_commitScore.configure(state=DISABLED)
 
-
             if self.editScoreMode == True:
-
                 currentPlayer = self.playerIndex[:1]  # Who is playing
-                newCurrent = []
+                currentScore = eval("self.player_"+str(currentPlayer[0])+"_label_2.get()", {"self": self})
+                if len(currentScore) < 3:
+                    eval("self.player_"+str(currentPlayer[0])+"_label_2.config(state=NORMAL)")
+                    eval("self.player_"+str(currentPlayer[0])+"_label_2.delete(0, END)")
+                    eval("self.player_"+str(currentPlayer[0])+"_label_2.insert(0, str(currentScore) + str(number))")
+                    eval("self.player_"+str(currentPlayer[0])+"_label_2.config(state=DISABLED)")
+                    newCurrentScore = eval("self.player_"+str(currentPlayer[0])+"_label_2.get()", {"self": self})
 
-                if currentPlayer == [1]: # if player #1 turn
-                    current = self.player_1_label_2.get()
-                    if len(current) < 3:
-                        self.player_1_label_2.config(state=NORMAL)
-                        self.player_1_label_2.delete(0, END)
-                        self.player_1_label_2.insert(0, str(current) + str(number))
-                        self.player_1_label_2.config(state=DISABLED)
-                        newCurrent = self.player_1_label_2.get()
-                elif currentPlayer == [2]:
-                    current = self.player_2_label_2.get()
-                    if len(current) < 3:
-                        self.player_2_label_2.config(state=NORMAL)
-                        self.player_2_label_2.delete(0, END)
-                        self.player_2_label_2.insert(0, str(current) + str(number))
-                        self.player_2_label_2.config(state=DISABLED)
-                        newCurrent = self.player_2_label_2.get()
-                elif currentPlayer == [3]:
-                    current = self.player_3_label_2.get()
-                    if len(current) < 3:
-                        self.player_3_label_2.config(state=NORMAL)
-                        self.player_3_label_2.delete(0, END)
-                        self.player_3_label_2.insert(0, str(current) + str(number))
-                        self.player_3_label_2.config(state=DISABLED)
-                        newCurrent = self.player_3_label_2.get()
-                elif currentPlayer == [4]:
-                    current = self.player_4_label_2.get()
-                    if len(current) < 3:
-                        self.player_4_label_2.config(state=NORMAL)
-                        self.player_4_label_2.delete(0, END)
-                        self.player_4_label_2.insert(0, str(current) + str(number))
-                        self.player_4_label_2.config(state=DISABLED)
-                        newCurrent = self.player_4_label_2.get()
-
-                # Will change the state of the button depending of what is now inside
-                if len(newCurrent) > 0:
-                    self.button_commitScore.configure(state=NORMAL)
-                if len(newCurrent) <= 0:
-                    self.button_commitScore.configure(state=DISABLED)
-
+                    # Will change the state of the button depending of what is now inside
+                    if len(newCurrentScore) > 0:
+                        self.button_commitScore.configure(state=NORMAL)
+                    elif len(newCurrentScore) <= 0:
+                        self.button_commitScore.configure(state=DISABLED)
         return
 
     def function_clear(self):
@@ -486,26 +456,10 @@ class MainWindow:
 
         if self.editScoreMode == True:
             currentPlayer = self.playerIndex[:1]
-            if currentPlayer == [1]:
-                self.player_1_label_2.config(state=NORMAL)
-                self.player_1_label_2.delete(0, END)
-                self.player_1_label_2.config(state=DISABLED)
-                self.button_commitScore.configure(state=DISABLED)
-            if currentPlayer == [2]:
-                self.player_2_label_2.config(state=NORMAL)
-                self.player_2_label_2.delete(0, END)
-                self.player_2_label_2.config(state=DISABLED)
-                self.button_commitScore.configure(state=DISABLED)
-            if currentPlayer == [3]:
-                self.player_3_label_2.config(state=NORMAL)
-                self.player_3_label_2.delete(0, END)
-                self.player_3_label_2.config(state=DISABLED)
-                self.button_commitScore.configure(state=DISABLED)
-            if currentPlayer == [4]:
-                self.player_4_label_2.config(state=NORMAL)
-                self.player_4_label_2.delete(0, END)
-                self.player_4_label_2.config(state=DISABLED)
-                self.button_commitScore.configure(state=DISABLED)
+            eval("self.player_"+str(currentPlayer[0])+"_label_2.config(state=NORMAL)")
+            eval("self.player_"+str(currentPlayer[0])+"_label_2.delete(0, END)")
+            eval("self.player_"+str(currentPlayer[0])+"_label_2.config(state=DISABLED)")
+            self.button_commitScore.configure(state=DISABLED)
         return
 
     def button_commitScore(self):
