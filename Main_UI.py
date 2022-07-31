@@ -170,7 +170,7 @@ class MainWindow:
                                        state= "disabled")
 
         self.button_editName = Button(self.frame0, text="Renommer Joueur", padx=20, pady=3, font=("Helvetica", 12),
-                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED,
+                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state=DISABLED, command=self.function_editName,
                                       activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_gameStart = Button(self.frame9, text="Démarrer Partie!", padx=40, pady=5, font=("Helvetica", 14, "bold"),
@@ -607,41 +607,41 @@ class MainWindow:
 
             if self.editScoreMode == False:
                 self.button_editScore.config(fg=self.activeButton_ft_color, bg=self.activeButton_bg_color, relief=SUNKEN)
-                print("pressed")
                 self.input_Score.config(state=NORMAL)
                 self.input_Score.delete(0, END)
                 self.input_Score.config(state=DISABLED)
                 self.button_commitScore.configure(state=DISABLED)
                 self.input_Score.config(disabledbackground=self.Button_bg_color)
-                if currentPlayer == [1]: # if player #1 turn
-                    self.player_1_label_2.config(disabledbackground='black')
-                if currentPlayer == [2]:
-                    self.player_2_label_2.config(disabledbackground='black')
-                if currentPlayer == [3]:
-                     self.player_3_label_2.config(disabledbackground='black')
-                if currentPlayer == [4]:
-                    self.player_4_label_2.config(disabledbackground='black')
-
+                eval("self.player_"+str(currentPlayer[0])+"_label_2.config(disabledbackground='black')")
                 self.editScoreMode = True
 
             elif self.editScoreMode == True:
                 self.button_editScore.config(fg=self.Button_ft_color, bg=self.Button_bg_color, relief=RAISED)
-                print("un-pressed")
                 self.input_Score.config(disabledbackground='black')
-                if currentPlayer == [1]: # if player #1 turn
-                    self.player_1_label_2.config(disabledbackground=self.Button_bg_color)
-                if currentPlayer == [2]:
-                    self.player_2_label_2.config(disabledbackground=self.Button_bg_color)
-                if currentPlayer == [3]:
-                     self.player_3_label_2.config(disabledbackground=self.Button_bg_color)
-                if currentPlayer == [4]:
-                    self.player_4_label_2.config(disabledbackground=self.Button_bg_color)
+                eval("self.player_"+str(currentPlayer[0])+"_label_2.config(disabledbackground=self.Button_bg_color)")
                 self.editScoreMode = False
+        return
 
+    def function_editName(self):
+
+        if self.gameStarted:
+            currentPlayer = self.playerIndex[:1]  # Who is playing
+
+            if self.editNameMode == False:
+                self.function_addPlayer()
+                self.editNameMode = True
+
+            elif self.editNameMode == True:
+                self.editNameMode = False
         return
 
 
     def function_addPlayer(MainWindow):
+
+        if MainWindow.editNameMode == True:
+            print('yoyo')
+            return
+
         MainWindow.button_addPlayer.config(state=DISABLED)
 
         MainWindow.subWin = Tk()
@@ -656,37 +656,39 @@ class MainWindow:
         MainWindow.subWin.emptylabel_2 = Label(MainWindow.subWin, padx=10, pady=2, bg=MainWindow.Button_bg_color)
         MainWindow.subWin.emptylabel_2.grid(row=4, column=0, columnspan=4)
 
-        l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (MainWindow.nbPlayer + 1),
-                  font=("Helvetica", 12), bg=MainWindow.Button_bg_color, fg=MainWindow.Button_ft_color)
-        l.grid(row=1, column=0, columnspan=1, padx=50, pady=10)
+        if MainWindow.editNameMode == False:
 
-        MainWindow.subWin.errorStatus = Label(MainWindow.subWin, text="", bg=MainWindow.Button_bg_color, fg="cyan")
-        MainWindow.subWin.errorStatus.grid(row=2, column=1, columnspan=1, padx=1, pady=10, sticky="n")
+            l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (MainWindow.nbPlayer + 1),
+                      font=("Helvetica", 12), bg=MainWindow.Button_bg_color, fg=MainWindow.Button_ft_color)
+            l.grid(row=1, column=0, columnspan=1, padx=50, pady=10)
 
-        MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black', fg='yellow', borderwidth=3,
-                                             font=("Helvetica", 16), justify='center')
-        MainWindow.subWin.input_Name.grid(row=1, column=1, columnspan=1)
+            MainWindow.subWin.errorStatus = Label(MainWindow.subWin, text="", bg=MainWindow.Button_bg_color, fg="cyan")
+            MainWindow.subWin.errorStatus.grid(row=2, column=1, columnspan=1, padx=1, pady=10, sticky="n")
 
-        MainWindow.subWin.button_commitAddPlayer = Button(MainWindow.subWin, text="Enregistrer", padx=10, pady=5,
-                                                          font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
-                                                          fg="yellow", command=MainWindow.commitAddPlayer,
-                                                          activebackground=MainWindow.activeButton_bg_color,
-                                                          activeforeground=MainWindow.activeButton_ft_color)
+            MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black', fg='yellow', borderwidth=3,
+                                                 font=("Helvetica", 16), justify='center')
 
-        MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady=5,
-                                                 font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
-                                                 fg=MainWindow.Button_ft_color,
-                                                 activebackground=MainWindow.activeButton_bg_color,
-                                                 activeforeground=MainWindow.activeButton_ft_color,
-                                                 command=lambda: MainWindow.destroySubWin())
+            MainWindow.subWin.input_Name.grid(row=1, column=1, columnspan=1)
 
-        MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
-        MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
+            MainWindow.subWin.button_commitAddPlayer = Button(MainWindow.subWin, text="Enregistrer", padx=10, pady=5,
+                                                              font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
+                                                              fg="yellow", command=MainWindow.commitAddPlayer,
+                                                              activebackground=MainWindow.activeButton_bg_color,
+                                                              activeforeground=MainWindow.activeButton_ft_color)
 
-        MainWindow.subWin.bind("<Return>", lambda event: MainWindow.commitAddPlayer())
+            MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady=5,
+                                                     font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
+                                                     fg=MainWindow.Button_ft_color,
+                                                     activebackground=MainWindow.activeButton_bg_color,
+                                                     activeforeground=MainWindow.activeButton_ft_color,
+                                                     command=lambda: MainWindow.destroySubWin())
 
-        MainWindow.subWin.after(1, lambda: MainWindow.subWin.focus_force())
-        MainWindow.subWin.after(1, lambda: MainWindow.subWin.input_Name.focus_force())
+            MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
+            MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
+
+            MainWindow.subWin.bind("<Return>", lambda event: MainWindow.commitAddPlayer())
+            MainWindow.subWin.after(1, lambda: MainWindow.subWin.focus_force())
+            MainWindow.subWin.after(1, lambda: MainWindow.subWin.input_Name.focus_force())
 
         return
 
@@ -799,6 +801,7 @@ class MainWindow:
         self.updateIndexLog()
         self.gameStarted = True
         self.button_editScore.config(state=NORMAL)
+        self.button_editName.config(state=NORMAL)
         self.button_endTurn.configure(state=NORMAL)
         self.function_refreshImages()
         self.function_updateStatusLabel("La Partie est commencée!")
