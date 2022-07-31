@@ -12,7 +12,7 @@ class MainWindow:
     def __init__(self, master):
 
         # Create variables (temporary method))
-        self.softVersion = "ver 0.x"
+        self.softVersion = "ver 1.0"
         self.nbPlayer = 0
         self.Button_bg_color = "#245042"
         self.Button_ft_color = "#D3DBE5"
@@ -64,47 +64,43 @@ class MainWindow:
 
         # Turn arrow panel for player 1
         self.arrowLabel_1 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
-        self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3)
+        self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3, ipady=1)
 
         # Turn arrow panel for player 2
         self.arrowLabel_2 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
-        self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=4)
+        self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=3, ipady=1)
 
         # Turn arrow panel for player 3
         self.arrowLabel_3 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
-        self.arrowLabel_3.grid(row=7, column=5, rowspan=2, columnspan=3)
+        self.arrowLabel_3.grid(row=7, column=5, rowspan=2, columnspan=3, ipady=8)
 
         # Turn arrow panel for player 4
         self.arrowLabel_4 = Label(master, padx=10, pady=0, bg=self.Button_bg_color)
-        self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=4)
-
-        # Empty Row between players 1-2 panels and player 3-4 panels
-        self.frame8 = LabelFrame(master, padx=10, pady=1, bg=self.Button_bg_color)
-        self.frame8.grid(row=5, column=8, columnspan=3, rowspan=3)
+        self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=3, ipady=8)
 
         # End turn button frame
         self.frame7 = LabelFrame(master, padx=10, pady=5, bg=self.Button_bg_color)
         self.frame7.grid(row=10, column=2, columnspan=1)
 
         # Previous (Ctrl Z) (AND Y) button frame
-        self.frame20 = LabelFrame(master, padx=5, pady=1, bg=self.Button_bg_color, borderwidth=0)
-        self.frame20.grid(row=10, column=4, columnspan=8, rowspan=1,sticky='N')
+        self.frame20 = Label(master, bg=self.Button_bg_color, borderwidth=0)
+        self.frame20.grid(row=10, column=11, columnspan=8, rowspan=2,sticky='W')
 
         # player 1 frame
-        self.frame3 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
+        self.frame3 = LabelFrame(master, padx=30, pady=20, bg=self.Button_bg_color)
         self.frame3.grid(row=5, column=5, columnspan=4, rowspan=3)
 
         # player 2 frame
-        self.frame4 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
+        self.frame4 = LabelFrame(master, padx=30, pady=20, bg=self.Button_bg_color)
         self.frame4.grid(row=5, column=9, columnspan=4, rowspan=3)
 
         # player 3 frame
-        self.frame5 = LabelFrame(master, padx=30, pady=30, background=self.Button_bg_color)
-        self.frame5.grid(row=8, column=5, columnspan=4, rowspan=3)
+        self.frame5 = LabelFrame(master, padx=30, pady=20, background=self.Button_bg_color)
+        self.frame5.grid(row=7, column=5, columnspan=4, rowspan=8)
 
         # fourth player 4 frame
-        self.frame6 = LabelFrame(master, padx=30, pady=30, bg=self.Button_bg_color)
-        self.frame6.grid(row=8, column=9, columnspan=4, rowspan=3)
+        self.frame6 = LabelFrame(master, padx=30, pady=20, bg=self.Button_bg_color)
+        self.frame6.grid(row=7, column=9, columnspan=4, rowspan=8)
 
         # --------------------------------------------------------------------------------------------------------------
         #   CREATING BUTTONS
@@ -249,6 +245,16 @@ class MainWindow:
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
 
+        self.player_1_label_3 = Entry(self.frame3, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey",border=0)
+
+        self.player_1_label_4 = Entry(self.frame3, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey", border=0)
+
         self.player_1_label_1.grid(row=0, column=0)
         self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
         self.player_1_label_1.config(state=DISABLED)
@@ -256,6 +262,15 @@ class MainWindow:
         self.player_1_label_2.grid(row=2, column=0, pady=10)
         self.player_1_label_2.insert(0, "501")
         self.player_1_label_2.config(state=DISABLED)
+
+        self.player_1_label_3.grid(row=3, column=0, pady=0, sticky='SW')
+        self.player_1_label_3.insert(0, "Avr:")
+        self.player_1_label_3.config(state=DISABLED)
+
+        self.player_1_label_4.grid(row=4, column=0, pady=0, sticky='SW')
+        self.player_1_label_4.insert(0, "HighScore:")
+        self.player_1_label_4.config(state=DISABLED)
+
 
         # Second Player Name and Score
         self.player_2_label_1 = Entry(self.frame4, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
@@ -267,12 +282,30 @@ class MainWindow:
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
 
+        self.player_2_label_3 = Entry(self.frame4, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey",border=0)
+
+        self.player_2_label_4 = Entry(self.frame4, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey", border=0)
+
         self.player_2_label_1.grid(row=0, column=0)
         self.player_2_label_1.insert(0, "Ajoutez le Joueur #2")
         self.player_2_label_1.config(state=DISABLED)
         self.player_2_label_2.grid(row=2, column=0, pady=10)
         self.player_2_label_2.insert(0, "501")
         self.player_2_label_2.config(state=DISABLED)
+
+        self.player_2_label_3.grid(row=3, column=0, pady=0, sticky='SW')
+        self.player_2_label_3.insert(0, "Avr:")
+        self.player_2_label_3.config(state=DISABLED)
+
+        self.player_2_label_4.grid(row=4, column=0, pady=0, sticky='SW')
+        self.player_2_label_4.insert(0, "HighScore:")
+        self.player_2_label_4.config(state=DISABLED)
 
         # Third Player Name and Score
         self.player_3_label_1 = Entry(self.frame5, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
@@ -284,12 +317,30 @@ class MainWindow:
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
 
+        self.player_3_label_3 = Entry(self.frame5, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey",border=0)
+
+        self.player_3_label_4 = Entry(self.frame5, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey", border=0)
+
         self.player_3_label_1.grid(row=0, column=0)
         self.player_3_label_1.insert(0, "Ajoutez le Joueur #3")
         self.player_3_label_1.config(state=DISABLED)
         self.player_3_label_2.grid(row=2, column=0, pady=10)
         self.player_3_label_2.insert(0, "501")
         self.player_3_label_2.config(state=DISABLED)
+
+        self.player_3_label_3.grid(row=3, column=0, pady=0, sticky='SW')
+        self.player_3_label_3.insert(0, "Avr:")
+        self.player_3_label_3.config(state=DISABLED)
+
+        self.player_3_label_4.grid(row=4, column=0, pady=0, sticky='SW')
+        self.player_3_label_4.insert(0, "HighScore:")
+        self.player_3_label_4.config(state=DISABLED)
 
         # Fourth Player Name and Score
         self.player_4_label_1 = Entry(self.frame6, width=16, bg=self.Button_bg_color, fg="grey", borderwidth=0,
@@ -300,12 +351,31 @@ class MainWindow:
                                       font=("Helvetica", 30),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
+
+        self.player_4_label_3 = Entry(self.frame6, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey",border=0)
+
+        self.player_4_label_4 = Entry(self.frame6, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+                                      font=("Helvetica", 8),
+                                      justify='right', disabledbackground=self.Button_bg_color,
+                                      disabledforeground="grey", border=0)
+
         self.player_4_label_1.grid(row=0, column=0)
         self.player_4_label_1.insert(0, "Ajoutez le Joueur #4")
         self.player_4_label_1.config(state=DISABLED)
         self.player_4_label_2.grid(row=2, column=0, pady=10)
         self.player_4_label_2.insert(0, "501")
         self.player_4_label_2.config(state=DISABLED)
+
+        self.player_4_label_3.grid(row=3, column=0, pady=0, sticky='SW')
+        self.player_4_label_3.insert(0, "Avr:")
+        self.player_4_label_3.config(state=DISABLED)
+
+        self.player_4_label_4.grid(row=4, column=0, pady=0, sticky='SW')
+        self.player_4_label_4.insert(0, "HighScore:")
+        self.player_4_label_4.config(state=DISABLED)
 
         # ---------------------------------------------------------------------------------------------------------------
         # CREATING STATUS
@@ -324,23 +394,10 @@ class MainWindow:
 
         logoImage = ImageTk.PhotoImage(Image.open("dart_Logo2.sgi"))
         self.logoImage = Label(self.emptylabel_3, image=logoImage, bg=self.Button_bg_color, fg="grey")
-        self.logoImage.grid(row=1, column=1, columnspan=2)
+        self.logoImage.grid(row=1, column=1, columnspan=3)
 
         arrowImage = ImageTk.PhotoImage(Image.open("arrow.sgi"))
         self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
-
-        # for testing...
-
-        # self.arrowImage.grid(row=1,column=1)
-
-        # self.arrowImage = Label(self.emptylabel_5, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        # self.arrowImage.grid(row=1,column=1)
-
-        # self.arrowImage = Label(self.emptylabel_6, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        # self.arrowImage.grid(row=1,column=1)
-
-        # self.arrowImage = Label(self.emptylabel_7, image=arrowImage,bg=self.Button_bg_color, fg="grey")
-        # self.arrowImage.grid(row=1,column=1)
 
         # ---------------------------------------------------------------------------------------------------------------
         # SOFTWARE VERSION LABEL
@@ -349,7 +406,7 @@ class MainWindow:
                                       font=("Helvetica", "12", "italic"), bg=self.Button_bg_color,
                                       fg="black")
 
-        self.softVersionLabel.grid(row=14, column=0, sticky="NW")
+        self.softVersionLabel.grid(row=13, column=0, rowspan=2, sticky="SW")
 
     # -------------------------------------------------------------------------------------------------------------------
     # DEFINING FUNCTION
@@ -812,7 +869,7 @@ if __name__ == "__main__":
         global root
         root = Tk()
         root.title("Score Board")
-        root.geometry("1150x875")
+        root.geometry("1125x875")
         center(root)
         root.resizable(False, False)
         root.iconbitmap("dart_icon.ico")
