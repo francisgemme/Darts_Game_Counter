@@ -20,7 +20,7 @@ class MainWindow:
         self.activeButton_ft_color = "#D3DBE5"
         self.gameMode = [] #
         self.gameStarted = False
-        self.playerIndex = []  # Variable tracking player turn and total number of players
+        self.playerIndex = [0, 0]  # Variable tracking player turn and total number of players
         self.turnIndexLog = [] #
         self.keyBindSetup(master)
         self.editScoreMode = False
@@ -443,7 +443,6 @@ class MainWindow:
             if currentPlayer == [1]:
                 self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
                 self.arrowImage.grid(row=1, column=1)
-
             if currentPlayer == [2]:
                 self.arrowImage = Label(self.arrowLabel_2, image=arrowImage, bg=self.Button_bg_color, fg="grey")
                 self.arrowImage.grid(row=1, column=1)
@@ -555,20 +554,20 @@ class MainWindow:
 
             if totalPlayer == [1]:
                 self.turnIndexLog = pd.DataFrame([[1, 0, 501]],
-                                            columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score'])
+                                            columns=['gameTurn', 'Player_1_Entry', 'Player_1_Score'])
             elif totalPlayer == [2]:
                  self.turnIndexLog = pd.DataFrame([[1, 0, 501, 0, 501]],
-                                             columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score',
-                                                      'Player_2_Turn', 'Player_2_Score'])
+                                             columns=['gameTurn', 'Player_1_Entry', 'Player_1_Score',
+                                                      'Player_2_Entry', 'Player_2_Score'])
             elif totalPlayer == [3]:
                 self.turnIndexLog = pd.DataFrame([[1, 0, 501, 0, 501, 0, 501]],
-                                            columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score', 'Player_2_Turn',
-                                                     'Player_2_Score','Player_3_Turn', 'Player_3_Score'])
+                                            columns=['gameTurn', 'Player_1_Entry', 'Player_1_Score', 'Player_2_Entry',
+                                                     'Player_2_Score','Player_3_Entry', 'Player_3_Score'])
             elif totalPlayer == [4]:
                 self.turnIndexLog = pd.DataFrame([[1, 0, 501, 0, 501, 0, 501, 0, 501]],
-                                            columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score', 'Player_2_Turn',
-                                                     'Player_2_Score', 'Player_3_Turn', 'Player_3_Score',
-                                                     'Player_4_Turn', 'Player_4_Score'])
+                                            columns=['gameTurn', 'Player_1_Entry', 'Player_1_Score', 'Player_2_Entry',
+                                                     'Player_2_Score', 'Player_3_Entry', 'Player_3_Score',
+                                                     'Player_4_Entry', 'Player_4_Score'])
 
         # If the game is started, add the committed score to the selected (current player)
         if self.gameStarted:
@@ -578,22 +577,22 @@ class MainWindow:
 
             if currentPlayer == [1]:
                 CommitedScoreToLog = int(self.player_1_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_1_Turn', 'Player_1_Score'])
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_1_Entry', 'Player_1_Score'])
                 self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
 
             elif currentPlayer == [2]:
                 CommitedScoreToLog = int(self.player_2_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_2_Turn', 'Player_2_Score'])
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_2_Entry', 'Player_2_Score'])
                 self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
 
             elif currentPlayer == [3]:
                 CommitedScoreToLog = int(self.player_3_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_3_Turn', 'Player_3_Score'])
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_3_Entry', 'Player_3_Score'])
                 self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
 
             elif currentPlayer == [4]:
                 CommitedScoreToLog = int(self.player_4_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_4_Turn', 'Player_4_Score'])
+                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_4_Entry', 'Player_4_Score'])
                 self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
 
 
@@ -625,28 +624,26 @@ class MainWindow:
     def function_editName(self):
 
         if self.gameStarted:
-            currentPlayer = self.playerIndex[:1]  # Who is playing
+            self.button_editName.config(state='disabled')
+            self.editNameMode = True
+            self.function_addPlayer()
 
-            if self.editNameMode == False:
-                self.function_addPlayer()
-                self.editNameMode = True
-
-            elif self.editNameMode == True:
-                self.editNameMode = False
         return
 
 
     def function_addPlayer(MainWindow):
 
         if MainWindow.editNameMode == True:
-            print('yoyo')
-            return
+            tmp = MainWindow.playerIndex[:1]  # Who is playing
+            currentPlayer = tmp[0]
+        elif MainWindow.editNameMode == False:
+            currentPlayer = MainWindow.nbPlayer + 1
 
         MainWindow.button_addPlayer.config(state=DISABLED)
 
         MainWindow.subWin = Tk()
         MainWindow.subWin.eval('tk::PlaceWindow . center')
-        MainWindow.subWin.wm_title("Ajouter Joueur #%s" % (MainWindow.nbPlayer + 1))
+        MainWindow.subWin.wm_title("Ajouter Joueur #%s" % (currentPlayer))
         MainWindow.subWin.configure(background=MainWindow.Button_bg_color)
         MainWindow.subWin.resizable(False, False)
 
@@ -656,44 +653,46 @@ class MainWindow:
         MainWindow.subWin.emptylabel_2 = Label(MainWindow.subWin, padx=10, pady=2, bg=MainWindow.Button_bg_color)
         MainWindow.subWin.emptylabel_2.grid(row=4, column=0, columnspan=4)
 
-        if MainWindow.editNameMode == False:
+        l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (currentPlayer),
+                  font=("Helvetica", 12), bg=MainWindow.Button_bg_color, fg=MainWindow.Button_ft_color)
+        l.grid(row=1, column=0, columnspan=1, padx=50, pady=10)
 
-            l = Label(MainWindow.subWin, text="Entrer le Nom du Joueur #%s" % (MainWindow.nbPlayer + 1),
-                      font=("Helvetica", 12), bg=MainWindow.Button_bg_color, fg=MainWindow.Button_ft_color)
-            l.grid(row=1, column=0, columnspan=1, padx=50, pady=10)
+        MainWindow.subWin.errorStatus = Label(MainWindow.subWin, text="", bg=MainWindow.Button_bg_color, fg="cyan")
+        MainWindow.subWin.errorStatus.grid(row=2, column=1, columnspan=1, padx=1, pady=10, sticky="n")
 
-            MainWindow.subWin.errorStatus = Label(MainWindow.subWin, text="", bg=MainWindow.Button_bg_color, fg="cyan")
-            MainWindow.subWin.errorStatus.grid(row=2, column=1, columnspan=1, padx=1, pady=10, sticky="n")
+        MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black', fg='yellow', borderwidth=3,
+                                             font=("Helvetica", 16), justify='center')
 
-            MainWindow.subWin.input_Name = Entry(MainWindow.subWin, width=20, bg='black', fg='yellow', borderwidth=3,
-                                                 font=("Helvetica", 16), justify='center')
+        MainWindow.subWin.input_Name.grid(row=1, column=1, columnspan=1)
+        MainWindow.subWin.button_commitAddPlayer = Button(MainWindow.subWin, text="Enregistrer", padx=10, pady=5,
+                                                          font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
+                                                          fg="yellow", command=MainWindow.commitAddPlayer,
+                                                          activebackground=MainWindow.activeButton_bg_color,
+                                                          activeforeground=MainWindow.activeButton_ft_color)
 
-            MainWindow.subWin.input_Name.grid(row=1, column=1, columnspan=1)
+        MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady=5,
+                                                 font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
+                                                 fg=MainWindow.Button_ft_color,
+                                                 activebackground=MainWindow.activeButton_bg_color,
+                                                 activeforeground=MainWindow.activeButton_ft_color,
+                                                 command=lambda: MainWindow.destroySubWin())
 
-            MainWindow.subWin.button_commitAddPlayer = Button(MainWindow.subWin, text="Enregistrer", padx=10, pady=5,
-                                                              font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
-                                                              fg="yellow", command=MainWindow.commitAddPlayer,
-                                                              activebackground=MainWindow.activeButton_bg_color,
-                                                              activeforeground=MainWindow.activeButton_ft_color)
+        MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
+        MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
 
-            MainWindow.subWin.button_cancel = Button(MainWindow.subWin, text="Annuler", padx=10, pady=5,
-                                                     font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
-                                                     fg=MainWindow.Button_ft_color,
-                                                     activebackground=MainWindow.activeButton_bg_color,
-                                                     activeforeground=MainWindow.activeButton_ft_color,
-                                                     command=lambda: MainWindow.destroySubWin())
-
-            MainWindow.subWin.button_commitAddPlayer.grid(row=3, column=1, columnspan=1)
-            MainWindow.subWin.button_cancel.grid(row=3, column=0, columnspan=1)
-
-            MainWindow.subWin.bind("<Return>", lambda event: MainWindow.commitAddPlayer())
-            MainWindow.subWin.after(1, lambda: MainWindow.subWin.focus_force())
-            MainWindow.subWin.after(1, lambda: MainWindow.subWin.input_Name.focus_force())
+        MainWindow.subWin.bind("<Return>", lambda event: MainWindow.commitAddPlayer())
+        MainWindow.subWin.after(1, lambda: MainWindow.subWin.focus_force())
+        MainWindow.subWin.after(1, lambda: MainWindow.subWin.input_Name.focus_force())
 
         return
 
     def destroySubWin(MainWindow):
-        MainWindow.button_addPlayer.config(state=NORMAL)
+        if MainWindow.gameStarted == False:
+            MainWindow.button_addPlayer.config(state=NORMAL)
+        elif MainWindow.gameStarted == True:
+            MainWindow.editNameMode = False
+            MainWindow.button_editName.config(state='normal')
+
         MainWindow.subWin.destroy()
         return
 
@@ -707,49 +706,59 @@ class MainWindow:
             MainWindow.subWin.errorStatus.configure(text="Vous devez entrer un nom... ")
             return
 
-        if MainWindow.nbPlayer == 0:
-            MainWindow.button_gameStart.configure(state="normal", fg="#60ff30")
+        if MainWindow.gameStarted == False:
+            if MainWindow.nbPlayer == 0:
+                MainWindow.button_gameStart.configure(state="normal", fg="#60ff30")
+                MainWindow.player_1_label_1.config(state=NORMAL)
+                MainWindow.player_1_label_1.delete(0, END)
+                MainWindow.player_1_label_1.insert(0, playerName)
+                MainWindow.player_1_label_1.config(state=DISABLED, disabledforeground="yellow")
+                MainWindow.frame3.configure(relief='raised')
+                updateStatusLabeltext = "Ajouter un deuxième joueur OU Cliquer Démarrer Partie!"
 
-            MainWindow.player_1_label_1.config(state=NORMAL)
-            MainWindow.player_1_label_1.delete(0, END)
-            MainWindow.player_1_label_1.insert(0, playerName)
-            MainWindow.player_1_label_1.config(state=DISABLED, disabledforeground="yellow")
-            MainWindow.frame3.configure(relief='raised')
-            updateStatusLabeltext = "Ajouter un deuxième joueur OU Cliquer Démarrer Partie!"
+            if MainWindow.nbPlayer == 1:
+                MainWindow.player_2_label_1.config(state=NORMAL)
+                MainWindow.player_2_label_1.delete(0, END)
+                MainWindow.player_2_label_1.insert(0, playerName)
+                MainWindow.player_2_label_1.config(state=DISABLED, disabledforeground="yellow")
+                MainWindow.frame4.configure(relief='raised')
+                updateStatusLabeltext = "Ajouter un troisième joueur OU Cliquer Démarrer Partie!"
 
-        if MainWindow.nbPlayer == 1:
-            MainWindow.player_2_label_1.config(state=NORMAL)
-            MainWindow.player_2_label_1.delete(0, END)
-            MainWindow.player_2_label_1.insert(0, playerName)
-            MainWindow.player_2_label_1.config(state=DISABLED, disabledforeground="yellow")
-            MainWindow.frame4.configure(relief='raised')
-            updateStatusLabeltext = "Ajouter un troisième joueur OU Cliquer Démarrer Partie!"
+            if MainWindow.nbPlayer == 2:
+                MainWindow.player_3_label_1.config(state=NORMAL)
+                MainWindow.player_3_label_1.delete(0, END)
+                MainWindow.player_3_label_1.insert(0, playerName)
+                MainWindow.player_3_label_1.config(state=DISABLED, disabledforeground="yellow")
+                MainWindow.frame5.configure(relief='raised')
+                updateStatusLabeltext = "Ajouter un quatrième joueur OU Cliquer Démarrer Partie!"
 
-        if MainWindow.nbPlayer == 2:
-            MainWindow.player_3_label_1.config(state=NORMAL)
-            MainWindow.player_3_label_1.delete(0, END)
-            MainWindow.player_3_label_1.insert(0, playerName)
-            MainWindow.player_3_label_1.config(state=DISABLED, disabledforeground="yellow")
-            MainWindow.frame5.configure(relief='raised')
-            updateStatusLabeltext = "Ajouter un quatrième joueur OU Cliquer Démarrer Partie!"
+            if MainWindow.nbPlayer == 3:
+                MainWindow.player_4_label_1.config(state=NORMAL)
+                MainWindow.player_4_label_1.delete(0, END)
+                MainWindow.player_4_label_1.insert(0, playerName)
+                MainWindow.player_4_label_1.config(state=DISABLED, disabledforeground="yellow")
+                MainWindow.frame6.configure(relief='raised')
+                updateStatusLabeltext = "Cliquer Démarrer Partie!"
 
-        if MainWindow.nbPlayer == 3:
-            MainWindow.player_4_label_1.config(state=NORMAL)
-            MainWindow.player_4_label_1.delete(0, END)
-            MainWindow.player_4_label_1.insert(0, playerName)
-            MainWindow.player_4_label_1.config(state=DISABLED, disabledforeground="yellow")
-            MainWindow.frame6.configure(relief='raised')
-            updateStatusLabeltext = "Cliquer Démarrer Partie!"
+            MainWindow.nbPlayer += 1
+            MainWindow.button_addPlayer.config(state=NORMAL)
+            MainWindow.function_updateStatusLabel(updateStatusLabeltext)
+            MainWindow.function_refreshImages()
 
-        MainWindow.nbPlayer += 1
-        print(MainWindow.nbPlayer)
-        MainWindow.function_updateStatusLabel(updateStatusLabeltext)
-        MainWindow.function_refreshImages()
+            if MainWindow.nbPlayer >= 4:
+                MainWindow.button_addPlayer.configure(state=DISABLED)
+
+        if MainWindow.gameStarted == True:
+            currentPlayer = MainWindow.playerIndex[:1]
+            eval("MainWindow.player_"+str(currentPlayer[0])+"_label_1.config(state=NORMAL)")
+            eval("MainWindow.player_"+str(currentPlayer[0])+"_label_1.delete(0, END)")
+            eval("MainWindow.player_"+str(currentPlayer[0])+"_label_1.insert(0, playerName)")
+            eval("MainWindow.player_"+str(currentPlayer[0])+"_label_1.config(state=DISABLED)")
+            MainWindow.button_commitScore.configure(state='disabled')
+            MainWindow.button_editName.config(state='normal')
+
         MainWindow.subWin.destroy()
-        MainWindow.button_addPlayer.config(state=NORMAL)
 
-        if MainWindow.nbPlayer >= 4:
-            MainWindow.button_addPlayer.configure(state=DISABLED)
 
         return
 
