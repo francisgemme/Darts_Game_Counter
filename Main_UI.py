@@ -83,8 +83,8 @@ class MainWindow:
         self.frame7.grid(row=10, column=2, columnspan=1)
 
         # Previous (Ctrl Z) (AND Y) button frame
-        self.frame20 = Label(master, bg=self.Button_bg_color, borderwidth=0)
-        self.frame20.grid(row=10, column=11, columnspan=8, rowspan=2,sticky='W')
+        #self.frame20 = Label(master, bg=self.Button_bg_color, borderwidth=0)
+        #self.frame20.grid(row=11, column=11, columnspan=8, rowspan=2,sticky='W')
 
         # player 1 frame
         self.frame3 = LabelFrame(master, padx=30, pady=20, bg=self.Button_bg_color)
@@ -182,11 +182,11 @@ class MainWindow:
                                      command=self.function_endTurn, state="disabled",
                                      activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
-        self.button_goBack = Button(self.frame20, text="<<", padx=5, pady=1, font=("Helvetica", 10),
+        self.button_goBack = Button(master, text="<<", padx=5, pady=1, font=("Helvetica", 10),
                                     bg=self.Button_bg_color, fg=self.Button_ft_color, state="normal",relief="groove",
                                     activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
-        self.button_forward = Button(self.frame20, text=">>", padx=5, pady=1, font=("Helvetica", 10),
+        self.button_forward = Button(master, text=">>", padx=5, pady=1, font=("Helvetica", 10),
                                      bg=self.Button_bg_color, fg=self.Button_ft_color, state="normal",relief="groove",
                                      activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
@@ -219,8 +219,8 @@ class MainWindow:
         self.button_editName.grid(row=0, column=4, columnspan=1)
         self.button_endTurn.grid(row=0, column=0, columnspan=1)
         self.button_gameStart.grid(row=0, column=3, columnspan=1)
-        self.button_goBack.grid(row=0, column=0,ipadx=5)
-        self.button_forward.grid(row=0, column=1,ipadx=5)
+        self.button_goBack.grid(row=13, column=5, ipadx=5,columnspan=1,  sticky="SE")
+        self.button_forward.grid(row=13, column=6, ipadx=5,columnspan=1,  sticky="SW")
         self.restartBoard.grid(row=13, column=10, columnspan=1, sticky="SE")
         self.button_quit.grid(row=13, column=11, columnspan=1, sticky="SE")
 
@@ -240,7 +240,7 @@ class MainWindow:
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
 
-        self.player_1_label_2 = Entry(self.frame3, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+        self.player_1_label_2 = Entry(self.frame3, width=6, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                       font=("Helvetica", 30),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
@@ -248,7 +248,7 @@ class MainWindow:
         self.player_1_label_3 = Entry(self.frame3, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                       font=("Helvetica", 8),
                                       justify='right', disabledbackground=self.Button_bg_color,
-                                      disabledforeground="grey",border=0)
+                                      disabledforeground="grey", border=0)
 
         self.player_1_label_4 = Entry(self.frame3, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                       font=("Helvetica", 8),
@@ -277,7 +277,7 @@ class MainWindow:
                                       font=("Helvetica", 14),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
-        self.player_2_label_2 = Entry(self.frame4, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+        self.player_2_label_2 = Entry(self.frame4, width=6, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                       font=("Helvetica", 30),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
@@ -312,7 +312,7 @@ class MainWindow:
                                       font=("Helvetica", 14),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
-        self.player_3_label_2 = Entry(self.frame5, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+        self.player_3_label_2 = Entry(self.frame5, width=6, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                       font=("Helvetica", 30),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
@@ -347,7 +347,7 @@ class MainWindow:
                                       font=("Helvetica", 14),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
-        self.player_4_label_2 = Entry(self.frame6, width=5, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+        self.player_4_label_2 = Entry(self.frame6, width=6, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                       font=("Helvetica", 30),
                                       justify='center', disabledbackground=self.Button_bg_color,
                                       disabledforeground="grey")
