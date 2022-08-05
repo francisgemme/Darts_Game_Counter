@@ -82,10 +82,6 @@ class MainWindow:
         self.frame7 = LabelFrame(master, padx=10, pady=5, bg=self.Button_bg_color)
         self.frame7.grid(row=10, column=2, columnspan=1)
 
-        # Previous (Ctrl Z) (AND Y) button frame
-        #self.frame20 = Label(master, bg=self.Button_bg_color, borderwidth=0)
-        #self.frame20.grid(row=11, column=11, columnspan=8, rowspan=2,sticky='W')
-
         # player 1 frame
         self.frame3 = LabelFrame(master, padx=30, pady=20, bg=self.Button_bg_color)
         self.frame3.grid(row=5, column=5, columnspan=4, rowspan=3)
@@ -107,41 +103,18 @@ class MainWindow:
         # --------------------------------------------------------------------------------------------------------------
 
         # Define buttons
-        self.button_1 = Button(self.frame1, text="1", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(1),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+        for i in range(9):
+            self.button = Button(self.frame1, text=str(i+1), padx=40, pady=20, font=("Helvetica", 25),
+                                      bg=self.Button_bg_color, fg=self.Button_ft_color,
+                                      command=lambda: self.function_click(1), activebackground=self.activeButton_bg_color,
+                                      activeforeground=self.activeButton_ft_color)
+            if i < 3:
+                self.button.grid(column=i, row=3)
+            elif i >= 3 and i < 6:
+                self.button.grid(column=i-3, row=2)
+            elif i >= 6 and i < 9:
+                self.button.grid(column=i-6, row=1)
 
-        self.button_2 = Button(self.frame1, text="2", padx=40, pady=20, font=("Helvetica", 25), bg= self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(2),
-                               activebackground= self.activeButton_bg_color, activeforeground= self.activeButton_ft_color)
-
-        self.button_3 = Button(self.frame1, text="3", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(3),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
-
-        self.button_4 = Button(self.frame1, text="4", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(4),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
-
-        self.button_5 = Button(self.frame1, text="5", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(5),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
-
-        self.button_6 = Button(self.frame1, text="6", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(6),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
-
-        self.button_7 = Button(self.frame1, text="7", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(7),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
-
-        self.button_8 = Button(self.frame1, text="8", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(8),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
-
-        self.button_9 = Button(self.frame1, text="9", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
-                               fg=self.Button_ft_color, command=lambda: self.function_click(9),
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
         self.button_0 = Button(self.frame1, text="0", padx=40, pady=20, font=("Helvetica", 25), bg=self.Button_bg_color,
                                fg=self.Button_ft_color, command=lambda: self.function_click(0),
@@ -201,15 +174,6 @@ class MainWindow:
                                    command=function_restartBoard)
 
         # Put the buttons on the screen
-        self.button_1.grid(row=3, column=0)
-        self.button_2.grid(row=3, column=1)
-        self.button_3.grid(row=3, column=2)
-        self.button_4.grid(row=2, column=0)
-        self.button_5.grid(row=2, column=1)
-        self.button_6.grid(row=2, column=2)
-        self.button_7.grid(row=1, column=0)
-        self.button_8.grid(row=1, column=1)
-        self.button_9.grid(row=1, column=2)
         self.button_0.grid(row=4, column=0)
         self.button_commitScore.grid(row=5, column=0, columnspan=3)
         self.button_clear.grid(row=4, column=1, columnspan=2)
@@ -575,26 +539,9 @@ class MainWindow:
             totalPlayer = self.playerIndex[1:]
             currentPlayer = self.playerIndex[:1]
 
-            if currentPlayer == [1]:
-                CommitedScoreToLog = int(self.player_1_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_1_Entry', 'Player_1_Score'])
-                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
-
-            elif currentPlayer == [2]:
-                CommitedScoreToLog = int(self.player_2_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_2_Entry', 'Player_2_Score'])
-                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
-
-            elif currentPlayer == [3]:
-                CommitedScoreToLog = int(self.player_3_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_3_Entry', 'Player_3_Score'])
-                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
-
-            elif currentPlayer == [4]:
-                CommitedScoreToLog = int(self.player_4_label_2.get())
-                toAppend = pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_4_Entry', 'Player_4_Score'])
-                self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
-
+            CommitedScoreToLog = eval("int(self.player_"+str(currentPlayer[0])+"_label_2.get())")
+            toAppend = eval("pd.DataFrame([[currentGameTurn, 1, CommitedScoreToLog]], columns=['gameTurn', 'Player_"+str(currentPlayer[0])+"_Entry', 'Player_"+str(currentPlayer[0])+"_Score'])")
+            self.turnIndexLog = pd.concat([self.turnIndexLog, toAppend])
 
         print(self.turnIndexLog)
         return
