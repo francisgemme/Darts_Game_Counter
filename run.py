@@ -9,10 +9,17 @@ if __name__ == "__main__":
     Game and League to manage data in a suitable matter.    
     """
 
-    cS.consoleSetup()  # To display Logs into console (in the proper format)
+    quitbuttonPressed = False
 
-    [root, mainWindow] = initWin.initializeWindow() # Initialize the window creation
-    
-    root.mainloop() # Created window is waiting for any action
+    while quitbuttonPressed == False:
+            cS.consoleSetup()  # To display Logs into console (in the proper format)
+            [root, mainWindow] = initWin.initializeWindow() # Initialize the window creation
+            root.mainloop() # Created window is waiting for any action
+            print(str(mainWindow.quitbuttonPressed))
+            quitbuttonPressed = mainWindow.quitbuttonPressed
+            root.destroy()
+
+
+
 
 

@@ -187,10 +187,10 @@ def populateGUI(self, master):
     self.button_quit = Button(master, text="Quitter", padx=40, pady=5, font=("Helvetica", 12),
                               bg=self.Button_bg_color, fg=self.Button_ft_color,
                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color,
-                              command=master.quit)
+                              command=lambda: self.quitGame(master))
 
     self.button_restartBoard = Button(master, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.resetBoard(master), state= DISABLED,
+                               bg=self.Button_bg_color, fg=self.Button_ft_color, command= master.quit, state=NORMAL,
                                activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
     # Put the buttons on the screen

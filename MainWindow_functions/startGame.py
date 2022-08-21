@@ -5,7 +5,6 @@ def startGame(MainWindow):
     if ~MainWindow.gameStarted:
         MainWindow.frame9.configure(borderwidth=0)
         MainWindow.button_gameStart.configure(borderwidth=0)
-        print(MainWindow.gameStarted)
         MainWindow.button_gameStart.configure(state=DISABLED, disabledforeground=MainWindow.Button_bg_color)
         MainWindow.button_addPlayer.configure(state=DISABLED)
         MainWindow.button_gameMode.config(state=DISABLED)

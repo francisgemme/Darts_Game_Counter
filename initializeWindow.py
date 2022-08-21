@@ -7,5 +7,6 @@ def initializeWindow():
     root = Tk()
     # Call Constructor
     e = MainWindow.MainWindow(root)
-    # The GUI is acting like a listening... Constantly waiting for something to happen.
+
     return [root, e]
+

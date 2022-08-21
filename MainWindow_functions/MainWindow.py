@@ -3,7 +3,7 @@ from tkinter import *
 from MainWindow_functions import populateGUI as pGUI, initializeGUIvar, keyBindSetup as kBs, updateIndexLog as uIL, \
     writeCommitScore as wCS, endTurn as eT, clickPad as cP, commitScore as cS, commitAddPlayer as cAP, updateStatusLabel as uSL, \
     clearClickPad as cCP, startGame as sG, editScore as eS, addPlayer as aP, refreshImages as rI, editName as eN, \
-    destroySubWin as dSW, resetBoard as rst
+    destroySubWin as dSW, quitGame as qG
 
 
 class MainWindow:
@@ -92,8 +92,8 @@ class MainWindow:
         dSW.destroySubWin(self)
         return
 
-    def resetBoard(self, master):
-        rst.resetBoard(self, master)
+    def quitGame(self, master):
+        qG.quitGame(self, master)
         return
 
     def function_gameMode(MainWindow):
