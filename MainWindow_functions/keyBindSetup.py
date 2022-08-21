@@ -1,4 +1,4 @@
-from MainWindows_functions import clickPad as cP, commitScore as cS, endTurn as eT
+from MainWindow_functions import clickPad as cP, commitScore as cS, endTurn as eT
 
 def keyBindSetup(self, master):
     master.bind("1", lambda event: cP.clickPad(self, 1))
