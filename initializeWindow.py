@@ -1,4 +1,4 @@
-from MainWindows_functions import MainWindow
+from MainWindow_functions import MainWindow
 from tkinter import *
 
 def initializeWindow():
