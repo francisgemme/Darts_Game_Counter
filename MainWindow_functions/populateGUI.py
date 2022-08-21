@@ -189,8 +189,8 @@ def populateGUI(self, master):
                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color,
                               command=master.quit)
 
-    self.restartBoard = Button(master, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color,
+    self.button_restartBoard = Button(master, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
+                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=self.resetBoard(master), state= DISABLED,
                                activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
     # Put the buttons on the screen
@@ -214,7 +214,7 @@ def populateGUI(self, master):
     self.button_gameStart.grid(row=0, column=3, columnspan=1)
     #self.button_goBack.grid(row=13, column=5, ipadx=5, columnspan=1, sticky="SE")
     #self.button_forward.grid(row=13, column=6, ipadx=5, columnspan=1, sticky="SW")
-    self.restartBoard.grid(row=13, column=10, columnspan=1, sticky="SE")
+    self.button_restartBoard.grid(row=13, column=10, columnspan=1, sticky="SE")
     self.button_quit.grid(row=13, column=11, columnspan=1, sticky="SE")
 
     # ---------------------------------------------------------------------------------------------------------------

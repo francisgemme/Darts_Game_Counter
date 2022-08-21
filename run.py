@@ -10,7 +10,9 @@ if __name__ == "__main__":
     """
 
     cS.consoleSetup()  # To display Logs into console (in the proper format)
+
     [root, mainWindow] = initWin.initializeWindow() # Initialize the window creation
+    
     root.mainloop() # Created window is waiting for any action
 
 
