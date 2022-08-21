@@ -146,7 +146,7 @@ def populateGUI(self, master):
 
     self.button_gameMode = Button(self.frame0, text="Mode de Jeu", padx=35, pady=3, font=("Helvetica", 12),
                                   bg=self.Button_bg_color, fg=self.Button_ft_color, state='normal',
-                                  command=self.function_gameMode,
+                                  command=self.selectGameMode,
                                   activebackground=self.activeButton_bg_color,
                                   activeforeground=self.activeButton_ft_color)
 
