@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+
 def updateIndexLog(MainWindow):
     if MainWindow.gameStarted == False:  # If the game is not started, create the IndexLog with all added players
         # get Current Player turn over the total nb of player
@@ -38,6 +39,8 @@ def updateIndexLog(MainWindow):
         MainWindow.turnIndexLog = pd.concat([MainWindow.turnIndexLog, toAppend])
 
         MainWindow.turnIndexLog = MainWindow.turnIndexLog.replace(np.nan, "|")
+
         print(MainWindow.turnIndexLog)
+
 
         return

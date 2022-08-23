@@ -47,7 +47,7 @@ def populateGUI(self, master):
 
     # Start Game button frame
     self.frame9 = LabelFrame(self.BackgroundFrame, padx=10, pady=10, bg=self.Button_bg_color)
-    self.frame9.grid(row=3, column=4, columnspan=8, rowspan=1, sticky= W)
+    self.frame9.grid(row=3, column=5, columnspan=7, rowspan=1, sticky= W)
 
     # Turn arrow panel for player 1
     self.arrowLabel_1 = Label(self.BackgroundFrame, padx=10, pady=0, bg=self.Button_bg_color)
