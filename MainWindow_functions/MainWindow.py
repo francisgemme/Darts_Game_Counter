@@ -3,7 +3,7 @@ from tkinter import *
 from MainWindow_functions import populateGUI as pGUI, initializeGUIvar, keyBindSetup as kBs, updateIndexLog as uIL, \
     writeCommitScore as wCS, endTurn as eT, clickPad as cP, commitScore as cS, commitAddPlayer as cAP, updateStatusLabel as uSL, \
     clearClickPad as cCP, startGame as sG, editScore as eS, addPlayer as aP, refreshImages as rI, editName as eN, \
-    destroySubWin as dSW, quitGame as qG, selectGameMode as sGM, commitGameMode as cGM
+    destroySubWin as dSW, quitGame as qG, populateGModeGUI as popGMGUI, commitGameMode as cGM, selectedMode as sM
 
 
 class MainWindow:
@@ -96,14 +96,16 @@ class MainWindow:
         qG.quitGame(self, master)
         return
 
-    def selectGameMode(self):
-        sGM.selectGameMode(self)
+    def populateGModeGUI(self):
+        popGMGUI.populateGModeGUI(self)
         return
 
     def commitGameMode(self):
         cGM.commitGameMode(self)
         return
 
-
+    def selectedMode(self):
+        sM.selectedMode(self)
+        return
 
 

@@ -2,7 +2,7 @@
 Since all methods use the MainWindow Object as an input/output, it is a lazy effective way to implement functionalities"""
 
 def initializeGUIvar(MainWindow):
-    MainWindow.softVersion = "ver 1.1"
+    MainWindow.softVersion = "ver 1.2"
     # Visual Stuff. These are used in the Populate GUI methods:
     MainWindow.Button_bg_color = "#245042"
     MainWindow.Button_ft_color = "#D3DBE5"
@@ -11,7 +11,10 @@ def initializeGUIvar(MainWindow):
 
     # Variabled
     MainWindow.nbPlayer = 0
-    MainWindow.gameMode = []  #
+    MainWindow.SelectedGameMode = [] # Selected Game Mode
+    MainWindow.DoubleInMode = True
+    MainWindow.DoubleOutMode = False
+    MainWindow.CommitGameMode = []  # Commit Game Mode
     MainWindow.gameStarted = False  # some methods (such as the log) act differently if the game is started.
     MainWindow.playerIndex = [0, 0]  # Variable tracking player turn and total number of players.
                                 # A quick variable to know who is playing
