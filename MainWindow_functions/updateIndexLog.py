@@ -8,10 +8,10 @@ def updateIndexLog(MainWindow):
         MainWindow.turnIndexLog = pd.DataFrame([[0, 0]], columns=['index', 'gameTurn']) # first default columns
 
         for i in range(totalPlayer[0]): # add all columns needed for the match
-            eval("MainWindow.turnIndexLog.insert(len(MainWindow.turnIndexLog.columns), 'Player_"+str(i+1)+"_Entry', 0)")
-            eval("MainWindow.turnIndexLog.insert(len(MainWindow.turnIndexLog.columns), 'Player_"+str(i+1)+"_Score', 501)")
+            eval("MainWindow.turnIndexLog.insert(len(MainWindow.turnIndexLog.columns), 'P_"+str(i+1)+"_Entry', 0)")
+            eval("MainWindow.turnIndexLog.insert(len(MainWindow.turnIndexLog.columns), 'P_"+str(i+1)+"_Score', 501)")
             if MainWindow.doubleInMode:
-                eval("MainWindow.turnIndexLog.insert(len(MainWindow.turnIndexLog.columns), 'Player_"+str(i+1)+"_DoubleIn', 0)")
+                eval("MainWindow.turnIndexLog.insert(len(MainWindow.turnIndexLog.columns), 'P_"+str(i+1)+"_DoubleIn', 0)")
 
     # If the game is started, add the committed score (and more) to the current player
     if MainWindow.gameStarted:
@@ -25,8 +25,8 @@ def updateIndexLog(MainWindow):
 
         # This allow multiple entries for each turns. The log will diplay all entries for a specific game turn
         if lastGameTurn == currentGameTurn:
-            if ~np.isnan(MainWindow.turnIndexLog["Player_" + str(currentPlayer[0]) + "_Entry"].iloc[-1]):
-                player_entry = MainWindow.turnIndexLog["Player_" + str(currentPlayer[0]) + "_Entry"].iloc[-1] + 1
+            if MainWindow.turnIndexLog["P_" + str(currentPlayer[0]) + "_Entry"].iloc[-1] != "|":
+                player_entry = MainWindow.turnIndexLog["P_" + str(currentPlayer[0]) + "_Entry"].iloc[-1] + 1
             else:
                 player_entry = 1
         elif lastGameTurn != currentGameTurn:
@@ -34,8 +34,10 @@ def updateIndexLog(MainWindow):
 
         CommitedScoreToLog = eval("int(MainWindow.player_"+str(currentPlayer[0])+"_label_2.get())")
         toAppend = eval("pd.DataFrame([[currentIndex, currentGameTurn, player_entry, CommitedScoreToLog]], "
-                        "columns=['index', 'gameTurn', 'Player_"+str(currentPlayer[0])+"_Entry', 'Player_"+str(currentPlayer[0])+"_Score'])")
+                        "columns=['index', 'gameTurn', 'P_"+str(currentPlayer[0])+"_Entry', 'P_"+str(currentPlayer[0])+"_Score'])")
         MainWindow.turnIndexLog = pd.concat([MainWindow.turnIndexLog, toAppend])
 
+        MainWindow.turnIndexLog = MainWindow.turnIndexLog.replace(np.nan, "|")
         print(MainWindow.turnIndexLog)
+
         return
