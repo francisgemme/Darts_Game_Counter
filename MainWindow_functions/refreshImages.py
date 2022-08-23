@@ -6,12 +6,12 @@ def refreshImages(MainWIndow):
     global arrowImage
 
     MainWIndow.BackgroundFrame.grid(row=0, column=0, sticky=NSEW)
-    logoImage = ImageTk.PhotoImage(Image.open("dart_Logo2.sgi"))
+    logoImage = ImageTk.PhotoImage(Image.open("images/dart_Logo2.sgi"))
     MainWIndow.logoImage = Label(MainWIndow.emptylabel_3, image=logoImage, bg=MainWIndow.Button_bg_color, fg="grey")
     MainWIndow.logoImage.grid(row=1, column=1, columnspan=2)
     if MainWIndow.gameStarted:
 
-        arrowImage = ImageTk.PhotoImage(Image.open("arrow.sgi"))
+        arrowImage = ImageTk.PhotoImage(Image.open("images/arrow.sgi"))
         currentPlayer = MainWIndow.playerIndex[:1]
 
         if currentPlayer == [1]:

@@ -8,7 +8,7 @@ def populateGUI(self, master):
     master.title("Score Board")
     master.geometry("1095x880")
     master.resizable(False, False)
-    master.iconbitmap("dart_icon.ico")
+    master.iconbitmap("images\dart_icon.ico")
     cW.centerWindow(master)
 
     # --------------------------------------------------------------------------------------------------------------
@@ -416,11 +416,11 @@ def populateGUI(self, master):
     global logoImage
     global arrowImage
 
-    logoImage = ImageTk.PhotoImage(Image.open("dart_Logo2.sgi"))
+    logoImage = ImageTk.PhotoImage(Image.open("images/dart_Logo2.sgi"))
     self.logoImage = Label(self.emptylabel_3, image=logoImage, bg=self.Button_bg_color, fg="grey")
     self.logoImage.grid(row=1, column=1, columnspan=3)
 
-    arrowImage = ImageTk.PhotoImage(Image.open("arrow.sgi"))
+    arrowImage = ImageTk.PhotoImage(Image.open("images/arrow.sgi"))
     self.arrowImage = Label(self.arrowLabel_1, image=arrowImage, bg=self.Button_bg_color, fg="grey")
 
     # ---------------------------------------------------------------------------------------------------------------
