@@ -12,6 +12,7 @@ def initializeGUIvar(MainWindow):
     # Variabled
     MainWindow.nbPlayer = 0
     MainWindow.SelectedGameMode = [] # Selected Game Mode
+    MainWindow.prevSelMode = 1 # temporary
     MainWindow.DoubleInMode = True
     MainWindow.DoubleOutMode = False
     MainWindow.CommitGameMode = []  # Commit Game Mode

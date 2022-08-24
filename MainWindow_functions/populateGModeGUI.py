@@ -22,31 +22,31 @@ def populateGModeGUI(MainWindow):
     MainWindow.subWin.mode_var = IntVar(MainWindow.subWin)
 
     MainWindow.subWin.mode1 = Radiobutton(MainWindow.subWin.emptylabel_1, indicatoron=0, text="Standard 301", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.Button_bg_color,
-                                          fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=1, command= MainWindow.selectedMode)
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.Button_bg_color, selectcolor = MainWindow.activeButton_bg_color,
+                                          fg='black', anchor="w", variable=MainWindow.subWin.mode_var, value=1, command= MainWindow.selectedMode)
 
     MainWindow.subWin.mode2 = Radiobutton(MainWindow.subWin.emptylabel_1, indicatoron=0, text="Standard 501", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color,
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color, selectcolor = MainWindow.activeButton_bg_color,
                                           fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=2, command= MainWindow.selectedMode)
 
     MainWindow.subWin.mode3 = Radiobutton(MainWindow.subWin.emptylabel_2, indicatoron=0, text="Around the Clock", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color,
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color, selectcolor = MainWindow.activeButton_bg_color,
                                           fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=3, command= MainWindow.selectedMode)
 
     MainWindow.subWin.mode4 = Radiobutton(MainWindow.subWin.emptylabel_2, indicatoron=0, text="180 Around the Clock", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color,
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color, selectcolor = MainWindow.activeButton_bg_color,
                                           fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=4, command= MainWindow.selectedMode)
 
     MainWindow.subWin.mode5 = Radiobutton(MainWindow.subWin.emptylabel_2, indicatoron=0, text="Baseball", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.Button_bg_color,
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color, selectcolor = MainWindow.activeButton_bg_color,
                                           fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=5, command= MainWindow.selectedMode)
 
     MainWindow.subWin.mode6 = Radiobutton(MainWindow.subWin.emptylabel_2, indicatoron=0, text="Chase The Dragon", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color,
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color, selectcolor = MainWindow.activeButton_bg_color,
                                           fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=6, command= MainWindow.selectedMode)
 
     MainWindow.subWin.mode7 = Radiobutton(MainWindow.subWin.emptylabel_2, indicatoron=0, text="Cricket", font=("Helvetica", 12),
-                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color,
+                                          padx=5, pady=5, bg=MainWindow.Button_bg_color, activebackground=MainWindow.activeButton_bg_color, selectcolor = MainWindow.activeButton_bg_color,
                                           fg=MainWindow.Button_ft_color, anchor="w", variable=MainWindow.subWin.mode_var, value=7, command= MainWindow.selectedMode)
 
 
@@ -57,7 +57,7 @@ def populateGModeGUI(MainWindow):
     MainWindow.subWin.button_commitGameMode = Button(MainWindow.subWin.emptylabel_3, text="Enregistrer", padx=10, pady=5, anchor='e',
                                                      font=("Helvetica", 12), bg=MainWindow.Button_bg_color,
                                                      fg="yellow", command=MainWindow.commitGameMode,
-                                                     activebackground=MainWindow.activeButton_bg_color,
+                                                     activebackground=MainWindow.activeButton_bg_color, state='disabled',
                                                      activeforeground=MainWindow.activeButton_ft_color)
 
     MainWindow.subWin.button_cancel = Button(MainWindow.subWin.emptylabel_3, text="Annuler", padx=10, pady=5, anchor='e',
