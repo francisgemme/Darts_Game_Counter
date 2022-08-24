@@ -26,5 +26,6 @@ def initializeGUIvar(MainWindow):
     MainWindow.doubleInMode = True
 
     MainWindow.quitbuttonPressed = False
+    MainWindow.resetbuttonPressed = False
 
     return

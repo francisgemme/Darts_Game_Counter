@@ -194,7 +194,7 @@ def populateGUI(self, master):
     # Warning: The restartBoard kills the window without changing the status of the quitGamePressed variable in the run.py.
     # This will cause the while loop to restart again.
     self.button_restartBoard = Button(self.BackgroundFrame, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command= master.quit, state=NORMAL,
+                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=master.quit, state=NORMAL,
                                activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
 
     # Put the buttons on the screen
