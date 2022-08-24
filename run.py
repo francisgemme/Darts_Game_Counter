@@ -17,8 +17,8 @@ if __name__ == "__main__":
     while quitbuttonPressed == False:
         cS.consoleSetup()  # To display Logs into console (in the proper format)
         [root, mainWindow] = initWin.initializeWindow()  # Initialize the window creation
-        root.protocol("WM_DELETE_WINDOW", on_closing)  # if the user closes the Window
-        root.mainloop()  # Created window is waiting for any action
+        root.protocol("WM_DELETE_WINDOW", on_closing)  # if the user closes the Window. Skip the remaining lines if pressed (due to exit())
+        root.mainloop()  # Window is waiting for any action
         quitbuttonPressed = mainWindow.quitbuttonPressed  # may be updated if user presses the Quit Button
-        root.destroy()
+        root.destroy() # Destroy everything, then repeat the loop.
 
