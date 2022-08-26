@@ -8,7 +8,7 @@ def populateGUI(self, master):
     master.title("Score Board")
     master.geometry("1095x880")
     master.resizable(False, False)
-    master.iconbitmap("images\dart_icon.ico")
+    master.iconbitmap("dart_icon.ico")
     cW.centerWindow(master)
 
     # --------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ def populateGUI(self, master):
 
     # Start Game button frame
     self.frame9 = LabelFrame(self.BackgroundFrame, padx=10, pady=10, bg=self.Button_bg_color)
-    self.frame9.grid(row=3, column=5, columnspan=7, rowspan=1, sticky= W)
+    self.frame9.grid(row=3, column=5, columnspan=7, rowspan=1, sticky=W)
 
     # Turn arrow panel for player 1
     self.arrowLabel_1 = Label(self.BackgroundFrame, padx=10, pady=0, bg=self.Button_bg_color)
@@ -193,9 +193,12 @@ def populateGUI(self, master):
 
     # Warning: The restartBoard kills the window without changing the status of the quitGamePressed variable in the run.py.
     # This will cause the while loop to restart again.
-    self.button_restartBoard = Button(self.BackgroundFrame, text="Réinitialiser Jeu", padx=40, pady=5, font=("Helvetica", 12),
-                               bg=self.Button_bg_color, fg=self.Button_ft_color, command=master.quit, state=NORMAL,
-                               activebackground=self.activeButton_bg_color, activeforeground=self.activeButton_ft_color)
+    self.button_restartBoard = Button(self.BackgroundFrame, text="Réinitialiser Jeu", padx=40, pady=5,
+                                      font=("Helvetica", 12),
+                                      bg=self.Button_bg_color, fg=self.Button_ft_color, command=master.quit,
+                                      state=NORMAL,
+                                      activebackground=self.activeButton_bg_color,
+                                      activeforeground=self.activeButton_ft_color)
 
     # Put the buttons on the screen
     self.button_0.grid(row=4, column=0)
@@ -216,8 +219,8 @@ def populateGUI(self, master):
     self.button_editName.grid(row=0, column=4, columnspan=1)
     self.button_endTurn.grid(row=0, column=0, columnspan=1)
     self.button_gameStart.grid(row=0, column=3, columnspan=1)
-    #self.button_goBack.grid(row=13, column=5, ipadx=5, columnspan=1, sticky="SE")
-    #self.button_forward.grid(row=13, column=6, ipadx=5, columnspan=1, sticky="SW")
+    # self.button_goBack.grid(row=13, column=5, ipadx=5, columnspan=1, sticky="SE")
+    # self.button_forward.grid(row=13, column=6, ipadx=5, columnspan=1, sticky="SW")
     self.button_restartBoard.grid(row=13, column=10, columnspan=1, sticky="SE")
     self.button_quit.grid(row=13, column=11, columnspan=1, sticky="SE")
 
@@ -257,8 +260,6 @@ def populateGUI(self, master):
                                              font=("Helvetica", 8), bg=self.Button_bg_color, fg="grey")
         self.player_1_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
         self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3, ipady=12)
-
-
 
     self.player_1_label_1.grid(row=0, column=0)
     self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
@@ -301,8 +302,6 @@ def populateGUI(self, master):
                                              font=("Helvetica", 8), bg=self.Button_bg_color, fg="grey")
         self.player_2_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
         self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=3, ipady=12)
-
-
 
     self.player_2_label_1.grid(row=0, column=0)
     self.player_2_label_1.insert(0, "Ajoutez le Joueur #2")
@@ -386,7 +385,6 @@ def populateGUI(self, master):
         self.player_4_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
         self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=3, ipady=20)
 
-
     self.player_4_label_1.grid(row=0, column=0)
     self.player_4_label_1.insert(0, "Ajoutez le Joueur #4")
     self.player_4_label_1.config(state=DISABLED)
@@ -406,8 +404,8 @@ def populateGUI(self, master):
     # CREATING STATUS
     # ---------------------------------------------------------------------------------------------------------------
     self.StatusLabel = Label(self.emptylabel0, padx=1, pady=20, text="Ajoutez au moins un Joueur!",
-                                   font=("Helvetica", 12), bg=self.Button_bg_color,
-                                   fg="cyan")
+                             font=("Helvetica", 12), bg=self.Button_bg_color,
+                             fg="cyan")
     self.StatusLabel.grid(row=0, column=0)
 
     # ---------------------------------------------------------------------------------------------------------------
