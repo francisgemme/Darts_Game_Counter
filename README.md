@@ -6,8 +6,8 @@ GUI has been created with the Tkinter Library.
 This game program aims to support dart players to count during the match.
 
 # Software Features:
-Players can create their avatar that will be stored in a database (saved locally).
-Stats are generated for each avatar
+Players can create their avatar that is be stored in a database. (NOT IMLEMENTED YET)
+Stats are generated for each avatar (NOT IMLEMENTED YET)
 Players can select the game mode.
 Players must enter their scores at every turn.
 The software can guide players to record their scores properly.
