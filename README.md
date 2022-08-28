@@ -3,9 +3,6 @@
 This repo contains a Darts Game Counter software (source code), that has been programmed in python3.9.
 GUI has been created with the Tkinter Library.
 
-***The zipFile (containing an .exe file) can  be downloaded. 
-Just run the .exe file in Windows 10 to enjoy!.***
-
 This game program aims to support dart players to count during the match.
 
 # Software Features:
