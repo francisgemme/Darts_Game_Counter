@@ -16,9 +16,7 @@ This software has been created for fun and learn more about the GUI/OOP developm
 
 # How to play:
 
-The compiled .exe file can be downloaded alone to run it. 
-Otherwise, you can download the full directory the .py and launch the "run.py" to initialize the game.
-The Alpha version has been released on August 20th.
+Download the full directory and launch the "run.py" to initialize the game.
 
 Will soon be releasing a version with additional Game modes, such as "Around the Clock", "Crickets", "BaseBall", "Chase the Dragon"
 
