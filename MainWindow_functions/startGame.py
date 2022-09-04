@@ -3,9 +3,6 @@ from tkinter import *
 
 def startGame(MainWindow):
     if ~MainWindow.gameStarted:
-        #MainWindow.frame9.configure(borderwidth=0)
-        #MainWindow.button_gameStart.configure(borderwidth=0)
-
         MainWindow.button_gameStart.configure(state=DISABLED, disabledforeground=MainWindow.Button_bg_color)
         MainWindow.button_gameStart.destroy()
         MainWindow.frame9.destroy()
@@ -15,32 +12,29 @@ def startGame(MainWindow):
 
         if MainWindow.nbPlayer != 0:  # probably a useless check...
             if MainWindow.nbPlayer == 1:
-                MainWindow.player_1_label_2.config(state=NORMAL)
-                MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
+                if MainWindow.DoubleInMode == False:
+                    MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
             if MainWindow.nbPlayer == 2:
-                MainWindow.player_2_label_2.config(state=NORMAL)
-                MainWindow.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
-                MainWindow.player_1_label_2.config(state=NORMAL)
-                MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
+                if MainWindow.DoubleInMode == False:
+                    MainWindow.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
+                    MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
             if MainWindow.nbPlayer == 3:
-                MainWindow.player_3_label_2.config(state=NORMAL)
-                MainWindow.player_3_label_2.config(state=DISABLED, disabledforeground="yellow")
-                MainWindow.player_2_label_2.config(state=NORMAL)
-                MainWindow.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
-                MainWindow.player_1_label_2.config(state=NORMAL)
-                MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
+                if MainWindow.DoubleInMode == False:
+                    MainWindow.player_3_label_2.config(state=DISABLED, disabledforeground="yellow")
+                    MainWindow.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
+                    MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
             if MainWindow.nbPlayer == 4:
-                MainWindow.player_4_label_2.config(state=NORMAL)
-                MainWindow.player_4_label_2.config(state=DISABLED, disabledforeground="yellow")
-                MainWindow.player_3_label_2.config(state=NORMAL)
-                MainWindow.player_3_label_2.config(state=DISABLED, disabledforeground="yellow")
-                MainWindow.player_2_label_2.config(state=NORMAL)
-                MainWindow.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
-                MainWindow.player_1_label_2.config(state=NORMAL)
-                MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
+                if MainWindow.DoubleInMode == False:
+                    MainWindow.player_4_label_2.config(state=DISABLED, disabledforeground="yellow")
+                    MainWindow.player_3_label_2.config(state=DISABLED, disabledforeground="yellow")
+                    MainWindow.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
+                    MainWindow.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
+
+    if MainWindow.DoubleInMode == True:
+        MainWindow.player_1_checkbox.config(state=NORMAL) # Activate the Double In box
 
     MainWindow.playerIndex = [1, MainWindow.nbPlayer]
     MainWindow.updateIndexLog()
