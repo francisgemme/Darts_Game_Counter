@@ -1,7 +1,6 @@
 from tkinter import *
 
 
-
 def checkChangedDoubleIn(MainWindow,buttonPressed):
 
     selectedMode = MainWindow.subWin.mode_var.get()
