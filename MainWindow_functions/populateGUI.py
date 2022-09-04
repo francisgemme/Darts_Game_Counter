@@ -250,30 +250,40 @@ def populateGUI(self, master):
                                   justify='right', disabledbackground=self.Button_bg_color,
                                   disabledforeground="grey", border=0)
 
-    self.player_1_label_4 = Entry(self.frame_player_1, width=10, bg=self.Button_bg_color, fg="grey", borderwidth=1,
+    self.player_1_label_4 = Entry(self.frame_player_1, width=15, bg=self.Button_bg_color, fg="grey", borderwidth=1,
                                   font=("Helvetica", 8),
                                   justify='right', disabledbackground=self.Button_bg_color,
                                   disabledforeground="grey", border=0)
 
     if self.DoubleInMode:
-        self.player_1_checkbox = Checkbutton(self.frame_player_1, text='DoubleIn', onvalue=1, offvalue=0,
-                                             font=("Helvetica", 8), bg=self.Button_bg_color, fg="grey")
-        self.player_1_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
-        self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3, ipady=12)
+        self.p1_DoubleInVar = IntVar(self.p1_DoubleInVar)
+        self.player_1_checkbox = Checkbutton(self.frame_player_1, onvalue=True, offvalue=0, variable=self.p1_DoubleInVar,
+                                             command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
+                                             font="black", bg=self.Button_bg_color, state="disabled")
+        self.player_1_checkbox.grid(row=3, column=2, pady=0, sticky=E)
+        self.arrowLabel_1.grid(row=4, column=5, rowspan=2, columnspan=3, ipady=15)
 
-    self.player_1_label_1.grid(row=0, column=0)
+        self.player_1_label_5 = Entry(self.frame_player_1, bg=self.Button_bg_color, fg="grey",
+                                  font=("Helvetica", 8),
+                                  justify='right', disabledbackground=self.Button_bg_color,
+                                  disabledforeground="grey", border=0)
+        self.player_1_label_5.insert(0, "Double In: ")
+        self.player_1_label_5.grid(row=3, column=1, pady=0, sticky=E)
+        self.player_1_label_5.config(state=DISABLED)
+
+    self.player_1_label_1.grid(row=0, column=0, columnspan=3)
     self.player_1_label_1.insert(0, "Ajoutez le Joueur #1")
     self.player_1_label_1.config(state=DISABLED)
 
-    self.player_1_label_2.grid(row=2, column=0, pady=10)
+    self.player_1_label_2.grid(row=2, column=0, pady=10, columnspan=3)
     self.player_1_label_2.insert(0, "301")
     self.player_1_label_2.config(state=DISABLED)
 
-    self.player_1_label_3.grid(row=4, column=0, pady=0, sticky='SW')
+    self.player_1_label_3.grid(row=4, column=1, pady=0, sticky=E)
     self.player_1_label_3.insert(0, "Avr: --")
     self.player_1_label_3.config(state=DISABLED)
 
-    self.player_1_label_4.grid(row=5, column=0, pady=0, sticky='SW')
+    self.player_1_label_4.grid(row=5, column=1, pady=0, sticky=E)
     self.player_1_label_4.insert(0, "HighScore: --")
     self.player_1_label_4.config(state=DISABLED)
 
@@ -298,23 +308,34 @@ def populateGUI(self, master):
                                   disabledforeground="grey", border=0)
 
     if self.DoubleInMode:
-        self.player_2_checkbox = Checkbutton(self.frame_player_2, text='DoubleIn', onvalue=1, offvalue=0,
-                                             font=("Helvetica", 8), bg=self.Button_bg_color, fg="grey")
-        self.player_2_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
-        self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=3, ipady=12)
+        self.p2_DoubleInVar = IntVar(self.p2_DoubleInVar)
+        self.player_2_checkbox = Checkbutton(self.frame_player_2, onvalue=True, offvalue=0, variable=self.p2_DoubleInVar,
+                                             command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
+                                             font="black", bg=self.Button_bg_color, state="disabled")
+        self.player_2_checkbox.grid(row=3, column=2, pady=0, sticky=E)
+        self.arrowLabel_2.grid(row=4, column=9, rowspan=2, columnspan=3, ipady=15)
 
-    self.player_2_label_1.grid(row=0, column=0)
+        self.player_2_label_5 = Entry(self.frame_player_2, bg=self.Button_bg_color, fg="grey",
+                                  font=("Helvetica", 8), justify='right', disabledbackground=self.Button_bg_color,
+                                  disabledforeground="grey", border=0)
+        self.player_2_label_5.insert(0, "Double In: ")
+        self.player_2_label_5.grid(row=3, column=1, pady=0, sticky=E)
+        self.player_2_label_5.config(state=DISABLED)
+
+
+    self.player_2_label_1.grid(row=0, column=0, columnspan=3)
     self.player_2_label_1.insert(0, "Ajoutez le Joueur #2")
     self.player_2_label_1.config(state=DISABLED)
-    self.player_2_label_2.grid(row=2, column=0, pady=10)
+
+    self.player_2_label_2.grid(row=2, column=0, pady=10, columnspan=3)
     self.player_2_label_2.insert(0, "301")
     self.player_2_label_2.config(state=DISABLED)
 
-    self.player_2_label_3.grid(row=4, column=0, pady=0, sticky='SW')
+    self.player_2_label_3.grid(row=4, column=1, pady=0, sticky=E)
     self.player_2_label_3.insert(0, "Avr: --")
     self.player_2_label_3.config(state=DISABLED)
 
-    self.player_2_label_4.grid(row=5, column=0, pady=0, sticky='SW')
+    self.player_2_label_4.grid(row=5, column=1, pady=0, sticky=E)
     self.player_2_label_4.insert(0, "HighScore: --")
     self.player_2_label_4.config(state=DISABLED)
 
@@ -339,23 +360,34 @@ def populateGUI(self, master):
                                   disabledforeground="grey", border=0)
 
     if self.DoubleInMode:
-        self.player_3_checkbox = Checkbutton(self.frame_player_3, text='DoubleIn', onvalue=1, offvalue=0,
-                                             font=("Helvetica", 8), bg=self.Button_bg_color, fg="grey")
-        self.player_3_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
-        self.arrowLabel_3.grid(row=7, column=5, rowspan=2, columnspan=3, ipady=20)
+        self.p3_DoubleInVar = IntVar(self.p3_DoubleInVar)
+        self.player_3_checkbox = Checkbutton(self.frame_player_3, onvalue=True, offvalue=0, variable=self.p3_DoubleInVar,
+                                             command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
+                                             font="black", bg=self.Button_bg_color,state="disabled")
+        self.player_3_checkbox.grid(row=3, column=2, pady=0, sticky=E)
+        self.arrowLabel_3.grid(row=7, column=5, rowspan=2, columnspan=3, ipady=23)
 
-    self.player_3_label_1.grid(row=0, column=0)
+        self.player_3_label_5 = Entry(self.frame_player_3, bg=self.Button_bg_color, fg="grey",
+                                  font=("Helvetica", 8),
+                                  justify='right', disabledbackground=self.Button_bg_color,
+                                  disabledforeground="grey", border=0)
+        self.player_3_label_5.insert(0, "Double In: ")
+        self.player_3_label_5.grid(row=3, column=1, pady=0, sticky=E)
+        self.player_3_label_5.config(state=DISABLED)
+
+    self.player_3_label_1.grid(row=0, column=0, columnspan=3)
     self.player_3_label_1.insert(0, "Ajoutez le Joueur #3")
     self.player_3_label_1.config(state=DISABLED)
-    self.player_3_label_2.grid(row=2, column=0, pady=10)
+
+    self.player_3_label_2.grid(row=2, column=0, pady=10, columnspan=3)
     self.player_3_label_2.insert(0, "301")
     self.player_3_label_2.config(state=DISABLED)
 
-    self.player_3_label_3.grid(row=4, column=0, pady=0, sticky='SW')
+    self.player_3_label_3.grid(row=4, column=1, pady=0, sticky=E)
     self.player_3_label_3.insert(0, "Avr: --")
     self.player_3_label_3.config(state=DISABLED)
 
-    self.player_3_label_4.grid(row=5, column=0, pady=0, sticky='SW')
+    self.player_3_label_4.grid(row=5, column=1, pady=0, sticky=E)
     self.player_3_label_4.insert(0, "HighScore: --")
     self.player_3_label_4.config(state=DISABLED)
 
@@ -380,23 +412,34 @@ def populateGUI(self, master):
                                   disabledforeground="grey", border=0)
 
     if self.DoubleInMode:
-        self.player_4_checkbox = Checkbutton(self.frame_player_4, text='DoubleIn', onvalue=1, offvalue=0,
-                                             font=("Helvetica", 8), bg=self.Button_bg_color, fg="grey")
-        self.player_4_checkbox.grid(row=3, column=0, pady=0, sticky='SW')
-        self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=3, ipady=20)
+        self.p4_DoubleInVar = IntVar(self.p4_DoubleInVar)
+        self.player_4_checkbox = Checkbutton(self.frame_player_4, onvalue=True, offvalue=0, variable=self.p4_DoubleInVar,
+                                             command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
+                                             font="black", bg=self.Button_bg_color,state="disabled")
+        self.player_4_checkbox.grid(row=3, column=2, pady=0, sticky=E)
+        self.arrowLabel_4.grid(row=7, column=9, rowspan=2, columnspan=3, ipady=23)
 
-    self.player_4_label_1.grid(row=0, column=0)
+        self.player_4_label_5 = Entry(self.frame_player_4, bg=self.Button_bg_color, fg="grey",
+                                  font=("Helvetica", 8),
+                                  justify='right', disabledbackground=self.Button_bg_color,
+                                  disabledforeground="grey", border=0)
+        self.player_4_label_5.insert(0, "Double In: ")
+        self.player_4_label_5.grid(row=3, column=1, pady=0, sticky=E)
+        self.player_4_label_5.config(state=DISABLED)
+
+    self.player_4_label_1.grid(row=0, column=0, columnspan=3)
     self.player_4_label_1.insert(0, "Ajoutez le Joueur #4")
     self.player_4_label_1.config(state=DISABLED)
-    self.player_4_label_2.grid(row=2, column=0, pady=10)
+
+    self.player_4_label_2.grid(row=2, column=0, pady=10, columnspan=3)
     self.player_4_label_2.insert(0, "301")
     self.player_4_label_2.config(state=DISABLED)
 
-    self.player_4_label_3.grid(row=4, column=0, pady=0, sticky='SW')
+    self.player_4_label_3.grid(row=4, column=1, pady=0, sticky=E)
     self.player_4_label_3.insert(0, "Avr: --")
     self.player_4_label_3.config(state=DISABLED)
 
-    self.player_4_label_4.grid(row=5, column=0, pady=0, sticky='SW')
+    self.player_4_label_4.grid(row=5, column=1, pady=0, sticky=E)
     self.player_4_label_4.insert(0, "HighScore: --")
     self.player_4_label_4.config(state=DISABLED)
 
