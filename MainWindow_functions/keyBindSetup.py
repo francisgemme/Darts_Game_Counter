@@ -13,4 +13,5 @@ def keyBindSetup(self, master):
     master.bind("0", lambda event: cP.clickPad(self, 0))
     master.bind("<Return>", lambda event: cS.commitScore(self))
     master.bind("<space>", lambda event: eT.endTurn(self))
+    master.bind("<BackSpace>", lambda event: cP.clickPad(self, -1))
     return
