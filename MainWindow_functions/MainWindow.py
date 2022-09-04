@@ -3,7 +3,8 @@ from tkinter import *
 from MainWindow_functions import populateGUI as pGUI, initializeGUIvar, keyBindSetup as kBs, updateIndexLog as uIL, \
     writeCommitScore as wCS, endTurn as eT, clickPad as cP, commitScore as cS, commitAddPlayer as cAP, updateStatusLabel as uSL, \
     clearClickPad as cCP, startGame as sG, editScore as eS, addPlayer as aP, refreshImages as rI, editName as eN, \
-    destroySubWin as dSW, quitGame as qG, populateGModeGUI as popGMGUI, commitGameMode as cGM, selectedMode as sM
+    destroySubWin as dSW, quitGame as qG, populateGModeGUI as popGMGUI, commitGameMode as cGM, selectedMode as sM, \
+    checkChanged as cC, checkChangedDoubleIn as cCDI
 
 
 class MainWindow:
@@ -108,4 +109,10 @@ class MainWindow:
         sM.selectedMode(self)
         return
 
+    def checkChanged(self):
+        cC.checkChanged(self)
+        return
+
+    def checkChangedDoubleIn(self, buttonPressed):
+        cCDI.checkChangedDoubleIn(self,buttonPressed)
 
