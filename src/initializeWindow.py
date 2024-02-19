@@ -1,12 +1,11 @@
 from MainWindow_functions import MainWindow
 from tkinter import *
 
-def initializeWindow():
+def initializeWindow(Match_inst):
 
     # Call the tkinter tool
-    root = Tk()
+    tk_layer = Tk()
     # Call Constructor
-    e = MainWindow.MainWindow(root)
+    MainWindow_inst = MainWindow.MainWindow(tk_layer, Match_inst)
 
-    return [root, e]
-
+    return [tk_layer, MainWindow_inst]

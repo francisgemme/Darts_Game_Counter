@@ -13,7 +13,6 @@ def initializeGUIvar(MainWindow):
         MainWindow.disabledButton_ft_color = "#D3DBE5"
         MainWindow.disabledButton_bg_color = "#245042"
 
-
     if MainWindow.colorTheme == "Dark":
         MainWindow.Button_bg_color = "#0a290a"
         MainWindow.Button_ft_color = "#D3DBE5"
@@ -27,7 +26,6 @@ def initializeGUIvar(MainWindow):
     MainWindow.p2_DoubleInVar = False # Selected Game Mode
     MainWindow.p3_DoubleInVar = False # Selected Game Mode
     MainWindow.p4_DoubleInVar = False # Selected Game Mode
-
 
     MainWindow.SelectedGameMode = [] # Selected Game Mode
     MainWindow.prevSelMode = 1 # temporary

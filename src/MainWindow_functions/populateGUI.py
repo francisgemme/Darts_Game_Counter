@@ -2,7 +2,6 @@ from tkinter import *
 import centerWindow as cW
 from PIL import ImageTk, Image
 
-
 def populateGUI(self, master):
     master.configure(bg=self.Button_bg_color)
     master.title("Score Board")

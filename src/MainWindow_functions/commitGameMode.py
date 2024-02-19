@@ -1,4 +1,3 @@
-
 def commitGameMode(MainWindow):
 
     selection = MainWindow.subWin.mode_var.get()

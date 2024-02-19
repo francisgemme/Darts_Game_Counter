@@ -19,6 +19,7 @@ def endTurn(MainWindow):
                         MainWindow.player_1_checkbox.config(state=DISABLED)
                     if MainWindow.p2_DoubleInVar.get() == False:
                         MainWindow.player_2_checkbox.config(state=NORMAL)
+
             if currentPlayer == [2]:
                 MainWindow.playerIndex[0] = 3
                 if MainWindow.DoubleInMode == True:
@@ -27,6 +28,7 @@ def endTurn(MainWindow):
                         MainWindow.player_2_checkbox.config(state=DISABLED)
                     if MainWindow.p3_DoubleInVar.get()== False:
                         MainWindow.player_3_checkbox.config(state=NORMAL)
+
             if currentPlayer == [3]:
                 MainWindow.playerIndex[0] = 4
                 if MainWindow.DoubleInMode == True:
