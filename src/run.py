@@ -11,7 +11,7 @@ if __name__ == "__main__":
     """
 
     # Initiates the match object
-    Match_inst = Match.initMatch()
+    Match_inst = Match.__init__()
 
     quitbuttonPressed = False
 
