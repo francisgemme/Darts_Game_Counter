@@ -1,11 +1,11 @@
-from MainWindow_functions import MainWindow
+from mainApp_functions import mainApp
 from tkinter import *
 
-def initializeWindow(Match_inst):
+def initializeWindow(match_inst):
 
     # Call the tkinter tool
     tk_layer = Tk()
     # Call Constructor
-    MainWindow_inst = MainWindow.MainWindow(tk_layer, Match_inst)
+    mainApp_inst = mainApp.mainApp(tk_layer, match_inst)
 
-    return [tk_layer, MainWindow_inst]
+    return [tk_layer, mainApp_inst]
