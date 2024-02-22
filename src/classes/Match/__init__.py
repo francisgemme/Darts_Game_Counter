@@ -71,4 +71,4 @@ class __init__:
     
     def addNplayer(self):
         self.nbPlayer += 1
-        return self.nbPlayer
+        return

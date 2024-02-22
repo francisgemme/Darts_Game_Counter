@@ -2,7 +2,7 @@ from tkinter import *
 
 def destroySubWin(mainApp):
     if mainApp.gameStarted == False:
-        if mainApp.nbPlayer < 4:
+        if mainApp.match_inst.getNplayer() < 4:
             mainApp.button_addPlayer.configure(state='normal')
 
         mainApp.button_gameMode.config(state=NORMAL)

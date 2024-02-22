@@ -19,9 +19,7 @@ def initializeGUIvar(mainApp):
         mainApp.activeButton_bg_color = "#9aa794"
         mainApp.activeButton_ft_color = "#D3DBE5"
 
-    # Variables
-    mainApp.nbPlayer = 0
-
+    # Variables  
     mainApp.p1_DoubleInVar = False # Selected Game Mode
     mainApp.p2_DoubleInVar = False # Selected Game Mode
     mainApp.p3_DoubleInVar = False # Selected Game Mode

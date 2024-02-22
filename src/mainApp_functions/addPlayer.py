@@ -15,7 +15,7 @@ def addPlayer(mainApp):
         tmp = mainApp.playerIndex[:1]  # Who is playing
         currentPlayer = tmp[0]
     elif mainApp.editNameMode == False:
-        currentPlayer = mainApp.match_inst.addNplayer()
+        currentPlayer = mainApp.match_inst.getNplayer() +1
 
     # Populate all sub-GUI widgets
     mainApp.subWin.emptylabel_1 = Label(mainApp.subWin, padx=10, pady=10, bg=mainApp.Button_bg_color)
