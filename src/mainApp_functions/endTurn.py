@@ -13,7 +13,7 @@ def endTurn(mainApp):
         if currentPlayer < totalPlayer:
             if currentPlayer == [1]: # if player #1 turn
                 mainApp.playerIndex[0] = 2
-                if mainApp.DoubleInMode == True:
+                if mainApp.match_inst.doubleInMode == True:
                     mainApp.player_1_checkbox.config(state=DISABLED)
                     if mainApp.p1_DoubleInVar.get() == True:
                         mainApp.player_1_checkbox.config(state=DISABLED)
@@ -22,7 +22,7 @@ def endTurn(mainApp):
 
             if currentPlayer == [2]:
                 mainApp.playerIndex[0] = 3
-                if mainApp.DoubleInMode == True:
+                if mainApp.match_inst.doubleInMode == True:
                     mainApp.player_2_checkbox.config(state=DISABLED)
                     if mainApp.p2_DoubleInVar.get() == True:
                         mainApp.player_2_checkbox.config(state=DISABLED)
@@ -31,7 +31,7 @@ def endTurn(mainApp):
 
             if currentPlayer == [3]:
                 mainApp.playerIndex[0] = 4
-                if mainApp.DoubleInMode == True:
+                if mainApp.match_inst.doubleInMode == True:
                     mainApp.player_3_checkbox.config(state=DISABLED)
                     if mainApp.p3_DoubleInVar.get() == True:
                         mainApp.player_3_checkbox.config(state=DISABLED)
@@ -40,12 +40,13 @@ def endTurn(mainApp):
 
         if currentPlayer == totalPlayer:
             mainApp.playerIndex[0] = 1
-            if mainApp.DoubleInMode == True:
+            if mainApp.match_inst.doubleInMode == True:
                 eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.config(state=DISABLED)")
                 if eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()") == True:
                     eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.config(state=DISABLED)")
                 if mainApp.p1_DoubleInVar.get() == False:
                     mainApp.player_1_checkbox.config(state=NORMAL)
+            
             #if this is the last player to play, the log "game turn" is updated by 1  **To be removed...
             mainApp.currentGameTurn += 1
 

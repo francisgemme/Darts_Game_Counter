@@ -20,16 +20,11 @@ def initializeGUIvar(mainApp):
         mainApp.activeButton_ft_color = "#D3DBE5"
 
     # Variables  
-    mainApp.p1_DoubleInVar = False # Selected Game Mode
-    mainApp.p2_DoubleInVar = False # Selected Game Mode
-    mainApp.p3_DoubleInVar = False # Selected Game Mode
-    mainApp.p4_DoubleInVar = False # Selected Game Mode
+    mainApp.p1_DoubleInVar = False
+    mainApp.p2_DoubleInVar = False
+    mainApp.p3_DoubleInVar = False
+    mainApp.p4_DoubleInVar = False
 
-    mainApp.SelectedGameMode = [] # Selected Game Mode
-    mainApp.prevSelMode = 1 # temporary
-    mainApp.DoubleInMode = True
-    mainApp.DoubleOutMode = False
-    mainApp.CommitGameMode = [1, mainApp.DoubleInMode]  # Commit Game Mode
     mainApp.gameStarted = False  # some methods (such as the log) act differently if the game is started.
     mainApp.playerIndex = [0, 0]  # Variable tracking player turn and total number of players.
                                 # A quick variable to know who is playing
@@ -38,7 +33,6 @@ def initializeGUIvar(mainApp):
     mainApp.editNameMode = False
     mainApp.currentGameTurn = 0
     mainApp.logIndex = 0
-    mainApp.doubleInMode = True
 
     mainApp.quitbuttonPressed = False
 

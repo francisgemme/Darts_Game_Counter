@@ -12,28 +12,28 @@ def startGame(mainApp):
 
         if mainApp.match_inst.getNplayer() != 0:  # probably a useless check...
             if mainApp.match_inst.getNplayer() == 1:
-                if mainApp.DoubleInMode == False:
+                if mainApp.match_inst.doubleInMode == False:
                     mainApp.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
             if mainApp.match_inst.getNplayer() == 2:
-                if mainApp.DoubleInMode == False:
+                if mainApp.match_inst.doubleInMode == False:
                     mainApp.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
                     mainApp.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
             if mainApp.match_inst.getNplayer() == 3:
-                if mainApp.DoubleInMode == False:
+                if mainApp.match_inst.doubleInMode == False:
                     mainApp.player_3_label_2.config(state=DISABLED, disabledforeground="yellow")
                     mainApp.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
                     mainApp.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
             if mainApp.match_inst.getNplayer() == 4:
-                if mainApp.DoubleInMode == False:
+                if mainApp.match_inst.doubleInMode == False:
                     mainApp.player_4_label_2.config(state=DISABLED, disabledforeground="yellow")
                     mainApp.player_3_label_2.config(state=DISABLED, disabledforeground="yellow")
                     mainApp.player_2_label_2.config(state=DISABLED, disabledforeground="yellow")
                     mainApp.player_1_label_2.config(state=DISABLED, disabledforeground="yellow")
 
-    if mainApp.DoubleInMode == True:
+    if mainApp.match_inst.doubleInMode == True:
         mainApp.player_1_checkbox.config(state=NORMAL) # Activate the Double In box
 
     mainApp.playerIndex = [1, mainApp.match_inst.getNplayer()]

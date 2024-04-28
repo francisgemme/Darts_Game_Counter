@@ -254,7 +254,7 @@ def populateGUI(self, master):
                                   justify='right', disabledbackground=self.Button_bg_color,
                                   disabledforeground="grey", border=0)
 
-    if self.DoubleInMode:
+    if self.match_inst.doubleInMode:
         self.p1_DoubleInVar = IntVar()
         self.player_1_checkbox = Checkbutton(self.frame_player_1, onvalue=True, offvalue=0, variable=self.p1_DoubleInVar,
                                              command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
@@ -306,7 +306,7 @@ def populateGUI(self, master):
                                   justify='right', disabledbackground=self.Button_bg_color,
                                   disabledforeground="grey", border=0)
 
-    if self.DoubleInMode:
+    if self.match_inst.doubleInMode:
         self.p2_DoubleInVar = IntVar()
         self.player_2_checkbox = Checkbutton(self.frame_player_2, onvalue=True, offvalue=0, variable=self.p2_DoubleInVar,
                                              command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
@@ -358,7 +358,7 @@ def populateGUI(self, master):
                                   justify='right', disabledbackground=self.Button_bg_color,
                                   disabledforeground="grey", border=0)
 
-    if self.DoubleInMode:
+    if self.match_inst.doubleInMode:
         self.p3_DoubleInVar = IntVar()
         self.player_3_checkbox = Checkbutton(self.frame_player_3, onvalue=True, offvalue=0, variable=self.p3_DoubleInVar,
                                              command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,
@@ -410,7 +410,7 @@ def populateGUI(self, master):
                                   justify='right', disabledbackground=self.Button_bg_color,
                                   disabledforeground="grey", border=0)
 
-    if self.DoubleInMode:
+    if self.match_inst.doubleInMode:
         self.p4_DoubleInVar = IntVar()
         self.player_4_checkbox = Checkbutton(self.frame_player_4, onvalue=True, offvalue=0, variable=self.p4_DoubleInVar,
                                              command=lambda: self.checkChanged(), disabledforeground=self.disabledButton_ft_color,

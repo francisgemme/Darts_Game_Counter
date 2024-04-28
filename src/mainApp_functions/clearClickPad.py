@@ -5,12 +5,12 @@ def clearClickPad(mainApp):
     # Transfer created player to the Lobby
     currentPlayer = mainApp.playerIndex[:1]  # Who is playing
 
-    if mainApp.DoubleInMode == True:
+    if mainApp.match_inst.doubleInMode == True:
         DoubleInStatus = eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()")
     else:
         DoubleInStatus = False
 
-    if DoubleInStatus == True or mainApp.DoubleInMode == False:
+    if DoubleInStatus == True or mainApp.match_inst.doubleInMode == False:
         if mainApp.editScoreMode == False:
             mainApp.input_Score.config(state=NORMAL)
             mainApp.input_Score.delete(0, END)

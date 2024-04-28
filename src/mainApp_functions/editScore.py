@@ -14,7 +14,7 @@ def editScore(mainApp):
             eval("mainApp.player_" + str(currentPlayer[0]) + "_label_2.config(disabledbackground='black')")
             mainApp.button_endTurn.configure(state='disabled')
 
-            if mainApp.DoubleInMode == True:
+            if mainApp.match_inst.doubleInMode == True:
                 eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.configure(state='disabled')")
 
 
@@ -26,7 +26,7 @@ def editScore(mainApp):
             eval("mainApp.player_" + str(currentPlayer[0]) + "_label_2.config(disabledbackground=mainApp.Button_bg_color)")
             mainApp.button_endTurn.configure(state='normal')
 
-            if mainApp.DoubleInMode == True:
+            if mainApp.match_inst.doubleInMode == True:
                 DoubleInStatus = eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()")
                 if DoubleInStatus == False:
                     eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.configure(state='normal')")

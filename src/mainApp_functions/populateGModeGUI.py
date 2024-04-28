@@ -47,7 +47,7 @@ def populateGModeGUI(mainApp):
                                                  text = "OFF",
                                                  fg=mainApp.Button_ft_color,
                                                  activebackground=mainApp.activeButton_bg_color)
-    if mainApp.DoubleInMode == True:
+    if mainApp.match_inst.doubleInMode == True:
         mainApp.subWin.DoubleIn_ON.select()
         mainApp.subWin.DoubleIn_ON.configure(fg='black')
 
@@ -115,7 +115,7 @@ def populateGModeGUI(mainApp):
     mainApp.subWin.button_commitGameMode.grid(row=3, column=3, sticky=E)
     mainApp.subWin.button_cancel.grid(row=3, column=2, sticky=E)
 
-    mainApp.subWin.wm_title("Sélectionner Mode de Jeu")
+    mainApp.subWin.wm_title("Sélectionner le Mode de Jeu")
     mainApp.subWin.configure(background=mainApp.Button_bg_color)
     mainApp.subWin.resizable(False, False)
 

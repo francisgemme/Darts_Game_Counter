@@ -12,8 +12,8 @@ class __init__:
         p4_DoubleInVar (bool): Player 4 Double In variable.
         SelectedGameMode (list): Selected Game Mode.
         prevSelMode (int): Previous Selected Mode.
-        DoubleInMode (bool): Double In Mode.
-        DoubleOutMode (bool): Double Out Mode.
+        doubleInMode (bool): Double In Mode.
+        doubleOutMode (bool): Double Out Mode.
         CommitGameMode (list): Game Mode to commit.
         gameStarted (bool): Indicates if the game has started.
         playerIndex (list): Player turn index and total number of players.
@@ -26,16 +26,21 @@ class __init__:
         quitbuttonPressed (bool): Indicates if the quit button has been pressed.
     """
 
+    # Declare variables & types
     nbPlayer = int(0)
+    players = []
     p1_DoubleInVar = bool(False)
     p2_DoubleInVar = bool(False)
     p3_DoubleInVar = bool(False)
     p4_DoubleInVar = bool(False)
     SelectedGameMode = []
-    prevSelMode = 1
-    DoubleInMode = bool(True)
-    DoubleOutMode = bool(False)
-    CommitGameMode = [1, DoubleInMode]
+    prevSelGameMode = 1 # to initiate the GUI with the current mode
+    prevSelDoubleInMode = bool(True) # to initiate the GUI with the current mode
+    prevSelDoubleOutMode = bool(True) # to initiate the GUI with the current mode
+    doubleInMode = bool(True)
+    doubleOutMode = bool(False)
+    CommitGameMode = [1, doubleInMode]
+
     gameStarted = bool(False)
     playerIndex = [int(0), int(0)]
     turnIndexLog = []
@@ -43,8 +48,7 @@ class __init__:
     editNameMode = bool(False)
     currentGameTurn = int(0)
     logIndex = int(0)
-    doubleInMode = bool(True)
-    quitbuttonPressed = bool(False)  
+    quitbuttonPressed = bool(False)    
     
     # -------------------------------------------------------------------------------------------------------------------
     # DEFINING FUNCTIONS (CLASS METHODS)
@@ -52,23 +56,43 @@ class __init__:
     # All below methods are stored in the mainApps_functions directory in separate .py files.
     # The name of the .py file and function must be the same in order to work properly
 
-    @staticmethod
-    def static_method():
-        """
-        A static method that does not require access to instance attributes.
-        """
-        print("This is a static method")
+    #@staticmethod
+    #def static_method():
+    #    """
+    #    A static method that does not require access to instance attributes.
+    #    """
+    #    print("This is a static method")
 
-    def regular_method(self):
+    #def regular_method(self):
+    #    """
+    #    A regular method that can access instance attributes.
+    #    """
+    #    print("This is a regular method")
+    #    print("Number of players:", self.nbPlayer)
+
+    def getNplayer(self):
         """
         A regular method that can access instance attributes.
         """
-        print("This is a regular method")
-        print("Number of players:", self.nbPlayer)
-
-    def getNplayer(self):
         return self.nbPlayer
     
     def addNplayer(self):
+        """
+        A regular method that can access instance attributes.
+        """
         self.nbPlayer += 1
         return
+    
+    def addPlayer(self, player):
+        """
+        A regular method that can access instance attributes.
+        """
+        self.players += player
+        return
+    
+    def getPlayer(self, index):
+        """
+        A regular method that can access instance attributes.
+        """
+        player = self.players(index)
+        return player

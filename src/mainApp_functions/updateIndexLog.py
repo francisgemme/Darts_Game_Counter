@@ -25,7 +25,7 @@ def updateIndexLog(mainApp):
             CommittedScoreToLog = eval("int(mainApp.player_"+str(i+1)+"_label_2.get())") # Read the initial score in the GUI
             eval("mainApp.turnIndexLog.insert(len(mainApp.turnIndexLog.columns), 'P_"+str(i+1)+"_Entry', 0)")
             eval("mainApp.turnIndexLog.insert(len(mainApp.turnIndexLog.columns), 'P_"+str(i+1)+"_Score', CommittedScoreToLog)")
-            if mainApp.DoubleInMode == True: # if this mode is on, add column for each player
+            if mainApp.match_inst.doubleInMode == True: # if this mode is on, add column for each player
                 eval("mainApp.turnIndexLog.insert(len(mainApp.turnIndexLog.columns), 'P_"+str(i+1)+"_DoubleIn', 0)")
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ def updateIndexLog(mainApp):
         elif currentPlayer != lastPlayerTurn:  # Below will log the EndTurn event by adding a PIPE .
             player_entry = "|"
             CommittedScoreToLog = "|"
-            if mainApp.DoubleInMode == True:
+            if mainApp.match_inst.doubleInMode == True:
                 DoubleInStatus = "|"
                 print(type(DoubleInStatus))
 
@@ -100,7 +100,7 @@ def updateIndexLog(mainApp):
         #                                 LOG THE DATA AND PRINT IN THE CONSOLE
         #---------------------------------------------------------------------------------------------------------------
         # Log and Deal with the DoubleIn mode
-        if mainApp.DoubleInMode == True:
+        if mainApp.match_inst.doubleInMode == True:
             if currentPlayer == lastPlayerTurn:
                 DoubleInStatus = eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()")
             # Will log the line with the double-in status

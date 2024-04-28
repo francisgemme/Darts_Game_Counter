@@ -5,12 +5,12 @@ def clickPad(mainApp, number):
     if mainApp.gameStarted == True:
         currentPlayer = mainApp.playerIndex[:1]  # Who is playing
 
-        if mainApp.DoubleInMode == True:
+        if mainApp.match_inst.doubleInMode == True:
             DoubleInStatus = eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()")
         else:
             DoubleInStatus = False
 
-        if DoubleInStatus == True or mainApp.DoubleInMode == False:
+        if DoubleInStatus == True or mainApp.match_inst.doubleInMode == False:
             current = mainApp.input_Score.get()
             if number == -1:
                 mainApp.input_Score.config(state='normal')
