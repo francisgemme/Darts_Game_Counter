@@ -1,7 +1,7 @@
 from tkinter import *
 
 def checkChanged(mainApp):
-    tmp = mainApp.playerIndex[:1]  # Who is playing
+    tmp = mainApp.match_inst.playerIndex[:1]  # Who is playing
     playerTurn = tmp[0]
     if playerTurn == 1:
         mainApp.player_1_checkbox.config(state=DISABLED)

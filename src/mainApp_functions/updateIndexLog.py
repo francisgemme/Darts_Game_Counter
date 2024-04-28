@@ -16,8 +16,8 @@ def updateIndexLog(mainApp):
     # If the game is not started, create the IndexLog with all added players
         # get Current Player turn over the total nb of player.
 
-    if mainApp.gameStarted == False:  # if the game is not started
-        totalPlayer = mainApp.playerIndex[1:] #get number of players
+    if mainApp.match_inst.gameStarted == False:  # if the game is not started
+        totalPlayer = mainApp.match_inst.playerIndex[1:] #get number of players
         mainApp.turnIndexLog = pd.DataFrame([[0, 0, 1]], columns=['index', 'gameTurn', 'playerTurn']) # create first default columns
 
         for i in range(totalPlayer[0]): # add all columns needed for the match
@@ -32,20 +32,20 @@ def updateIndexLog(mainApp):
     #                                                  UPDATE THE LOG
     #-------------------------------------------------------------------------------------------------------------------
     # If the game is started, add the committed score, record the endturn for the current player
-    if mainApp.gameStarted: #if the game is started
+    if mainApp.match_inst.gameStarted: #if the game is started
 
         # DO A BUNCH OF CHECKS AND CHANGES ON VARIABLES DEPENDING OF THE SITUATION
 
         # Extract information that is needed before logging
-        mainApp.logIndex += 1 # The log index event increase. (refer to initializeGUIvar for parameters)
-        currentIndex = mainApp.logIndex # Any event is logged
+        mainApp.match_inst.logIndex += 1 # The log index event increase. (refer to initializeGUIvar for parameters)
+        currentIndex = mainApp.match_inst.logIndex # Any event is logged
 
         # Store who is playing out of the total
-        totalPlayer = mainApp.playerIndex[1:]
-        currentPlayer = mainApp.playerIndex[:1]
+        totalPlayer = mainApp.match_inst.playerIndex[1:]
+        currentPlayer = mainApp.match_inst.playerIndex[:1]
 
         # Get the current and previous game turn. If there are the same, the player entry will be affected.
-        currentGameTurn = mainApp.currentGameTurn # What is the game turn
+        currentGameTurn = mainApp.match_inst.currentGameTurn # What is the game turn
         lastGameTurn = mainApp.turnIndexLog['gameTurn'].iloc[-1] # Get previous game turn
 
         #----------------------------------------------------------------------------------------------------------

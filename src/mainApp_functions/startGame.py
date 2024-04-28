@@ -2,7 +2,7 @@ from tkinter import *
 
 
 def startGame(mainApp):
-    if ~mainApp.gameStarted:
+    if ~mainApp.match_inst.gameStarted:
         mainApp.button_gameStart.configure(state=DISABLED, disabledforeground=mainApp.Button_bg_color)
         mainApp.button_gameStart.destroy()
         mainApp.frame9.destroy()
@@ -36,10 +36,12 @@ def startGame(mainApp):
     if mainApp.match_inst.doubleInMode == True:
         mainApp.player_1_checkbox.config(state=NORMAL) # Activate the Double In box
 
-    mainApp.playerIndex = [1, mainApp.match_inst.getNplayer()]
+    mainApp.match_inst.playerIndex = [1, mainApp.match_inst.getNplayer()]
     mainApp.updateIndexLog()
-    mainApp.gameStarted = True
-    mainApp.currentGameTurn = 1
+
+    mainApp.match_inst.gameStarted = True
+    mainApp.match_inst.currentGameTurn = 1
+
     mainApp.button_editScore.configure(state='normal')
     mainApp.button_editName.configure(state='normal')
     mainApp.button_endTurn.configure(state='normal')

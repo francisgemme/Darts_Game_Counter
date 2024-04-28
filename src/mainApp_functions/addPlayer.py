@@ -11,10 +11,10 @@ def addPlayer(mainApp):
     mainApp.subWin.eval('tk::PlaceWindow . center')
 
     # Distinguishing if editing the name or adding a new player...
-    if mainApp.editNameMode == True:
-        tmp = mainApp.playerIndex[:1]  # Who is playing
+    if mainApp.match_inst.editNameMode == True:
+        tmp = mainApp.match_inst.playerIndex[:1]  # Who is playing
         currentPlayer = tmp[0]
-    elif mainApp.editNameMode == False:
+    elif mainApp.match_inst.editNameMode == False:
         currentPlayer = mainApp.match_inst.getNplayer() +1
 
     # Populate all sub-GUI widgets

@@ -1,8 +1,8 @@
 from tkinter import *
 
 def editName(mainApp):
-    if mainApp.gameStarted:
+    if mainApp.match_inst.gameStarted:
         mainApp.button_editName.config(state='disabled')
-        mainApp.editNameMode = True
+        mainApp.match_inst.editNameMode = True
         mainApp.addPlayer()
     return

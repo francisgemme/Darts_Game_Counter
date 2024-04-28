@@ -2,8 +2,8 @@ from tkinter import *
 
 def clickPad(mainApp, number):
 
-    if mainApp.gameStarted == True:
-        currentPlayer = mainApp.playerIndex[:1]  # Who is playing
+    if mainApp.match_inst.gameStarted == True:
+        currentPlayer = mainApp.match_inst.playerIndex[:1]  # Who is playing
 
         if mainApp.match_inst.doubleInMode == True:
             DoubleInStatus = eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()")
@@ -18,7 +18,7 @@ def clickPad(mainApp, number):
                 mainApp.input_Score.config(state=DISABLED)
                 return
 
-            if mainApp.editScoreMode == False:
+            if mainApp.match_inst.editScoreMode == False:
                 if len(current) < 3:
                     mainApp.input_Score.config(state='normal')
                     mainApp.input_Score.delete(0, END)
@@ -33,8 +33,8 @@ def clickPad(mainApp, number):
                     mainApp.button_commitScore.configure(state=DISABLED)
 
 
-            if mainApp.editScoreMode == True:
-                currentPlayer = mainApp.playerIndex[:1]  # Who is playing
+            if mainApp.match_inst.editScoreMode == True:
+                currentPlayer = mainApp.match_inst.playerIndex[:1]  # Who is playing
                 currentScore = eval("mainApp.player_" + str(currentPlayer[0]) + "_label_2.get()", {"mainApp": mainApp})
                 if len(currentScore) < 3:
                     eval("mainApp.player_" + str(currentPlayer[0]) + "_label_2.config(state='normal')")

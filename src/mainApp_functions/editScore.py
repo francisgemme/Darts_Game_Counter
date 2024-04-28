@@ -1,10 +1,10 @@
 from tkinter import *
 
 def editScore(mainApp):
-    if mainApp.gameStarted:
-        currentPlayer = mainApp.playerIndex[:1]  # Who is playing
+    if mainApp.match_inst.gameStarted:
+        currentPlayer = mainApp.match_inst.playerIndex[:1]  # Who is playing
 
-        if mainApp.editScoreMode == False:
+        if mainApp.match_inst.editScoreMode == False:
             mainApp.button_editScore.config(fg=mainApp.activeButton_ft_color, bg=mainApp.activeButton_bg_color, relief=SUNKEN)
             mainApp.input_Score.config(state=NORMAL)
             mainApp.input_Score.delete(0, END)
@@ -18,9 +18,9 @@ def editScore(mainApp):
                 eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.configure(state='disabled')")
 
 
-            mainApp.editScoreMode = True
+            mainApp.match_inst.editScoreMode = True
 
-        elif mainApp.editScoreMode == True:
+        elif mainApp.match_inst.editScoreMode == True:
             mainApp.button_editScore.config(fg=mainApp.Button_ft_color, bg=mainApp.Button_bg_color, relief=RAISED)
             mainApp.input_Score.config(disabledbackground='black')
             eval("mainApp.player_" + str(currentPlayer[0]) + "_label_2.config(disabledbackground=mainApp.Button_bg_color)")
@@ -31,5 +31,5 @@ def editScore(mainApp):
                 if DoubleInStatus == False:
                     eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.configure(state='normal')")
 
-            mainApp.editScoreMode = False
+            mainApp.match_inst.editScoreMode = False
     return

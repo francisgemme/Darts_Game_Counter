@@ -1,18 +1,18 @@
 from tkinter import *
 
 def endTurn(mainApp):
-    if mainApp.gameStarted == True:
+    if mainApp.match_inst.gameStarted == True:
 
-        print(mainApp.playerIndex)
+        print(mainApp.match_inst.playerIndex)
         mainApp.button_endTurn.configure(state=DISABLED) #De-activate button for safety
 
         # get Current Player turn over the total nb of player
-        currentPlayer = mainApp.playerIndex[:1]  # Who is playing
-        totalPlayer = mainApp.playerIndex[1:] # Total number of players
+        currentPlayer = mainApp.match_inst.playerIndex[:1]  # Who is playing
+        totalPlayer = mainApp.match_inst.playerIndex[1:] # Total number of players
 
         if currentPlayer < totalPlayer:
             if currentPlayer == [1]: # if player #1 turn
-                mainApp.playerIndex[0] = 2
+                mainApp.match_inst.playerIndex[0] = 2
                 if mainApp.match_inst.doubleInMode == True:
                     mainApp.player_1_checkbox.config(state=DISABLED)
                     if mainApp.p1_DoubleInVar.get() == True:
@@ -21,7 +21,7 @@ def endTurn(mainApp):
                         mainApp.player_2_checkbox.config(state=NORMAL)
 
             if currentPlayer == [2]:
-                mainApp.playerIndex[0] = 3
+                mainApp.match_inst.playerIndex[0] = 3
                 if mainApp.match_inst.doubleInMode == True:
                     mainApp.player_2_checkbox.config(state=DISABLED)
                     if mainApp.p2_DoubleInVar.get() == True:
@@ -30,7 +30,7 @@ def endTurn(mainApp):
                         mainApp.player_3_checkbox.config(state=NORMAL)
 
             if currentPlayer == [3]:
-                mainApp.playerIndex[0] = 4
+                mainApp.match_inst.playerIndex[0] = 4
                 if mainApp.match_inst.doubleInMode == True:
                     mainApp.player_3_checkbox.config(state=DISABLED)
                     if mainApp.p3_DoubleInVar.get() == True:
@@ -39,7 +39,7 @@ def endTurn(mainApp):
                         mainApp.player_4_checkbox.config(state=NORMAL)
 
         if currentPlayer == totalPlayer:
-            mainApp.playerIndex[0] = 1
+            mainApp.match_inst.playerIndex[0] = 1
             if mainApp.match_inst.doubleInMode == True:
                 eval("mainApp.player_"+str(currentPlayer[0])+"_checkbox.config(state=DISABLED)")
                 if eval("mainApp.p"+str(currentPlayer[0])+"_DoubleInVar.get()") == True:
@@ -48,7 +48,12 @@ def endTurn(mainApp):
                     mainApp.player_1_checkbox.config(state=NORMAL)
             
             #if this is the last player to play, the log "game turn" is updated by 1  **To be removed...
-            mainApp.currentGameTurn += 1
+            mainApp.match_inst.currentGameTurn += 1
+
+        # Cleanup score field for next player
+        mainApp.input_Score.config(state='normal')
+        mainApp.input_Score.delete(0, END)
+        mainApp.input_Score.config(state=DISABLED)
 
         mainApp.arrowImage.grid_forget()
         mainApp.button_endTurn.configure(state='normal')

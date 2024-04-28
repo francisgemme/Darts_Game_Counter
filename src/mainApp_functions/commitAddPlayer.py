@@ -7,7 +7,7 @@ def commitAddPlayer(mainApp):
         mainApp.subWin.errorStatus.configure(text="Vous devez entrer un nom... ")
         return
 
-    if mainApp.gameStarted == False:  # to do during the game setup, i.e., before starting.
+    if mainApp.match_inst.gameStarted == False:  # to do during the game setup, i.e., before starting.
 
         mainApp.button_gameStart.configure(state="normal", fg="#60ff30")
         updateStatusLabeltext_1 = "Ajouter un deuxième joueur OU Cliquer Démarrer Partie!"
@@ -25,8 +25,8 @@ def commitAddPlayer(mainApp):
         eval("mainApp.updateStatusLabel(updateStatusLabeltext_" + str(mainApp.match_inst.getNplayer()) + ')'"")
         mainApp.refreshImages()
 
-    if mainApp.gameStarted == True:  # to do if the editname mode has been pressed.
-        currentPlayer = mainApp.playerIndex[:1]
+    if mainApp.match_inst.gameStarted == True:  # to do if the editname mode has been pressed.
+        currentPlayer = mainApp.match_inst.playerIndex[:1]
         eval("mainApp.player_" + str(currentPlayer[0]) + "_label_1.config(state=NORMAL)")
         eval("mainApp.player_" + str(currentPlayer[0]) + "_label_1.delete(0, END)")
         eval("mainApp.player_" + str(currentPlayer[0]) + "_label_1.insert(0, playerName)")

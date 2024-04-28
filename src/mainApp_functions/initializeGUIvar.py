@@ -25,15 +25,6 @@ def initializeGUIvar(mainApp):
     mainApp.p3_DoubleInVar = False
     mainApp.p4_DoubleInVar = False
 
-    mainApp.gameStarted = False  # some methods (such as the log) act differently if the game is started.
-    mainApp.playerIndex = [0, 0]  # Variable tracking player turn and total number of players.
-                                # A quick variable to know who is playing
-    mainApp.turnIndexLog = []  #
-    mainApp.editScoreMode = False
-    mainApp.editNameMode = False
-    mainApp.currentGameTurn = 0
-    mainApp.logIndex = 0
-
     mainApp.quitbuttonPressed = False
 
     return

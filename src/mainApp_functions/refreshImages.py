@@ -9,10 +9,10 @@ def refreshImages(mainApp):
     logoImage = ImageTk.PhotoImage(Image.open("./data/images/dart_Logo2.sgi"))
     mainApp.logoImage = Label(mainApp.emptylabel_3, image=logoImage, bg=mainApp.Button_bg_color, fg="grey")
     mainApp.logoImage.grid(row=1, column=1, columnspan=2)
-    if mainApp.gameStarted:
+    if mainApp.match_inst.gameStarted:
 
         arrowImage = ImageTk.PhotoImage(Image.open("./data/images/arrow.sgi"))
-        currentPlayer = mainApp.playerIndex[:1]
+        currentPlayer = mainApp.match_inst.playerIndex[:1]
 
         if currentPlayer == [1]:
             mainApp.arrowImage = Label(mainApp.arrowLabel_1, image=arrowImage, bg=mainApp.Button_bg_color, fg="grey")

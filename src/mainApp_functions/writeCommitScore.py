@@ -5,7 +5,7 @@ def writeCommitScore(mainApp):
     scoreToInput = mainApp.input_Score.get()
     if scoreToInput != '':
         scoreToInput = int(mainApp.input_Score.get())
-        currentPlayer = mainApp.playerIndex[:1]
+        currentPlayer = mainApp.match_inst.playerIndex[:1]
         mainApp.input_Score.config(state=NORMAL)
         mainApp.input_Score.delete(0, END)
         mainApp.input_Score.config(state=DISABLED)

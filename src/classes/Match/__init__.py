@@ -29,10 +29,13 @@ class __init__:
     # Declare variables & types
     nbPlayer = int(0)
     players = []
+
+    #Used to be stored in the GUI, must be located in the player object
     p1_DoubleInVar = bool(False)
     p2_DoubleInVar = bool(False)
     p3_DoubleInVar = bool(False)
     p4_DoubleInVar = bool(False)
+
     SelectedGameMode = []
     prevSelGameMode = 1 # to initiate the GUI with the current mode
     prevSelDoubleInMode = bool(True) # to initiate the GUI with the current mode
@@ -42,12 +45,13 @@ class __init__:
     CommitGameMode = [1, doubleInMode]
 
     gameStarted = bool(False)
-    playerIndex = [int(0), int(0)]
+    playerIndex = [0, 0]
     turnIndexLog = []
     editScoreMode = bool(False)
     editNameMode = bool(False)
     currentGameTurn = int(0)
     logIndex = int(0)
+    
     quitbuttonPressed = bool(False)    
     
     # -------------------------------------------------------------------------------------------------------------------
@@ -55,20 +59,6 @@ class __init__:
     # -------------------------------------------------------------------------------------------------------------------
     # All below methods are stored in the mainApps_functions directory in separate .py files.
     # The name of the .py file and function must be the same in order to work properly
-
-    #@staticmethod
-    #def static_method():
-    #    """
-    #    A static method that does not require access to instance attributes.
-    #    """
-    #    print("This is a static method")
-
-    #def regular_method(self):
-    #    """
-    #    A regular method that can access instance attributes.
-    #    """
-    #    print("This is a regular method")
-    #    print("Number of players:", self.nbPlayer)
 
     def getNplayer(self):
         """
